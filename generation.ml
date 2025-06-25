@@ -590,7 +590,6 @@ let main =
     let totalStartTime = Sys.time() in
     let out_channel_haskell = open_out "illtyped.hs" in
     let out_channel_ocaml = open_out "illtyped.ml" in
-    print_endline (log_ctxt gamma);
     (* generating three lambdas for mutual recursion *)
     let lambdas = ref [] in
     for i = 1 to 3 do
