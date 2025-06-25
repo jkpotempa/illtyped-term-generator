@@ -166,7 +166,7 @@ len = foldr (\\_ n -> n+1) 0
 ifthenelse :: Bool -> a -> a -> a
 ifthenelse c a b = if c then a else b
 
-lam1"
+welltypedProgram"
 
 let program_prefix_ocaml : string =
 "let safeHead list = 
@@ -183,4 +183,4 @@ let compose f g x = f (g x)
 
 let ifthenelse c a b = if c then a else b
 
-let lam1"
+let welltypedProgram"

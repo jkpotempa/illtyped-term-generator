@@ -591,13 +591,13 @@ let main =
     let out_channel_haskell = open_out "illtyped.hs" in
     let out_channel_ocaml = open_out "illtyped.ml" in
     (* generating three lambdas for mutual recursion *)
-    let lambdas = ref [] in
+    (* let lambdas = ref [] in
     for i = 1 to 3 do
         let n = List.length gamma in
         let expected_type = snd (List.nth gamma (n-i)) in
         let pi = ref (Hashtbl.create 64) in
         lambdas := (generate 5 expected_type [] None pi) :: !lambdas;
-    done;
+    done; *)
     (* well-typed generation *)
     let expected_type = List.hd (shuffle (TFunc (TList TInt, TList TInt) :: basic_types)) in
     let steps = 8 in
@@ -613,12 +613,14 @@ let main =
     let eriTime = Sys.time() -. eriStartTime in
     (* printing final program files *)
     (* Haskell *)
-    let out_program = ref ((program_prefix_haskell) ^ (" = ") ^ (prettyprint_haskell (List.nth !lambdas 0)) ^ "\n\nlam2 = " ^ (prettyprint_haskell (List.nth !lambdas 1)) ^ "\n\nlam3 = " ^ (prettyprint_haskell (List.nth !lambdas 2)) ^ "\n\nwelltypedProgram = " ^ (prettyprint_haskell e) ^ ("\n\nilltypedProgram ")) in
+    let out_program = ref ((program_prefix_haskell) ^ (" = ") ^ (prettyprint_haskell e) ^ ("\n\nilltypedProgram ")) in
+    (* let out_program = ref ((program_prefix_haskell) ^ (" = ") ^ (prettyprint_haskell (List.nth !lambdas 0)) ^ "\n\nlam2 = " ^ (prettyprint_haskell (List.nth !lambdas 1)) ^ "\n\nlam3 = " ^ (prettyprint_haskell (List.nth !lambdas 2)) ^ "\n\nwelltypedProgram = " ^ (prettyprint_haskell e) ^ ("\n\nilltypedProgram ")) in *)
     if use_type_annotation then out_program := !out_program ^ ":: " ^ (ty_to_string expected_type) else (); 
     out_program := !out_program ^ (" = ") ^ (prettyprint_haskell evil);
     Printf.fprintf out_channel_haskell "%s" !out_program;
     (* Ocaml *)
-    let out_program = ref ((program_prefix_ocaml) ^ (" = ") ^ (prettyprint_ocaml (List.nth !lambdas 0)) ^ "\nand lam2 = " ^ (prettyprint_ocaml (List.nth !lambdas 1)) ^ "\nand lam3 = " ^ (prettyprint_ocaml (List.nth !lambdas 2)) ^ "\n\nlet welltypedProgram = " ^ (prettyprint_ocaml e) ^ ("\n\nlet illtypedProgram ")) in
+    let out_program = ref ((program_prefix_ocaml) ^ (" = ") ^ (prettyprint_ocaml e) ^ ("\n\nlet illtypedProgram ")) in
+    (* let out_program = ref ((program_prefix_ocaml) ^ (" = ") ^ (prettyprint_ocaml (List.nth !lambdas 0)) ^ "\nand lam2 = " ^ (prettyprint_ocaml (List.nth !lambdas 1)) ^ "\nand lam3 = " ^ (prettyprint_ocaml (List.nth !lambdas 2)) ^ "\n\nlet welltypedProgram = " ^ (prettyprint_ocaml e) ^ ("\n\nlet illtypedProgram ")) in *)
     if use_type_annotation then out_program := !out_program ^ ": " ^ (ty_to_string_ocaml expected_type) else (); 
     out_program := !out_program ^ (" = ") ^ (prettyprint_ocaml evil);
     Printf.fprintf out_channel_ocaml "%s" !out_program;
