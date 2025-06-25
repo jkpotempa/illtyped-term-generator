@@ -1,0 +1,22 @@
+FROM ubuntu:22.04
+
+WORKDIR /usr/src/app
+
+RUN apt-get update
+RUN apt-get install -y build-essential curl libffi-dev libffi8ubuntu1 libgmp-dev libgmp10 libncurses-dev libncurses5 libtinfo5 opam
+RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+
+RUN curl https://downloads.haskell.org/~ghc/6.12.1/ghc-6.12.1-x86_64-unknown-linux-n.tar.bz2
+RUN tar xfjv ghc-6.12.1-x86_64-unknown-linux-n.tar.bz2
+RUN cd ghc-6.12.1
+RUN ./configure
+RUN make install
+
+RUN opam init --disable-sandboxing -y
+RUN opam switch create 3.07 ocaml-base-compiler.3.07
+RUN opam switch set 3.07
+RUN eval $(opam env)
+
+COPY . .
+
+CMD ["./generator"]

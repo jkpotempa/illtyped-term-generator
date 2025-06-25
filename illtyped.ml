@@ -1,0 +1,21 @@
+let safeHead list = 
+    match list with
+    | [] -> None
+    | (h::t) -> Some h
+
+let safeTail list =
+    match list with
+    | [] -> []
+    | (h::t) -> t
+
+let compose f g x = f (g x)
+
+let ifthenelse c a b = if c then a else b
+
+let lam1 = let y4 = (((=)) (((&&)) ((begin match [] with | [] -> false; | (z7::z8) -> z7 end)) (((||)) (true) (true) ) ) ((compose) (let y13 = (List.map) in (Fun.id)) (snd) ((Fun.id,false)) ) ) in ((compose) ((if (let y5 = (List.length) in (true)) then ((if (y4) then (snd) else (fst))) else ((fun (x13 : ((bool -> (int) list) * (bool -> (int) list))) -> lam1)))) (snd) ((Fun.id,(lam1,lam1))) )
+and lam2 = (fun (x6 : (bool) list) -> (List.cons) (((fun  x7 -> x7)) (((||)) (true) (true) ) ) ((List.map) ((Fun.id) (snd) ) ((List.map) (Fun.id) ([]) ) ) )
+and lam3 = (fun (x1 : int) -> (lam2) ((Fun.id) ((List.map) (fst) ([]) ) ) )
+
+let welltypedProgram = ((=)) ((compose) ((snd) (((~-),(begin match (if ((if (false) then (false) else (true))) then ((safeHead) ([]) ) else ((compose) (Fun.id) (safeHead) ([]) )) with | None -> (begin match (safeHead) ([])  with | None -> (fun x30 -> x30); | Some x -> x end); | Some x -> x end))) ) ((fst) (((if (((||)) (true) ((begin match [] with | [] -> false; | (z21::z22) -> false end)) ) then ((compose) ((fun x33 -> x33)) ((begin match [] with | [] -> Fun.id; | (z23::z24) -> Fun.id end)) (Fun.id) ) else ((fun (x34 : bool) -> false))),((-)) ((compose) ((fun x31 -> 0)) ((fun x32 -> (~-))) (((&&)) (true) (false) ) ) (((~-)) (0) ) )) ) (((||)) ((compose) ((fun x35 -> false)) ((fun x36 -> (compose) ((fun x37 -> false)) ((fun x38 -> lam2)) (((-)) (0) (1) ) )) (0) ) ((fst) (((if (let y22 = (snd) in (false)) then (((<)) (0) (0) ) else (let y24 = (0) in (false))),((<)) (((+)) (1) (0) ) (0) )) ) ) ) ((Fun.id) (false) ) 
+
+let illtypedProgram  = ((=)) ((compose) ((snd) ((((List.cons) ((Fun.id) (((~-)) ((begin match (safeTail) ((lam3) (1) )  with | [] -> (List.length) ((List.map) ((<)) ([]) ) ; | (z85::z86) -> (compose) ((if (false) then (fst) else (fst))) ((if (false) then (Fun.id) else (Fun.id))) ((0,0))  end)) ) ) ((begin match (safeHead) ((safeTail) ((List.filter) ((fun (x67 : (int) list) -> false)) ((safeTail) ([]) ) ) )  with | None -> (compose) (fst) ((snd) (((compose) ((<)) ((~-)) (1) ,(Fun.id) (fst) )) ) ((((safeTail) ([]) ,true),let y51 = ((@)) in (((||)) (true) (false) ))) ; | Some x -> x end)) ) ((begin match ((@)) ((lam2) ((snd) (((||),(List.map) (Fun.id) ([]) )) ) ) ((begin match (compose) ((fun x41 -> x41)) ((fun x42 -> (Fun.id) (x42) )) ((begin match ((@)) ([]) ([])  with | [] -> (safeHead) ([]) ; | (z41::z42) -> (safeHead) (z42)  end))  with | None -> (List.map) ((compose) ((fun x39 -> fst)) (lam3) (0) ) ((List.map) (Fun.id) ([]) ) ; | Some x -> x end))  with | [] -> (fst) ((((@)) ((compose) ((compose) (Fun.id) (List.map) (List.length) ) ((fun x45 -> [])) (fst) ) ((snd) ((safeHead,[])) ) ,(List.filter) (Fun.id) ([]) )) ; | (z35::z36) -> (compose) ((fun x48 -> ((@)) ((safeTail) ((Fun.id) (x48) ) ) ((List.map) ((if (z35) then (fst) else (fst))) ((begin match z36 with | [] -> []; | (z55::z56) -> [] end)) ) )) (safeTail) ((List.cons) ((begin match (lam3) ((if (z35) then (1) else (1)))  with | [] -> (fst) ((0,z36)) ; | (z61::z62) -> 1 end)) ((begin match let y42 = ((safeHead) ([]) ) in ((Fun.id) (y42) ) with | None -> (compose) (Fun.id) (fst) (([],(-))) ; | Some x -> x end)) )  end)),(begin match (if ((if (false) then (false) else (true))) then ((safeHead) ([]) ) else ((compose) (Fun.id) (safeHead) ([]) )) with | None -> (begin match (safeHead) ([])  with | None -> (fun x30 -> x30); | Some x -> x end); | Some x -> x end))) ) ((fst) (((if (((||)) (true) ((begin match [] with | [] -> false; | (z21::z22) -> false end)) ) then ((compose) ((fun x33 -> x33)) ((begin match [] with | [] -> Fun.id; | (z23::z24) -> Fun.id end)) (Fun.id) ) else ((fun (x34 : bool) -> false))),((-)) ((compose) ((fun x31 -> 0)) ((fun x32 -> (~-))) (((&&)) (true) (false) ) ) (((~-)) (0) ) )) ) (((||)) ((compose) ((fun x35 -> false)) ((fun x36 -> (compose) ((fun x37 -> false)) ((fun x38 -> lam2)) (((-)) (0) (1) ) )) (0) ) ((fst) (((if (let y22 = (snd) in (false)) then (((<)) (0) (0) ) else (let y24 = (0) in (false))),((<)) (((+)) (1) (0) ) (0) )) ) ) ) ((Fun.id) (false) ) 
