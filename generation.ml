@@ -550,15 +550,22 @@ and introduce_evil_rule_safe (e : expr) (pi : ty_hashtbl ref) (use_type_annotati
 
 let unusedArgumentCount = ref 0
 let totalArgumentsCount = ref 0
-let totalLambdasCount = ref 0
 let exprSize = ref 0
+let totalVars = ref 0
+let totalLams = ref 0
+let totalLamExts = ref 0
+let totalApps = ref 0
+let totalTuples = ref 0
+let totalMaybes = ref 0
+let totalLets = ref 0
+let totalPMs = ref 0
 
 let rec statTrack (e : expr) : unit =
     begin match e with
-    | EVar _ -> ()
+    | EVar _ -> totalVars := !totalVars + 1
     | ELam (e1, e2) ->
         exprSize := !exprSize + 1;
-        totalLambdasCount := !totalLambdasCount + 1;
+        totalLams := !totalLams + 1;
         totalArgumentsCount := !totalArgumentsCount + 1;
         if not (usesArgument e1 e2) then unusedArgumentCount := !unusedArgumentCount + 1 else ();
         statTrack e1;
@@ -571,17 +578,21 @@ let rec statTrack (e : expr) : unit =
             if usesArgument arg body then () else unusedArgumentCount := !unusedArgumentCount + 1;
         done;
         totalArgumentsCount := !totalArgumentsCount + len;
-        totalLambdasCount := !totalLambdasCount + 1;
+        totalLamExts := !totalLamExts + 1;
         exprSize := !exprSize + 1;
         statTrack body;
     | EAppMulti (e1, args) ->
+        totalApps := !totalApps + 1;
         exprSize := !exprSize + 1;
         statTrack e1;
         for i = 0 to (List.length args) - 1 do 
             statTrack (List.nth args i)
         done;
-    | EApp (e1, e2) | ETuple (e1, e2) | EMaybe (e1, e2) | ELet (_, e1, e2) -> statTrack e1; statTrack e2
-    | EPatternMatch (e1, e2, e3, _, _) -> statTrack e1; statTrack e2; statTrack e3
+    | EApp (e1, e2) -> statTrack e1; statTrack e2
+    | ETuple (e1, e2) -> statTrack e1; statTrack e2; totalTuples := !totalTuples + 1
+    | EMaybe (e1, e2) -> statTrack e1; statTrack e2; totalMaybes := !totalMaybes + 1
+    | ELet (_, e1, e2) -> statTrack e1; statTrack e2; totalLets := !totalLets + 1
+    | EPatternMatch (e1, e2, e3, _, _) -> statTrack e1; statTrack e2; statTrack e3; totalPMs := !totalPMs + 1
     end
 
 let main = 
@@ -614,13 +625,11 @@ let main =
     (* printing final program files *)
     (* Haskell *)
     let out_program = ref ((program_prefix_haskell) ^ (" = ") ^ (prettyprint_haskell e) ^ ("\n\nilltypedProgram ")) in
-    (* let out_program = ref ((program_prefix_haskell) ^ (" = ") ^ (prettyprint_haskell (List.nth !lambdas 0)) ^ "\n\nlam2 = " ^ (prettyprint_haskell (List.nth !lambdas 1)) ^ "\n\nlam3 = " ^ (prettyprint_haskell (List.nth !lambdas 2)) ^ "\n\nwelltypedProgram = " ^ (prettyprint_haskell e) ^ ("\n\nilltypedProgram ")) in *)
     if use_type_annotation then out_program := !out_program ^ ":: " ^ (ty_to_string expected_type) else (); 
     out_program := !out_program ^ (" = ") ^ (prettyprint_haskell evil);
     Printf.fprintf out_channel_haskell "%s" !out_program;
     (* Ocaml *)
     let out_program = ref ((program_prefix_ocaml) ^ (" = ") ^ (prettyprint_ocaml e) ^ ("\n\nlet illtypedProgram ")) in
-    (* let out_program = ref ((program_prefix_ocaml) ^ (" = ") ^ (prettyprint_ocaml (List.nth !lambdas 0)) ^ "\nand lam2 = " ^ (prettyprint_ocaml (List.nth !lambdas 1)) ^ "\nand lam3 = " ^ (prettyprint_ocaml (List.nth !lambdas 2)) ^ "\n\nlet welltypedProgram = " ^ (prettyprint_ocaml e) ^ ("\n\nlet illtypedProgram ")) in *)
     if use_type_annotation then out_program := !out_program ^ ": " ^ (ty_to_string_ocaml expected_type) else (); 
     out_program := !out_program ^ (" = ") ^ (prettyprint_ocaml evil);
     Printf.fprintf out_channel_ocaml "%s" !out_program;
@@ -634,20 +643,31 @@ let main =
     let eriTimeStr = ("ERI time: " ^ (string_of_float eriTime)) in
     let totalTime = Sys.time() -. totalStartTime in
     let totalTimeStr = ("Total time: " ^ (string_of_float totalTime)) in
+    let totalVarStr = string_of_int !totalVars in
+    let totalLamStr = string_of_int !totalLams in
+    let totalLamExtStr = string_of_int !totalLamExts in
+    let totalAppStr = string_of_int !totalApps in
+    let totalTupleStr = string_of_int !totalTuples in
+    let totalMaybeStr = string_of_int !totalMaybes in
+    let totalLetStr = string_of_int !totalLets in
+    let totalPMStr = string_of_int !totalPMs in
     print_endline argUsageStr; print_endline exprSizeStr; print_endline generationTimeStr; print_endline eriTimeStr; print_endline totalTimeStr;
     (* logging *)
     let out_log = open_out "expr_log.txt" in
     let log_pi = log_ty_hashtbl !pi in
-    Printf.fprintf out_log "%s" ((log_expr e) ^ "\n" ^ (log_expr evil) ^ "\nPI: " ^ log_pi ^ "\nEXPECTED TYPE: " ^ (log_ty expected_type) ^ "\n" ^ argUsageStr ^ "\n" ^ exprSizeStr ^ "\n" ^ generationTimeStr ^ "\n" ^ eriTimeStr ^ "\n" ^ totalTimeStr ^ "\n\n" ^ !log);
+    Printf.fprintf out_log "%s" ((log_expr e) ^ "\n" ^ (log_expr evil) ^ "\nPI: " ^ log_pi ^ "\nEXPECTED TYPE: " 
+        ^ (log_ty expected_type) ^ "\n" ^ argUsageStr ^ "\n" ^ exprSizeStr ^ "\n" ^ generationTimeStr ^ "\n" 
+        ^ eriTimeStr ^ "\n" ^ totalTimeStr ^ "\n" ^ totalVarStr ^ "\n" ^ totalLamStr ^ "\n" ^ totalLamExtStr 
+        ^ "\n" ^ totalAppStr ^ "\n" ^ totalTupleStr ^ "\n" ^ totalMaybeStr ^ "\n" ^ totalLetStr ^ "\n" ^ totalPMStr ^ "\n\n" ^ !log);
     close_out out_log;
     (* writing stats to file *)
     let found = ref false in
-    for i = 1 to 120 do
+    for i = 1 to 250 do
         if not !found then
         let in_ratios = open_in ("stats/" ^ (string_of_int i) ^ ".csv") in
         (* if the file is too large, write to the next best one instead to avoid overhead *)
-        (* one program produces 38 chars on average so a single stats file will fit about 1000 lines *)
-        if in_channel_length in_ratios >= 38000 then close_in in_ratios else 
+        (* one program produces 70 chars on average so a single stats file will fit about 500 lines *)
+        if in_channel_length in_ratios >= 35000 then close_in in_ratios else 
             let entirefile = ref "" in
             try
             while true do
@@ -657,7 +677,11 @@ let main =
             found := true;
             close_in in_ratios;
             let out_ratios = open_out ("stats/" ^ (string_of_int i) ^ ".csv") in
-            Printf.fprintf out_ratios "%s" (!entirefile ^ (string_of_float ratio) ^ "," ^ (string_of_int !exprSize) ^ "," ^ (string_of_float generationTime) ^ "," ^ (string_of_float eriTime) ^ "," ^ (string_of_float totalTime)); 
+            Printf.fprintf out_ratios "%s" (!entirefile ^ (string_of_float ratio) ^ "," ^ (string_of_int !exprSize) 
+                ^ "," ^ (string_of_float generationTime) ^ "," ^ (string_of_float eriTime) ^ "," 
+                ^ (string_of_float totalTime) ^ "," ^ (log_ty expected_type) ^ "," ^ totalVarStr ^ "," ^ totalLamStr 
+                ^ "," ^ totalLamExtStr ^ "," ^ totalAppStr ^ "," ^ totalTupleStr ^ "," ^ totalMaybeStr ^ "," 
+                ^ totalLetStr ^ "," ^ totalPMStr); 
             close_out out_ratios;
             close_out out_channel_haskell;
             close_out out_channel_ocaml;

@@ -1,1 +1,7 @@
 archive/
+*.cmi
+*.cmo
+*.o
+*.cmx
+illtyped_haskell
+illtyped_ocaml

@@ -328,9 +328,6 @@ let gamma : ctxt =  [(EVar ("(+)", []), TFuncMulti ([TInt; TInt], TInt))
                     ;(EVar ("fst", []), TFuncMulti ([TTuple (TPoly "a", TPoly "b")], TPoly "a"))
                     ;(EVar ("snd", []), TFuncMulti ([TTuple (TPoly "a", TPoly "b")], TPoly "b"))
                     ;(EVar ("(.)", []), TFuncMulti ([TFunc (TPoly "b", TPoly "c"); TFunc (TPoly "a", TPoly "b"); TPoly "a"], TPoly "c"))                    
-                    (* ;(EVar ("lam1", []), TFuncMulti ([List.hd (shuffle basic_types)], List.hd (shuffle basic_types)))
-                    ;(EVar ("lam2", []), TFuncMulti ([List.hd (shuffle basic_types)], List.hd (shuffle basic_types)))
-                    ;(EVar ("lam3", []), TFuncMulti ([List.hd (shuffle basic_types)], List.hd (shuffle basic_types))) *)
                     ]
 
 let rec lookup (e : expr) (ct : ctxt) : ty =
