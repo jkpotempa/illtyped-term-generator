@@ -1,61 +1,2419 @@
-ELam (EVar ("x1", [(EVar ("x1", []), TList (TInt));]), EVar ("[]", [(EVar ("x1", []), TList (TInt));]))
-ELam (EVar ("x1", [(EVar ("x1", []), TList (TInt));]), EApp (EAppMulti (EVar ("map", []), [EAppMulti (EVar ("snd", []), [ETuple (EVar ("True", []), ELam (EVar ("x19", [(EVar ("x19", []), TPoly "alpha1322");]), EAppMulti (EVar ("(&&)", [(EVar ("x19", []), TPoly "alpha1322");]), [EAppMulti (EVar ("(Main.==)", [(EVar ("x19", []), TPoly "alpha1322");]), [EVar ("x19", [(EVar ("x19", []), TPoly "alpha1322");]);EVar ("False", [(EVar ("x19", []), TPoly "alpha1322");]);]);EAppMulti (EVar ("(Main.<)", [(EVar ("x19", []), TPoly "alpha1322");]), [EVar ("1", [(EVar ("x19", []), TPoly "alpha1322");]);EVar ("1", [(EVar ("x19", []), TPoly "alpha1322");]);]);])));]);EAppMulti (EVar ("filter", []), [ELam (EVar ("x20", [(EVar ("x20", []), TBool);]), EAppMulti (EVar ("id", [(EVar ("x20", []), TBool);]), [EAppMulti (EVar ("id", [(EVar ("x20", []), TBool);]), [EAppMulti (EVar ("id", [(EVar ("x20", []), TBool);]), [EVar ("False", [(EVar ("x20", []), TBool);]);]);]);]));EAppMulti (EVar ("(.)", []), [EAppMulti (EVar ("ifthenelse", []), [EAppMulti (EVar ("(Main.<)", []), [EAppMulti (EVar ("len", []), [EVar ("[]", []);]);EAppMulti (EVar ("(+)", []), [EVar ("1", []);EVar ("1", []);]);]);EPatternMatch (EAppMulti (EVar ("ifthenelse", []), [EVar ("True", []);EVar ("[]", []);EVar ("[]", []);]), EAppMulti (EVar ("id", []), [EVar ("id", []);]), ELet (EVar ("y13", [(EVar ("y13", []), TPoly "alpha2273");]), EVar ("[]", [(EVar ("z17", []), TPoly "alpha2090");(EVar ("z18", []), TList (TPoly "alpha2090"));]), EVar ("safeTail", [(EVar ("y13", []), TPoly "alpha2273");(EVar ("z17", []), TPoly "alpha2090");(EVar ("z18", []), TList (TPoly "alpha2090"));])), EVar ("z17", [(EVar ("z17", []), TPoly "alpha2090");]), EVar ("z18", [(EVar ("z18", []), TList (TPoly "alpha2090"));]));ELam (EVar ("x22", [(EVar ("x22", []), TList (TBool));]), EAppMulti (EVar ("safeTail", [(EVar ("x22", []), TList (TBool));]), [EVar ("x22", [(EVar ("x22", []), TList (TBool));]);]));]);EVar ("fst", []);ETuple (ELet (EVar ("y14", [(EVar ("y14", []), TPoly "alpha2688");]), EVar ("[]", []), EAppMulti (EVar ("id", [(EVar ("y14", []), TPoly "alpha2688");]), [EVar ("y14", [(EVar ("y14", []), TPoly "alpha2688");]);])), EAppMulti (EVar ("filter", []), [ELam (EVar ("x23", [(EVar ("x23", []), TPoly "alpha2500");]), EVar ("x23", [(EVar ("x23", []), TPoly "alpha2500");]));EAppMulti (EVar ("safeTail", []), [EVar ("[]", []);]);]));]);]);]), EAppMulti (EVar ("(.)", []), [ELam (EVar ("x2", [(EVar ("x2", []), TPoly "alpha151");]), EAppMulti (EVar ("safeTail", [(EVar ("x2", []), TPoly "alpha151");]), [EAppMulti (EVar ("snd", [(EVar ("x2", []), TPoly "alpha151");]), [ETuple (EVar ("len", [(EVar ("x2", []), TPoly "alpha151");]), EAppMulti (EVar ("filter", [(EVar ("x2", []), TPoly "alpha151");]), [EVar ("id", [(EVar ("x2", []), TPoly "alpha151");]);EVar ("[]", [(EVar ("x2", []), TPoly "alpha151");]);]));]);]));EVar ("(++)", []);EAppMulti (EVar ("filter", []), [EAppMulti (EVar ("fst", []), [ETuple (EAppMulti (EVar ("(.)", []), [ELam (EVar ("x12", [(EVar ("x12", []), TPoly "alpha719");]), EVar ("x12", [(EVar ("x12", []), TPoly "alpha719");]));ELam (EVar ("x14", [(EVar ("x14", []), TPoly "alpha718");]), EVar ("id", [(EVar ("x14", []), TPoly "alpha718");]));EAppMulti (EVar ("(:)", []), [EVar ("negate", []);EVar ("[]", []);]);]), EAppMulti (EVar ("(.)", []), [EVar ("(.)", []);EAppMulti (EVar ("ifthenelse", []), [EVar ("False", []);EVar ("(++)", []);EVar ("(++)", []);]);EVar ("[]", []);]));]);EAppMulti (EVar ("snd", []), [ETuple (EVar ("(Main.<)", []), ELet (EVar ("y4", [(EVar ("y4", []), TPoly "alpha1023");]), EAppMulti (EVar ("(.)", []), [EVar ("id", []);EVar ("safeHead", []);EVar ("[]", []);]), EMaybe (EVar ("y4", [(EVar ("y4", []), TPoly "alpha1023");]), EVar ("[]", [(EVar ("y4", []), TPoly "alpha1023");]))));]);]);])))
-PI: [TPoly "alpha48",TInt; ]
-EXPECTED TYPE: TFunc (TList (TInt), TList (TInt))
-Argument usage in lambdas: 4/8 = 0.5
-Expression size: 40
-Generation time: 0.000279
-ERI time: 0.016466
-Total time: 0.016976
-80
-8
-0
-32
-5
-1
+EPatternMatch (EAppMulti (EVar ("filter", []), [EPatternMatch (EAppMulti (EVar ("ifthenelse", []), [EVar ("True", []);EAppMulti (EVar ("(.)", []), [EVar ("id", []);EAppMulti (EVar ("id", []), [ELam (EVar ("x1", [(EVar ("x1", []), TPoly "alpha170");]), EVar ("x1", [(EVar ("x1", []), TPoly "alpha170");]));]);EAppMulti (EVar ("(.)", []), [ELam (EVar ("x2", [(EVar ("x2", []), TPoly "alpha288");]), EVar ("[]", [(EVar ("x2", []), TPoly "alpha288");]));EVar ("(&&)", []);EAppMulti (EVar ("(&&)", []), [EVar ("True", []);EVar ("True", []);]);]);]);EAppMulti (EVar ("(.)", []), [EAppMulti (EVar ("ifthenelse", []), [EAppMulti (EVar ("(Main.<)", []), [EVar ("0", []);EVar ("0", []);]);EVar ("fst", []);EAppMulti (EVar ("ifthenelse", []), [EVar ("False", []);EVar ("fst", []);EVar ("fst", []);]);]);EAppMulti (EVar ("(.)", []), [EAppMulti (EVar ("ifthenelse", []), [EVar ("False", []);EVar ("id", []);EVar ("id", []);]);ELam (EVar ("x13", [(EVar ("x13", []), TPoly "alpha723");]), EVar ("fst", [(EVar ("x13", []), TPoly "alpha723");]));EAppMulti (EVar ("safeTail", []), [EVar ("[]", []);]);]);ETuple (ETuple (EVar ("[]", []), EVar ("safeTail", [])), EAppMulti (EVar ("(++)", []), [EVar ("[]", []);EVar ("[]", []);]));]);]), ELet (EVar ("y6", [(EVar ("y6", []), TPoly "alpha1295");]), EVar ("1", []), EVar ("snd", [(EVar ("y6", []), TPoly "alpha1295");])), EAppMulti (EVar ("snd", [(EVar ("z3", []), TPoly "alpha80");(EVar ("z4", []), TList (TPoly "alpha80"));]), [ETuple (EVar ("(&&)", [(EVar ("z3", []), TPoly "alpha80");(EVar ("z4", []), TList (TPoly "alpha80"));]), EMaybe (EAppMulti (EVar ("safeHead", [(EVar ("z3", []), TPoly "alpha80");(EVar ("z4", []), TList (TPoly "alpha80"));]), [EVar ("z4", [(EVar ("z3", []), TPoly "alpha80");(EVar ("z4", []), TList (TPoly "alpha80"));]);]), EVar ("z3", [(EVar ("z3", []), TPoly "alpha80");(EVar ("z4", []), TList (TPoly "alpha80"));])));]), EVar ("z3", [(EVar ("z3", []), TPoly "alpha80");]), EVar ("z4", [(EVar ("z4", []), TList (TPoly "alpha80"));]));EAppMulti (EVar ("(++)", []), [EAppMulti (EVar ("safeTail", []), [EAppMulti (EVar ("fst", []), [ETuple (ELet (EVar ("y10", [(EVar ("y10", []), TPoly "alpha1994");]), EVar ("[]", []), EVar ("y10", [(EVar ("y10", []), TPoly "alpha1994");])), EAppMulti (EVar ("(-)", []), [EVar ("0", []);EVar ("0", []);]));]);]);EAppMulti (EVar ("(++)", []), [EAppMulti (EVar ("safeTail", []), [EAppMulti (ELamMulti ([(EVar ("x23", [(EVar ("x23", []), TInt);]), TInt);], EVar ("[]", [])), [ELet (EVar ("y13", [(EVar ("y13", []), TPoly "alpha2234");]), EVar ("safeHead", []), EVar ("0", [(EVar ("y13", []), TPoly "alpha2234");]));]);]);EAppMulti (EVar ("(:)", []), [ETuple (EVar ("(:)", []), EAppMulti (EVar ("id", []), [EVar ("True", []);]));EAppMulti (EVar ("safeTail", []), [EAppMulti (EVar ("safeTail", []), [EVar ("[]", []);]);]);]);]);]);]), EMaybe (EAppMulti (EVar ("id", []), [EAppMulti (EVar ("safeHead", []), [EAppMulti (EVar ("id", []), [EAppMulti (EVar ("fst", []), [ETuple (EVar ("[]", []), EVar ("(-)", []));]);]);]);]), EAppMulti (EVar ("filter", []), [EVar ("id", []);EPatternMatch (EPatternMatch (EAppMulti (EVar ("ifthenelse", []), [EPatternMatch (EVar ("[]", []), EVar ("False", []), EVar ("True", [(EVar ("z33", []), TPoly "alpha2827");(EVar ("z34", []), TList (TPoly "alpha2827"));]), EVar ("z33", [(EVar ("z33", []), TPoly "alpha2827");]), EVar ("z34", [(EVar ("z34", []), TList (TPoly "alpha2827"));]));EAppMulti (EVar ("map", []), [EVar ("(:)", []);EVar ("[]", []);]);EAppMulti (EVar ("id", []), [EVar ("[]", []);]);]), EAppMulti (EVar ("snd", []), [ETuple (EVar ("snd", []), EVar ("[]", []));]), EAppMulti (EVar ("filter", [(EVar ("z31", []), TPoly "alpha2767");(EVar ("z32", []), TList (TPoly "alpha2767"));]), [EVar ("id", [(EVar ("z31", []), TPoly "alpha2767");(EVar ("z32", []), TList (TPoly "alpha2767"));]);EAppMulti (EVar ("(++)", [(EVar ("z31", []), TPoly "alpha2767");(EVar ("z32", []), TList (TPoly "alpha2767"));]), [EVar ("[]", [(EVar ("z31", []), TPoly "alpha2767");(EVar ("z32", []), TList (TPoly "alpha2767"));]);EVar ("[]", [(EVar ("z31", []), TPoly "alpha2767");(EVar ("z32", []), TList (TPoly "alpha2767"));]);]);]), EVar ("z31", [(EVar ("z31", []), TPoly "alpha2767");]), EVar ("z32", [(EVar ("z32", []), TList (TPoly "alpha2767"));])), EAppMulti (EVar ("fst", []), [ETuple (ELet (EVar ("y22", [(EVar ("y22", []), TPoly "alpha3652");]), EVar ("[]", []), EVar ("y22", [(EVar ("y22", []), TPoly "alpha3652");])), EAppMulti (EVar ("(Main.<)", []), [EVar ("0", []);EVar ("1", []);]));]), EAppMulti (EVar ("safeTail", [(EVar ("z29", []), TPoly "alpha2735");(EVar ("z30", []), TList (TPoly "alpha2735"));]), [EAppMulti (EVar ("(++)", [(EVar ("z29", []), TPoly "alpha2735");(EVar ("z30", []), TList (TPoly "alpha2735"));]), [EAppMulti (EVar ("safeTail", [(EVar ("z29", []), TPoly "alpha2735");(EVar ("z30", []), TList (TPoly "alpha2735"));]), [EVar ("[]", [(EVar ("z29", []), TPoly "alpha2735");(EVar ("z30", []), TList (TPoly "alpha2735"));]);]);EAppMulti (EVar ("(++)", [(EVar ("z29", []), TPoly "alpha2735");(EVar ("z30", []), TList (TPoly "alpha2735"));]), [EVar ("[]", [(EVar ("z29", []), TPoly "alpha2735");(EVar ("z30", []), TList (TPoly "alpha2735"));]);EVar ("[]", [(EVar ("z29", []), TPoly "alpha2735");(EVar ("z30", []), TList (TPoly "alpha2735"));]);]);]);]), EVar ("z29", [(EVar ("z29", []), TPoly "alpha2735");]), EVar ("z30", [(EVar ("z30", []), TList (TPoly "alpha2735"));]));])), EAppMulti (EVar ("(.)", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [ELam (EVar ("x25", [(EVar ("x25", []), TPoly "alpha4204");]), EAppMulti (EVar ("safeTail", [(EVar ("x25", []), TPoly "alpha4204");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EAppMulti (ELamMulti ([(EVar ("x26", [(EVar ("x26", []), TInt);]), TInt);], EVar ("x25", [(EVar ("x25", []), TPoly "alpha4204");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));])), [EAppMulti (EVar ("id", [(EVar ("x25", []), TPoly "alpha4204");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [ELet (EVar ("y24", [(EVar ("y24", []), TPoly "alpha4406");]), EVar ("[]", [(EVar ("x25", []), TPoly "alpha4204");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), EVar ("0", [(EVar ("y24", []), TPoly "alpha4406");(EVar ("x25", []), TPoly "alpha4204");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]));]);]);]));EMaybe (EAppMulti (EVar ("id", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EAppMulti (EVar ("(.)", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [ELam (EVar ("x29", [(EVar ("x29", []), TPoly "alpha4855");]), EVar ("x29", [(EVar ("x29", []), TPoly "alpha4855");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]));EVar ("id", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);EAppMulti (EVar ("safeHead", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EAppMulti (EVar ("ifthenelse", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EVar ("True", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);EVar ("[]", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);EVar ("[]", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);]);]);]);]), ELam (EVar ("x27", [(EVar ("x27", []), TPoly "alpha4203");]), EAppMulti (EVar ("(:)", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EAppMulti (EVar ("(&&)", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EVar ("x27", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);EVar ("False", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);]);EAppMulti (EVar ("safeTail", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EAppMulti (EVar ("filter", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EVar ("id", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);EVar ("[]", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);]);]);])));EAppMulti (EVar ("fst", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [ETuple (EAppMulti (EVar ("(||)", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EAppMulti (EVar ("(&&)", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EVar ("True", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);ELet (EVar ("y29", [(EVar ("y29", []), TPoly "alpha5413");]), EVar ("(:)", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), EVar ("False", [(EVar ("y29", []), TPoly "alpha5413");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]));]);EAppMulti (EVar ("(Main.<)", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EAppMulti (EVar ("len", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EVar ("[]", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);]);EAppMulti (EVar ("negate", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EVar ("0", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);]);]);]), EVar ("filter", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]));]);]), EVar ("z1", [(EVar ("z1", []), TPoly "alpha32");]), EVar ("z2", [(EVar ("z2", []), TList (TPoly "alpha32"));]))
+EPatternMatch (EAppMulti (EVar ("filter", []), [EPatternMatch (EAppMulti (EVar ("ifthenelse", []), [EVar ("True", []);EAppMulti (EVar ("(.)", []), [EVar ("id", []);EAppMulti (EVar ("id", []), [ELam (EVar ("x1", [(EVar ("x1", []), TPoly "alpha170");]), EAppMulti (EVar ("EVILifthenelse", [(EVar ("x1", []), TPoly "alpha170");]), [ELet (EVar ("y31", [(EVar ("y31", []), TPoly "alpha19288");]), EAppMulti (EVar ("id", []), [EVar ("True", []);]), EAppMulti (EVar ("(:)", [(EVar ("y31", []), TPoly "alpha19288");]), [EMaybe (EAppMulti (EVar ("ifthenelse", [(EVar ("y31", []), TPoly "alpha19288");]), [EAppMulti (EVar ("(&&)", [(EVar ("y31", []), TPoly "alpha19288");]), [EAppMulti (EVar ("(||)", [(EVar ("y31", []), TPoly "alpha19288");]), [EVar ("True", [(EVar ("y31", []), TPoly "alpha19288");]);EVar ("y31", [(EVar ("y31", []), TPoly "alpha19288");]);]);EVar ("y31", [(EVar ("y31", []), TPoly "alpha19288");]);]);EAppMulti (ELamMulti ([(EVar ("x38", [(EVar ("x38", []), TMaybe (TBool));]), TMaybe (TBool));], EVar ("x38", [(EVar ("y31", []), TPoly "alpha19288");(EVar ("x38", []), TMaybe (TBool));])), [EAppMulti (EVar ("(.)", [(EVar ("y31", []), TPoly "alpha19288");]), [EVar ("safeHead", [(EVar ("y31", []), TPoly "alpha19288");]);EVar ("id", [(EVar ("y31", []), TPoly "alpha19288");]);EVar ("[]", [(EVar ("y31", []), TPoly "alpha19288");]);]);]);EAppMulti (EVar ("(.)", [(EVar ("y31", []), TPoly "alpha19288");]), [EVar ("id", [(EVar ("y31", []), TPoly "alpha19288");]);EAppMulti (EVar ("(.)", [(EVar ("y31", []), TPoly "alpha19288");]), [EVar ("id", [(EVar ("y31", []), TPoly "alpha19288");]);EVar ("id", [(EVar ("y31", []), TPoly "alpha19288");]);EVar ("id", [(EVar ("y31", []), TPoly "alpha19288");]);]);EAppMulti (EVar ("safeHead", [(EVar ("y31", []), TPoly "alpha19288");]), [EVar ("[]", [(EVar ("y31", []), TPoly "alpha19288");]);]);]);]), EAppMulti (EVar ("(Main.==)", [(EVar ("y31", []), TPoly "alpha19288");]), [EAppMulti (EVar ("id", [(EVar ("y31", []), TPoly "alpha19288");]), [EAppMulti (EVar ("(Main.==)", [(EVar ("y31", []), TPoly "alpha19288");]), [EVar ("y31", [(EVar ("y31", []), TPoly "alpha19288");]);EVar ("False", [(EVar ("y31", []), TPoly "alpha19288");]);]);]);EAppMulti (EVar ("ifthenelse", [(EVar ("y31", []), TPoly "alpha19288");]), [EAppMulti (EVar ("(.)", [(EVar ("y31", []), TPoly "alpha19288");]), [EVar ("id", [(EVar ("y31", []), TPoly "alpha19288");]);EVar ("id", [(EVar ("y31", []), TPoly "alpha19288");]);EVar ("True", [(EVar ("y31", []), TPoly "alpha19288");]);]);EPatternMatch (EVar ("[]", [(EVar ("y31", []), TPoly "alpha19288");]), EVar ("False", [(EVar ("y31", []), TPoly "alpha19288");]), EVar ("True", [(EVar ("y31", []), TPoly "alpha19288");(EVar ("z61", []), TPoly "alpha19701");(EVar ("z62", []), TList (TPoly "alpha19701"));]), EVar ("z61", [(EVar ("z61", []), TPoly "alpha19701");]), EVar ("z62", [(EVar ("z62", []), TList (TPoly "alpha19701"));]));EAppMulti (EVar ("ifthenelse", [(EVar ("y31", []), TPoly "alpha19288");]), [EVar ("y31", [(EVar ("y31", []), TPoly "alpha19288");]);EVar ("True", [(EVar ("y31", []), TPoly "alpha19288");]);EVar ("True", [(EVar ("y31", []), TPoly "alpha19288");]);]);]);]));EAppMulti (EVar ("id", [(EVar ("y31", []), TPoly "alpha19288");]), [EAppMulti (EVar ("(++)", [(EVar ("y31", []), TPoly "alpha19288");]), [EAppMulti (EVar ("(.)", [(EVar ("y31", []), TPoly "alpha19288");]), [EAppMulti (EVar ("id", [(EVar ("y31", []), TPoly "alpha19288");]), [EVar ("fst", [(EVar ("y31", []), TPoly "alpha19288");]);]);EVar ("id", [(EVar ("y31", []), TPoly "alpha19288");]);ETuple (EVar ("[]", [(EVar ("y31", []), TPoly "alpha19288");]), EVar ("len", [(EVar ("y31", []), TPoly "alpha19288");]));]);EAppMulti (EVar ("snd", [(EVar ("y31", []), TPoly "alpha19288");]), [ETuple (EVar ("(.)", [(EVar ("y31", []), TPoly "alpha19288");]), EVar ("[]", [(EVar ("y31", []), TPoly "alpha19288");]));]);]);]);]));EAppMulti (EVar ("(Main.<)", []), [EAppMulti (EVar ("(-)", []), [EAppMulti (EVar ("negate", []), [ELet (EVar ("y44", [(EVar ("y44", []), TPoly "alpha21197");]), EAppMulti (EVar ("ifthenelse", []), [EAppMulti (EVar ("id", []), [EVar ("False", []);]);EAppMulti (EVar ("safeTail", []), [EVar ("[]", []);]);EVar ("[]", []);]), EAppMulti (EVar ("snd", [(EVar ("y44", []), TPoly "alpha21197");]), [ETuple (EVar ("negate", [(EVar ("y44", []), TPoly "alpha21197");]), EVar ("1", [(EVar ("y44", []), TPoly "alpha21197");]));]));]);EVar ("0", []);]);EVar ("0", []);]);EAppMulti (EVar ("(.)", []), [EVar ("fst", []);ELam (EVar ("x873", [(EVar ("x873", []), TPoly "alpha32189");]), ETuple (EAppMulti (EVar ("(+)", [(EVar ("x873", []), TPoly "alpha32189");]), [EPatternMatch (EAppMulti (EVar ("(++)", [(EVar ("x873", []), TPoly "alpha32189");]), [EVar ("[]", [(EVar ("x873", []), TPoly "alpha32189");]);EVar ("[]", [(EVar ("x873", []), TPoly "alpha32189");]);]), EAppMulti (EVar ("(-)", [(EVar ("x873", []), TPoly "alpha32189");]), [EVar ("1", [(EVar ("x873", []), TPoly "alpha32189");]);EVar ("0", [(EVar ("x873", []), TPoly "alpha32189");]);]), EPatternMatch (EVar ("[]", [(EVar ("x873", []), TPoly "alpha32189");(EVar ("z783", []), TPoly "alpha32349");(EVar ("z784", []), TList (TPoly "alpha32349"));]), EVar ("0", [(EVar ("x873", []), TPoly "alpha32189");(EVar ("z783", []), TPoly "alpha32349");(EVar ("z784", []), TList (TPoly "alpha32349"));]), EVar ("z783", [(EVar ("x873", []), TPoly "alpha32189");(EVar ("z783", []), TPoly "alpha32349");(EVar ("z784", []), TList (TPoly "alpha32349"));(EVar ("z787", []), TPoly "alpha32541");(EVar ("z788", []), TList (TPoly "alpha32541"));]), EVar ("z787", [(EVar ("z787", []), TPoly "alpha32541");]), EVar ("z788", [(EVar ("z788", []), TList (TPoly "alpha32541"));])), EVar ("z783", [(EVar ("z783", []), TPoly "alpha32349");]), EVar ("z784", [(EVar ("z784", []), TList (TPoly "alpha32349"));]));EAppMulti (EVar ("fst", [(EVar ("x873", []), TPoly "alpha32189");]), [ETuple (EVar ("x873", [(EVar ("x873", []), TPoly "alpha32189");]), EVar ("(.)", [(EVar ("x873", []), TPoly "alpha32189");]));]);]), EVar ("(+)", [(EVar ("x873", []), TPoly "alpha32189");])));EAppMulti (EVar ("snd", []), [ETuple (EAppMulti (EVar ("negate", []), [EAppMulti (EVar ("fst", []), [ETuple (EVar ("1", []), EVar ("(||)", []));]);]), EAppMulti (EVar ("len", []), [EAppMulti (EVar ("safeTail", []), [EAppMulti (EVar ("(++)", []), [EVar ("[]", []);EVar ("[]", []);]);]);]));]);]);]));]);EAppMulti (EVar ("(.)", []), [ELam (EVar ("x2", [(EVar ("x2", []), TPoly "alpha288");]), EVar ("[]", [(EVar ("x2", []), TPoly "alpha288");]));EVar ("(&&)", []);EAppMulti (EVar ("(&&)", []), [EVar ("True", []);EVar ("True", []);]);]);]);EAppMulti (EVar ("(.)", []), [EAppMulti (EVar ("ifthenelse", []), [EAppMulti (EVar ("(Main.<)", []), [EVar ("0", []);EVar ("0", []);]);EVar ("fst", []);EAppMulti (EVar ("ifthenelse", []), [EVar ("False", []);EVar ("fst", []);EVar ("fst", []);]);]);EAppMulti (EVar ("(.)", []), [EAppMulti (EVar ("ifthenelse", []), [EVar ("False", []);EVar ("id", []);EVar ("id", []);]);ELam (EVar ("x13", [(EVar ("x13", []), TPoly "alpha723");]), EVar ("fst", [(EVar ("x13", []), TPoly "alpha723");]));EAppMulti (EVar ("safeTail", []), [EVar ("[]", []);]);]);ETuple (ETuple (EVar ("[]", []), EVar ("safeTail", [])), EAppMulti (EVar ("(++)", []), [EVar ("[]", []);EVar ("[]", []);]));]);]), ELet (EVar ("y6", [(EVar ("y6", []), TPoly "alpha1295");]), EVar ("1", []), EVar ("snd", [(EVar ("y6", []), TPoly "alpha1295");])), EAppMulti (EVar ("snd", [(EVar ("z3", []), TPoly "alpha80");(EVar ("z4", []), TList (TPoly "alpha80"));]), [ETuple (EVar ("(&&)", [(EVar ("z3", []), TPoly "alpha80");(EVar ("z4", []), TList (TPoly "alpha80"));]), EMaybe (EAppMulti (EVar ("safeHead", [(EVar ("z3", []), TPoly "alpha80");(EVar ("z4", []), TList (TPoly "alpha80"));]), [EVar ("z4", [(EVar ("z3", []), TPoly "alpha80");(EVar ("z4", []), TList (TPoly "alpha80"));]);]), EVar ("z3", [(EVar ("z3", []), TPoly "alpha80");(EVar ("z4", []), TList (TPoly "alpha80"));])));]), EVar ("z3", [(EVar ("z3", []), TPoly "alpha80");]), EVar ("z4", [(EVar ("z4", []), TList (TPoly "alpha80"));]));EAppMulti (EVar ("(++)", []), [EAppMulti (EVar ("safeTail", []), [EAppMulti (EVar ("fst", []), [ETuple (ELet (EVar ("y10", [(EVar ("y10", []), TPoly "alpha1994");]), EVar ("[]", []), EVar ("y10", [(EVar ("y10", []), TPoly "alpha1994");])), EAppMulti (EVar ("(-)", []), [EVar ("0", []);EVar ("0", []);]));]);]);EAppMulti (EVar ("(++)", []), [EAppMulti (EVar ("safeTail", []), [EAppMulti (ELamMulti ([(EVar ("x23", [(EVar ("x23", []), TInt);]), TInt);], EVar ("[]", [])), [ELet (EVar ("y13", [(EVar ("y13", []), TPoly "alpha2234");]), EVar ("safeHead", []), EVar ("0", [(EVar ("y13", []), TPoly "alpha2234");]));]);]);EAppMulti (EVar ("(:)", []), [ETuple (EVar ("(:)", []), EAppMulti (EVar ("id", []), [EVar ("True", []);]));EAppMulti (EVar ("safeTail", []), [EAppMulti (EVar ("safeTail", []), [EVar ("[]", []);]);]);]);]);]);]), EMaybe (EAppMulti (EVar ("id", []), [EAppMulti (EVar ("safeHead", []), [EAppMulti (EVar ("id", []), [EAppMulti (EVar ("fst", []), [ETuple (EVar ("[]", []), EVar ("(-)", []));]);]);]);]), EAppMulti (EVar ("filter", []), [EVar ("id", []);EPatternMatch (EPatternMatch (EAppMulti (EVar ("ifthenelse", []), [EPatternMatch (EVar ("[]", []), EVar ("False", []), EVar ("True", [(EVar ("z33", []), TPoly "alpha2827");(EVar ("z34", []), TList (TPoly "alpha2827"));]), EVar ("z33", [(EVar ("z33", []), TPoly "alpha2827");]), EVar ("z34", [(EVar ("z34", []), TList (TPoly "alpha2827"));]));EAppMulti (EVar ("map", []), [EVar ("(:)", []);EVar ("[]", []);]);EAppMulti (EVar ("id", []), [EVar ("[]", []);]);]), EAppMulti (EVar ("snd", []), [ETuple (EVar ("snd", []), EVar ("[]", []));]), EAppMulti (EVar ("filter", [(EVar ("z31", []), TPoly "alpha2767");(EVar ("z32", []), TList (TPoly "alpha2767"));]), [EVar ("id", [(EVar ("z31", []), TPoly "alpha2767");(EVar ("z32", []), TList (TPoly "alpha2767"));]);EAppMulti (EVar ("(++)", [(EVar ("z31", []), TPoly "alpha2767");(EVar ("z32", []), TList (TPoly "alpha2767"));]), [EVar ("[]", [(EVar ("z31", []), TPoly "alpha2767");(EVar ("z32", []), TList (TPoly "alpha2767"));]);EVar ("[]", [(EVar ("z31", []), TPoly "alpha2767");(EVar ("z32", []), TList (TPoly "alpha2767"));]);]);]), EVar ("z31", [(EVar ("z31", []), TPoly "alpha2767");]), EVar ("z32", [(EVar ("z32", []), TList (TPoly "alpha2767"));])), EAppMulti (EVar ("fst", []), [ETuple (ELet (EVar ("y22", [(EVar ("y22", []), TPoly "alpha3652");]), EVar ("[]", []), EVar ("y22", [(EVar ("y22", []), TPoly "alpha3652");])), EAppMulti (EVar ("(Main.<)", []), [EVar ("0", []);EVar ("1", []);]));]), EAppMulti (EVar ("safeTail", [(EVar ("z29", []), TPoly "alpha2735");(EVar ("z30", []), TList (TPoly "alpha2735"));]), [EAppMulti (EVar ("(++)", [(EVar ("z29", []), TPoly "alpha2735");(EVar ("z30", []), TList (TPoly "alpha2735"));]), [EAppMulti (EVar ("safeTail", [(EVar ("z29", []), TPoly "alpha2735");(EVar ("z30", []), TList (TPoly "alpha2735"));]), [EVar ("[]", [(EVar ("z29", []), TPoly "alpha2735");(EVar ("z30", []), TList (TPoly "alpha2735"));]);]);EAppMulti (EVar ("(++)", [(EVar ("z29", []), TPoly "alpha2735");(EVar ("z30", []), TList (TPoly "alpha2735"));]), [EVar ("[]", [(EVar ("z29", []), TPoly "alpha2735");(EVar ("z30", []), TList (TPoly "alpha2735"));]);EVar ("[]", [(EVar ("z29", []), TPoly "alpha2735");(EVar ("z30", []), TList (TPoly "alpha2735"));]);]);]);]), EVar ("z29", [(EVar ("z29", []), TPoly "alpha2735");]), EVar ("z30", [(EVar ("z30", []), TList (TPoly "alpha2735"));]));])), EAppMulti (EVar ("(.)", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [ELam (EVar ("x25", [(EVar ("x25", []), TPoly "alpha4204");]), EAppMulti (EVar ("safeTail", [(EVar ("x25", []), TPoly "alpha4204");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EAppMulti (ELamMulti ([(EVar ("x26", [(EVar ("x26", []), TInt);]), TInt);], EVar ("x25", [(EVar ("x25", []), TPoly "alpha4204");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));])), [EAppMulti (EVar ("id", [(EVar ("x25", []), TPoly "alpha4204");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [ELet (EVar ("y24", [(EVar ("y24", []), TPoly "alpha4406");]), EVar ("[]", [(EVar ("x25", []), TPoly "alpha4204");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), EVar ("0", [(EVar ("y24", []), TPoly "alpha4406");(EVar ("x25", []), TPoly "alpha4204");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]));]);]);]));EMaybe (EAppMulti (EVar ("id", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EAppMulti (EVar ("(.)", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [ELam (EVar ("x29", [(EVar ("x29", []), TPoly "alpha4855");]), EVar ("x29", [(EVar ("x29", []), TPoly "alpha4855");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]));EVar ("id", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);EAppMulti (EVar ("safeHead", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EAppMulti (EVar ("ifthenelse", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EVar ("True", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);EVar ("[]", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);EVar ("[]", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);]);]);]);]), ELam (EVar ("x27", [(EVar ("x27", []), TPoly "alpha4203");]), EAppMulti (EVar ("(:)", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EAppMulti (EVar ("(&&)", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EVar ("x27", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);EVar ("False", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);]);EAppMulti (EVar ("safeTail", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EAppMulti (EVar ("filter", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EVar ("id", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);EVar ("[]", [(EVar ("x27", []), TPoly "alpha4203");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);]);]);])));EAppMulti (EVar ("fst", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [ETuple (EAppMulti (EVar ("(||)", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EAppMulti (EVar ("(&&)", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EVar ("True", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);ELet (EVar ("y29", [(EVar ("y29", []), TPoly "alpha5413");]), EVar ("(:)", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), EVar ("False", [(EVar ("y29", []), TPoly "alpha5413");(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]));]);EAppMulti (EVar ("(Main.<)", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EAppMulti (EVar ("len", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EVar ("[]", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);]);EAppMulti (EVar ("negate", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]), [EVar ("0", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]);]);]);]), EVar ("filter", [(EVar ("z1", []), TPoly "alpha32");(EVar ("z2", []), TList (TPoly "alpha32"));]));]);]), EVar ("z1", [(EVar ("z1", []), TPoly "alpha32");]), EVar ("z2", [(EVar ("z2", []), TList (TPoly "alpha32"));]))
+PI: [TPoly "alpha5197",TFuncMulti ([TFunc (TPoly "alpha5280", TBool);TList (TPoly "alpha5280");], TList (TPoly "alpha5280")); TPoly "alpha4203",TBool; TPoly "alpha689",TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)); TPoly "alpha2079",TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool); TPoly "alpha5049",TList (TFunc (TBool, TList (TBool))); TPoly "alpha3476",TList (TBool); TPoly "alpha2402",TBool; TPoly "alpha1385",TFuncMulti ([TBool;TBool;], TBool); TPoly "alpha5540",TPoly "alpha5609"; TPoly "alpha5196",TBool; TPoly "alpha724",TPoly "alpha806"; TPoly "alpha4531",TBool; TPoly "alpha806",TFunc (TPoly "alpha494", TTuple (TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)), TFuncMulti ([TList (TPoly "alpha1242");], TList (TPoly "alpha1242")))); TPoly "alpha2620",TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool); TPoly "alpha5413",TFuncMulti ([TPoly "alpha5503";TList (TPoly "alpha5503");], TList (TPoly "alpha5503")); TPoly "alpha496",TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)); TPoly "alpha2343",TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool); TPoly "alpha4741",TBool; TPoly "alpha4205",TList (TBool); TPoly "alpha4015",TList (TList (TBool)); TPoly "alpha3186",TFuncMulti ([TTuple (TPoly "alpha3302", TPoly "alpha3303");], TPoly "alpha3303"); TPoly "alpha1749",TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool); TPoly "alpha4915",TFunc (TBool, TList (TBool)); TPoly "alpha3477",TBool; TPoly "alpha2660",TBool; TPoly "alpha1313",TBool; TPoly "alpha3719",TBool; TPoly "alpha193",TFunc (TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)), TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool))); TPoly "alpha709",TFuncMulti ([TList (TPoly "alpha1242");], TList (TPoly "alpha1242")); TPoly "alpha3452",TBool; TPoly "alpha3076",TList (TFunc (TList (TPoly "alpha3026"), TList (TPoly "alpha3026"))); TPoly "alpha1295",TInt; TPoly "alpha288",TFunc (TBool, TBool); TPoly "alpha3370",TBool; TPoly "alpha3928",TBool; TPoly "alpha99",TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)); TPoly "alpha2827",TPoly "alpha2859"; TPoly "alpha3731",TBool; TPoly "alpha3352",TBool; TPoly "alpha825",TFunc (TPoly "alpha494", TTuple (TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)), TFuncMulti ([TList (TPoly "alpha1242");], TList (TPoly "alpha1242")))); TPoly "alpha4782",TBool; TPoly "alpha4912",TMaybe (TFunc (TBool, TList (TBool))); TPoly "alpha4856",TMaybe (TFunc (TBool, TList (TBool))); TPoly "alpha3768",TBool; TPoly "alpha3652",TList (TBool); TPoly "alpha1817",TList (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool)); TPoly "alpha2928",TFunc (TList (TPoly "alpha3026"), TList (TPoly "alpha3026")); TPoly "alpha4713",TBool; TPoly "alpha1312",TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")); TPoly "alpha5141",TFunc (TBool, TList (TBool)); TPoly "alpha4823",TMaybe (TFunc (TBool, TList (TBool))); TPoly "alpha4363",TInt; TPoly "alpha2234",TFuncMulti ([TList (TPoly "alpha2340");], TMaybe (TPoly "alpha2340")); TPoly "alpha3311",TBool; TPoly "alpha623",TFuncMulti ([TList (TPoly "alpha1242");], TList (TPoly "alpha1242")); TPoly "alpha914",TTuple (TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)), TFuncMulti ([TList (TPoly "alpha1242");], TList (TPoly "alpha1242"))); TPoly "alpha1386",TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool); TPoly "alpha32",TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool); TPoly "alpha3862",TBool; TPoly "alpha723",TList (TPoly "alpha953"); TPoly "alpha730",TFunc (TFunc (TPoly "alpha494", TTuple (TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)), TFuncMulti ([TList (TPoly "alpha1242");], TList (TPoly "alpha1242")))), TFunc (TPoly "alpha494", TTuple (TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)), TFuncMulti ([TList (TPoly "alpha1242");], TList (TPoly "alpha1242"))))); TPoly "alpha3968",TMaybe (TList (TBool)); TPoly "alpha1818",TInt; TPoly "alpha80",TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool); TPoly "alpha3241",TBool; TPoly "alpha3984",TList (TBool); TPoly "alpha1774",TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool); TPoly "alpha3417",TBool; TPoly "alpha4817",TBool; TPoly "alpha725",TFunc (TPoly "alpha494", TTuple (TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)), TFuncMulti ([TList (TPoly "alpha1242");], TList (TPoly "alpha1242")))); TPoly "alpha1165",TPoly "alpha1131"; TPoly "alpha2061",TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool); TPoly "alpha289",TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)); TPoly "alpha3962",TBool; TPoly "alpha953",TPoly "alpha1023"; TPoly "alpha2701",TBool; TPoly "alpha2735",TBool; TPoly "alpha915",TList (TPoly "alpha1084"); TPoly "alpha4056",TFuncMulti ([TInt;TInt;], TInt); TPoly "alpha501",TFunc (TPoly "alpha495", TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool))); TPoly "alpha3793",TBool; TPoly "alpha4406",TList (TPoly "alpha4496"); TPoly "alpha3187",TList (TBool); TPoly "alpha708",TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)); TPoly "alpha5175",TFunc (TBool, TList (TBool)); TPoly "alpha3159",TFunc (TList (TPoly "alpha3026"), TList (TPoly "alpha3026")); TPoly "alpha2767",TFunc (TList (TPoly "alpha3026"), TList (TPoly "alpha3026")); TPoly "alpha3880",TBool; TPoly "alpha4855",TMaybe (TFunc (TBool, TList (TBool))); TPoly "alpha690",TFuncMulti ([TList (TPoly "alpha1242");], TList (TPoly "alpha1242")); TPoly "alpha2786",TList (TFunc (TList (TPoly "alpha3026"), TList (TPoly "alpha3026"))); TPoly "alpha39",TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool); TPoly "alpha190",TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)); TPoly "alpha4055",TList (TList (TBool)); TPoly "alpha1994",TList (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool)); TPoly "alpha287",TBool; TPoly "alpha2104",TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool); TPoly "alpha1443",TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool); TPoly "alpha4854",TMaybe (TFunc (TBool, TList (TBool))); TPoly "alpha628",TFunc (TTuple (TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)), TFuncMulti ([TList (TPoly "alpha1242");], TList (TPoly "alpha1242"))), TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool))); TPoly "alpha2566",TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool); TPoly "alpha2535",TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool); TPoly "alpha3061",TPoly "alpha3026"; TPoly "alpha1277",TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool); TPoly "alpha170",TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)); TPoly "alpha172",TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)); TPoly "alpha495",TTuple (TPoly "alpha622", TFuncMulti ([TList (TPoly "alpha1242");], TList (TPoly "alpha1242"))); TPoly "alpha2927",TPoly "alpha3061"; TPoly "alpha4232",TBool; TPoly "alpha2204",TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool); TPoly "alpha4173",TList (TBool); TPoly "alpha354",TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool); TPoly "alpha1084",TPoly "alpha1165"; TPoly "alpha4204",TList (TBool); TPoly "alpha171",TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)); TPoly "alpha622",TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)); TPoly "alpha494",TTuple (TTuple (TList (TFunc (TTuple (TFuncMulti ([TPoly "alpha2523";TList (TPoly "alpha2523");], TList (TPoly "alpha2523")), TBool), TBool)), TFuncMulti ([TList (TPoly "alpha1242");], TList (TPoly "alpha1242"))), TList (TPoly "alpha1084")); ]
+EXPECTED TYPE: TList (TBool)
+Argument usage in lambdas: 5/10 = 0.5
+Expression size: 115
+Generation time: 0.117502
+ERI time: 0.170505
+Total time: 0.288333
+233
+7
 3
-1
+102
+16
+4
+8
+8
 
 looking up (Int -> Int -> Int) in applicabilityCache
-TPoly "alpha51" TList (TPoly "alpha52")
+TList (TPoly "alpha6024") TList (TPoly "alpha5671")
+TPoly "alpha6058" TList (TPoly "alpha6027")
+TPoly "alpha6072" TPoly "alpha6052"
+TFunc (TPoly "alpha6062", TPoly "alpha6063") TFuncMulti ([TPoly "alpha6073";], TPoly "alpha6073")
+TPoly "alpha6079" TFunc (TPoly "alpha6064", TPoly "alpha6065")
+TPoly "alpha6094" TPoly "alpha6067"
+TPoly "alpha6085" TList (TPoly "alpha6095")
+TFunc (TPoly "alpha6086", TPoly "alpha6087") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha6089"
+TPoly "alpha6118" TPoly "alpha6055"
+TPoly "alpha6128" TFunc (TPoly "alpha6108", TPoly "alpha6109")
+TBool TBool
+TPoly "alpha6122" TFuncMulti ([TTuple (TPoly "alpha6140", TPoly "alpha6141");], TPoly "alpha6140")
+TPoly "alpha6152" TPoly "alpha6125"
+TPoly "alpha6146" TFuncMulti ([TTuple (TPoly "alpha6155", TPoly "alpha6156");], TPoly "alpha6155")
+TPoly "alpha6149" TFuncMulti ([TTuple (TPoly "alpha6158", TPoly "alpha6159");], TPoly "alpha6158")
+TPoly "alpha6172" TFunc (TPoly "alpha6110", TPoly "alpha6111")
+TPoly "alpha6182" TFunc (TPoly "alpha6162", TPoly "alpha6163")
+TPoly "alpha6176" TFuncMulti ([TPoly "alpha6185";], TPoly "alpha6185")
+TPoly "alpha6179" TFuncMulti ([TPoly "alpha6188";], TPoly "alpha6188")
+TPoly "alpha6165" TFuncMulti ([TTuple (TPoly "alpha6191", TPoly "alpha6192");], TPoly "alpha6191")
+TList (TPoly "alpha6197") TPoly "alpha6167"
+TList (TPoly "alpha6194") TList (TPoly "alpha6200")
+TPoly "alpha6221" TList (TPoly "alpha6225")
+TPoly "alpha6220" TFuncMulti ([TList (TPoly "alpha6222");], TList (TPoly "alpha6222"))
+TList (TPoly "alpha6211") TPoly "alpha6203"
+TList (TPoly "alpha6205") TList (TPoly "alpha6214")
+TList (TPoly "alpha6208") TList (TPoly "alpha6217")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha6018", TBool) TFuncMulti ([TTuple (TPoly "alpha6046", TPoly "alpha6047");], TPoly "alpha6047")
+TPoly "alpha6032" TFunc (TPoly "alpha6018", TBool)
+TPoly "alpha6028" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha6040") TMaybe (TPoly "alpha6029")
+TList (TPoly "alpha6037") TList (TPoly "alpha80")
+TPoly "alpha6029" TPoly "alpha80"
+TList (TPoly "alpha6234") TList (TPoly "alpha6021")
+TList (TPoly "alpha6240") TList (TPoly "alpha6228")
+TPoly "alpha6246" TList (TPoly "alpha6237")
+TPoly "alpha1994" TList (TPoly "alpha6261")
+TPoly "alpha6243" TPoly "alpha1994"
+TInt TPoly "alpha6244"
+TList (TPoly "alpha6270") TList (TPoly "alpha6231")
+TList (TPoly "alpha6276") TList (TPoly "alpha6264")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha6280");], TMaybe (TPoly "alpha6280"))
+TPoly "alpha6279" TInt
+TList (TPoly "alpha6289") TList (TPoly "alpha6267")
+TPoly "alpha6293" TFuncMulti ([TPoly "alpha6300";TList (TPoly "alpha6300");], TList (TPoly "alpha6300"))
+TPoly "alpha6297" TPoly "alpha6292"
+TPoly "alpha6294" TBool
+TList (TPoly "alpha6306") TList (TPoly "alpha6286")
+TList (TPoly "alpha6312") TList (TPoly "alpha6303")
+TList (TPoly "alpha6309") TList (TPoly "alpha6315")
+TPoly "alpha5994" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha6000") TPoly "alpha5991"
+TPoly "alpha6006" TList (TPoly "alpha5997")
+TPoly "alpha6012" TPoly "alpha6003"
+TPoly "alpha6009" TList (TPoly "alpha6015")
+TPoly "alpha6010" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha5844") TPoly "tau"
+TFunc (TPoly "alpha5838", TBool) TFuncMulti ([TPoly "alpha5847";], TPoly "alpha5847")
+TPoly "alpha5960" TList (TPoly "alpha5911")
+TList (TPoly "alpha5963") TList (TPoly "alpha5964")
+TList (TPoly "alpha5974") TPoly "alpha5954"
+TFunc (TPoly "alpha5967", TPoly "alpha5968") TFuncMulti ([TPoly "alpha5976";TList (TPoly "alpha5976");], TList (TPoly "alpha5976"))
+TList (TPoly "alpha5970") TList (TPoly "alpha5979")
+TPoly "alpha5985" TPoly "alpha5957"
+TPoly "alpha5982" TList (TPoly "alpha5988")
+TPoly "alpha5943" TList (TPoly "alpha5850")
+TPoly "alpha5939" TFuncMulti ([TTuple (TPoly "alpha5948", TPoly "alpha5949");], TPoly "alpha5949")
+TPoly "alpha5940" TList (TPoly "alpha5945")
+TList (TPoly "alpha5918") TList (TPoly "alpha5850")
+TFunc (TPoly "alpha5912", TBool) TFuncMulti ([TPoly "alpha5921";], TPoly "alpha5921")
+TList (TPoly "alpha5930") TList (TPoly "alpha5915")
+TList (TPoly "alpha5924") TList (TPoly "alpha5933")
+TList (TPoly "alpha5927") TList (TPoly "alpha5936")
+TPoly "alpha5893" TList (TPoly "alpha5841")
+TPoly "alpha3652" TList (TPoly "alpha5908")
+TPoly "alpha5890" TPoly "alpha3652"
+TBool TPoly "alpha5891"
+TList (TPoly "alpha5854") TList (TPoly "alpha5841")
+TList (TPoly "alpha5863") TList (TPoly "alpha5851")
+TList (TPoly "alpha5869") TList (TPoly "alpha5857")
+TList (TPoly "alpha5866") TList (TPoly "alpha5872")
+TList (TPoly "alpha5881") TList (TPoly "alpha5860")
+TList (TPoly "alpha5875") TList (TPoly "alpha5884")
+TList (TPoly "alpha5878") TList (TPoly "alpha5887")
+TPoly "alpha5683" TPoly "tau"
+TList (TPoly "alpha5687") TPoly "alpha5674"
+TPoly "alpha5694" TPoly "alpha5690"
+TPoly "alpha4406" TList (TPoly "alpha5697")
+TPoly "alpha5691" TInt
+TPoly "alpha5742" TMaybe (TFunc (TPoly "alpha5675", TPoly "alpha5676"))
+TPoly "alpha5756" TPoly "alpha5739"
+TFunc (TPoly "alpha5748", TPoly "alpha5749") TFuncMulti ([TPoly "alpha5757";], TPoly "alpha5757")
+TMaybe (TPoly "alpha5763") TPoly "alpha5751"
+TPoly "alpha5775" TList (TPoly "alpha5760")
+TPoly "alpha5769" TList (TPoly "alpha5778")
+TPoly "alpha5772" TList (TPoly "alpha5781")
+TList (TPoly "alpha5706") TPoly "alpha5676"
+TBool TPoly "alpha5700"
+TList (TPoly "alpha5721") TList (TPoly "alpha5703")
+TList (TPoly "alpha5730") TList (TPoly "alpha5718")
+TFunc (TPoly "alpha5724", TBool) TFuncMulti ([TPoly "alpha5733";], TPoly "alpha5733")
+TList (TPoly "alpha5727") TList (TPoly "alpha5736")
+TPoly "alpha5787" TPoly "alpha5678"
+TBool TPoly "alpha5784"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha5811";TList (TPoly "alpha5811");], TList (TPoly "alpha5811"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha5823") TList (TPoly "alpha5829")
+TInt TInt
+TPoly "alpha5785" TFuncMulti ([TFunc (TPoly "alpha5790", TBool);TList (TPoly "alpha5790");], TList (TPoly "alpha5790"))
 looking up (Int -> Int -> Int) in applicabilityCache
 looking up (Bool -> Bool -> Bool) in applicabilityCache
-TPoly "alpha55" TList (TPoly "alpha56")
+TList (TPoly "alpha6671") TList (TPoly "alpha6318")
+TPoly "alpha6705" TList (TPoly "alpha6674")
+TPoly "alpha6719" TPoly "alpha6699"
+TFunc (TPoly "alpha6709", TPoly "alpha6710") TFuncMulti ([TPoly "alpha6720";], TPoly "alpha6720")
+TPoly "alpha6726" TFunc (TPoly "alpha6711", TPoly "alpha6712")
+TPoly "alpha6741" TPoly "alpha6714"
+TPoly "alpha6732" TList (TPoly "alpha6742")
+TFunc (TPoly "alpha6733", TPoly "alpha6734") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha6736"
+TPoly "alpha6765" TPoly "alpha6702"
+TPoly "alpha6775" TFunc (TPoly "alpha6755", TPoly "alpha6756")
+TBool TBool
+TPoly "alpha6769" TFuncMulti ([TTuple (TPoly "alpha6787", TPoly "alpha6788");], TPoly "alpha6787")
+TPoly "alpha6799" TPoly "alpha6772"
+TPoly "alpha6793" TFuncMulti ([TTuple (TPoly "alpha6802", TPoly "alpha6803");], TPoly "alpha6802")
+TPoly "alpha6796" TFuncMulti ([TTuple (TPoly "alpha6805", TPoly "alpha6806");], TPoly "alpha6805")
+TPoly "alpha6819" TFunc (TPoly "alpha6757", TPoly "alpha6758")
+TPoly "alpha6829" TFunc (TPoly "alpha6809", TPoly "alpha6810")
+TPoly "alpha6823" TFuncMulti ([TPoly "alpha6832";], TPoly "alpha6832")
+TPoly "alpha6826" TFuncMulti ([TPoly "alpha6835";], TPoly "alpha6835")
+TPoly "alpha6812" TFuncMulti ([TTuple (TPoly "alpha6838", TPoly "alpha6839");], TPoly "alpha6838")
+TList (TPoly "alpha6844") TPoly "alpha6814"
+TList (TPoly "alpha6841") TList (TPoly "alpha6847")
+TPoly "alpha6868" TList (TPoly "alpha6872")
+TPoly "alpha6867" TFuncMulti ([TList (TPoly "alpha6869");], TList (TPoly "alpha6869"))
+TList (TPoly "alpha6858") TPoly "alpha6850"
+TList (TPoly "alpha6852") TList (TPoly "alpha6861")
+TList (TPoly "alpha6855") TList (TPoly "alpha6864")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha6665", TBool) TFuncMulti ([TTuple (TPoly "alpha6693", TPoly "alpha6694");], TPoly "alpha6694")
+TPoly "alpha6679" TFunc (TPoly "alpha6665", TBool)
+TPoly "alpha6675" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha6687") TMaybe (TPoly "alpha6676")
+TList (TPoly "alpha6684") TList (TPoly "alpha80")
+TPoly "alpha6676" TPoly "alpha80"
+TList (TPoly "alpha6881") TList (TPoly "alpha6668")
+TList (TPoly "alpha6887") TList (TPoly "alpha6875")
+TPoly "alpha6893" TList (TPoly "alpha6884")
+TPoly "alpha1994" TList (TPoly "alpha6908")
+TPoly "alpha6890" TPoly "alpha1994"
+TInt TPoly "alpha6891"
+TList (TPoly "alpha6917") TList (TPoly "alpha6878")
+TList (TPoly "alpha6923") TList (TPoly "alpha6911")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha6927");], TMaybe (TPoly "alpha6927"))
+TPoly "alpha6926" TInt
+TList (TPoly "alpha6936") TList (TPoly "alpha6914")
+TPoly "alpha6940" TFuncMulti ([TPoly "alpha6947";TList (TPoly "alpha6947");], TList (TPoly "alpha6947"))
+TPoly "alpha6944" TPoly "alpha6939"
+TPoly "alpha6941" TBool
+TList (TPoly "alpha6953") TList (TPoly "alpha6933")
+TList (TPoly "alpha6959") TList (TPoly "alpha6950")
+TList (TPoly "alpha6956") TList (TPoly "alpha6962")
+TPoly "alpha6641" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha6647") TPoly "alpha6638"
+TPoly "alpha6653" TList (TPoly "alpha6644")
+TPoly "alpha6659" TPoly "alpha6650"
+TPoly "alpha6656" TList (TPoly "alpha6662")
+TPoly "alpha6657" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha6491") TPoly "tau"
+TFunc (TPoly "alpha6485", TBool) TFuncMulti ([TPoly "alpha6494";], TPoly "alpha6494")
+TPoly "alpha6607" TList (TPoly "alpha6558")
+TList (TPoly "alpha6610") TList (TPoly "alpha6611")
+TList (TPoly "alpha6621") TPoly "alpha6601"
+TFunc (TPoly "alpha6614", TPoly "alpha6615") TFuncMulti ([TPoly "alpha6623";TList (TPoly "alpha6623");], TList (TPoly "alpha6623"))
+TList (TPoly "alpha6617") TList (TPoly "alpha6626")
+TPoly "alpha6632" TPoly "alpha6604"
+TPoly "alpha6629" TList (TPoly "alpha6635")
+TPoly "alpha6590" TList (TPoly "alpha6497")
+TPoly "alpha6586" TFuncMulti ([TTuple (TPoly "alpha6595", TPoly "alpha6596");], TPoly "alpha6596")
+TPoly "alpha6587" TList (TPoly "alpha6592")
+TList (TPoly "alpha6565") TList (TPoly "alpha6497")
+TFunc (TPoly "alpha6559", TBool) TFuncMulti ([TPoly "alpha6568";], TPoly "alpha6568")
+TList (TPoly "alpha6577") TList (TPoly "alpha6562")
+TList (TPoly "alpha6571") TList (TPoly "alpha6580")
+TList (TPoly "alpha6574") TList (TPoly "alpha6583")
+TPoly "alpha6540" TList (TPoly "alpha6488")
+TPoly "alpha3652" TList (TPoly "alpha6555")
+TPoly "alpha6537" TPoly "alpha3652"
+TBool TPoly "alpha6538"
+TList (TPoly "alpha6501") TList (TPoly "alpha6488")
+TList (TPoly "alpha6510") TList (TPoly "alpha6498")
+TList (TPoly "alpha6516") TList (TPoly "alpha6504")
+TList (TPoly "alpha6513") TList (TPoly "alpha6519")
+TList (TPoly "alpha6528") TList (TPoly "alpha6507")
+TList (TPoly "alpha6522") TList (TPoly "alpha6531")
+TList (TPoly "alpha6525") TList (TPoly "alpha6534")
+TPoly "alpha6330" TPoly "tau"
+TList (TPoly "alpha6334") TPoly "alpha6321"
+TPoly "alpha6341" TPoly "alpha6337"
+TPoly "alpha4406" TList (TPoly "alpha6344")
+TPoly "alpha6338" TInt
+TPoly "alpha6389" TMaybe (TFunc (TPoly "alpha6322", TPoly "alpha6323"))
+TPoly "alpha6403" TPoly "alpha6386"
+TFunc (TPoly "alpha6395", TPoly "alpha6396") TFuncMulti ([TPoly "alpha6404";], TPoly "alpha6404")
+TMaybe (TPoly "alpha6410") TPoly "alpha6398"
+TPoly "alpha6422" TList (TPoly "alpha6407")
+TPoly "alpha6416" TList (TPoly "alpha6425")
+TPoly "alpha6419" TList (TPoly "alpha6428")
+TList (TPoly "alpha6353") TPoly "alpha6323"
+TBool TPoly "alpha6347"
+TList (TPoly "alpha6368") TList (TPoly "alpha6350")
+TList (TPoly "alpha6377") TList (TPoly "alpha6365")
+TFunc (TPoly "alpha6371", TBool) TFuncMulti ([TPoly "alpha6380";], TPoly "alpha6380")
+TList (TPoly "alpha6374") TList (TPoly "alpha6383")
+TPoly "alpha6434" TPoly "alpha6325"
+TBool TPoly "alpha6431"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha6458";TList (TPoly "alpha6458");], TList (TPoly "alpha6458"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha6470") TList (TPoly "alpha6476")
+TInt TInt
+TPoly "alpha6432" TFuncMulti ([TFunc (TPoly "alpha6437", TBool);TList (TPoly "alpha6437");], TList (TPoly "alpha6437"))
 looking up (Bool -> Bool -> Bool) in applicabilityCache
 looking up ([a] -> Int) in applicabilityCache
-TPoly "alpha59" TList (TPoly "alpha60")
+TList (TPoly "alpha7318") TList (TPoly "alpha6965")
+TPoly "alpha7352" TList (TPoly "alpha7321")
+TPoly "alpha7366" TPoly "alpha7346"
+TFunc (TPoly "alpha7356", TPoly "alpha7357") TFuncMulti ([TPoly "alpha7367";], TPoly "alpha7367")
+TPoly "alpha7373" TFunc (TPoly "alpha7358", TPoly "alpha7359")
+TPoly "alpha7388" TPoly "alpha7361"
+TPoly "alpha7379" TList (TPoly "alpha7389")
+TFunc (TPoly "alpha7380", TPoly "alpha7381") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha7383"
+TPoly "alpha7412" TPoly "alpha7349"
+TPoly "alpha7422" TFunc (TPoly "alpha7402", TPoly "alpha7403")
+TBool TBool
+TPoly "alpha7416" TFuncMulti ([TTuple (TPoly "alpha7434", TPoly "alpha7435");], TPoly "alpha7434")
+TPoly "alpha7446" TPoly "alpha7419"
+TPoly "alpha7440" TFuncMulti ([TTuple (TPoly "alpha7449", TPoly "alpha7450");], TPoly "alpha7449")
+TPoly "alpha7443" TFuncMulti ([TTuple (TPoly "alpha7452", TPoly "alpha7453");], TPoly "alpha7452")
+TPoly "alpha7466" TFunc (TPoly "alpha7404", TPoly "alpha7405")
+TPoly "alpha7476" TFunc (TPoly "alpha7456", TPoly "alpha7457")
+TPoly "alpha7470" TFuncMulti ([TPoly "alpha7479";], TPoly "alpha7479")
+TPoly "alpha7473" TFuncMulti ([TPoly "alpha7482";], TPoly "alpha7482")
+TPoly "alpha7459" TFuncMulti ([TTuple (TPoly "alpha7485", TPoly "alpha7486");], TPoly "alpha7485")
+TList (TPoly "alpha7491") TPoly "alpha7461"
+TList (TPoly "alpha7488") TList (TPoly "alpha7494")
+TPoly "alpha7515" TList (TPoly "alpha7519")
+TPoly "alpha7514" TFuncMulti ([TList (TPoly "alpha7516");], TList (TPoly "alpha7516"))
+TList (TPoly "alpha7505") TPoly "alpha7497"
+TList (TPoly "alpha7499") TList (TPoly "alpha7508")
+TList (TPoly "alpha7502") TList (TPoly "alpha7511")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha7312", TBool) TFuncMulti ([TTuple (TPoly "alpha7340", TPoly "alpha7341");], TPoly "alpha7341")
+TPoly "alpha7326" TFunc (TPoly "alpha7312", TBool)
+TPoly "alpha7322" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha7334") TMaybe (TPoly "alpha7323")
+TList (TPoly "alpha7331") TList (TPoly "alpha80")
+TPoly "alpha7323" TPoly "alpha80"
+TList (TPoly "alpha7528") TList (TPoly "alpha7315")
+TList (TPoly "alpha7534") TList (TPoly "alpha7522")
+TPoly "alpha7540" TList (TPoly "alpha7531")
+TPoly "alpha1994" TList (TPoly "alpha7555")
+TPoly "alpha7537" TPoly "alpha1994"
+TInt TPoly "alpha7538"
+TList (TPoly "alpha7564") TList (TPoly "alpha7525")
+TList (TPoly "alpha7570") TList (TPoly "alpha7558")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha7574");], TMaybe (TPoly "alpha7574"))
+TPoly "alpha7573" TInt
+TList (TPoly "alpha7583") TList (TPoly "alpha7561")
+TPoly "alpha7587" TFuncMulti ([TPoly "alpha7594";TList (TPoly "alpha7594");], TList (TPoly "alpha7594"))
+TPoly "alpha7591" TPoly "alpha7586"
+TPoly "alpha7588" TBool
+TList (TPoly "alpha7600") TList (TPoly "alpha7580")
+TList (TPoly "alpha7606") TList (TPoly "alpha7597")
+TList (TPoly "alpha7603") TList (TPoly "alpha7609")
+TPoly "alpha7288" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha7294") TPoly "alpha7285"
+TPoly "alpha7300" TList (TPoly "alpha7291")
+TPoly "alpha7306" TPoly "alpha7297"
+TPoly "alpha7303" TList (TPoly "alpha7309")
+TPoly "alpha7304" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha7138") TPoly "tau"
+TFunc (TPoly "alpha7132", TBool) TFuncMulti ([TPoly "alpha7141";], TPoly "alpha7141")
+TPoly "alpha7254" TList (TPoly "alpha7205")
+TList (TPoly "alpha7257") TList (TPoly "alpha7258")
+TList (TPoly "alpha7268") TPoly "alpha7248"
+TFunc (TPoly "alpha7261", TPoly "alpha7262") TFuncMulti ([TPoly "alpha7270";TList (TPoly "alpha7270");], TList (TPoly "alpha7270"))
+TList (TPoly "alpha7264") TList (TPoly "alpha7273")
+TPoly "alpha7279" TPoly "alpha7251"
+TPoly "alpha7276" TList (TPoly "alpha7282")
+TPoly "alpha7237" TList (TPoly "alpha7144")
+TPoly "alpha7233" TFuncMulti ([TTuple (TPoly "alpha7242", TPoly "alpha7243");], TPoly "alpha7243")
+TPoly "alpha7234" TList (TPoly "alpha7239")
+TList (TPoly "alpha7212") TList (TPoly "alpha7144")
+TFunc (TPoly "alpha7206", TBool) TFuncMulti ([TPoly "alpha7215";], TPoly "alpha7215")
+TList (TPoly "alpha7224") TList (TPoly "alpha7209")
+TList (TPoly "alpha7218") TList (TPoly "alpha7227")
+TList (TPoly "alpha7221") TList (TPoly "alpha7230")
+TPoly "alpha7187" TList (TPoly "alpha7135")
+TPoly "alpha3652" TList (TPoly "alpha7202")
+TPoly "alpha7184" TPoly "alpha3652"
+TBool TPoly "alpha7185"
+TList (TPoly "alpha7148") TList (TPoly "alpha7135")
+TList (TPoly "alpha7157") TList (TPoly "alpha7145")
+TList (TPoly "alpha7163") TList (TPoly "alpha7151")
+TList (TPoly "alpha7160") TList (TPoly "alpha7166")
+TList (TPoly "alpha7175") TList (TPoly "alpha7154")
+TList (TPoly "alpha7169") TList (TPoly "alpha7178")
+TList (TPoly "alpha7172") TList (TPoly "alpha7181")
+TPoly "alpha6977" TPoly "tau"
+TList (TPoly "alpha6981") TPoly "alpha6968"
+TPoly "alpha6988" TPoly "alpha6984"
+TPoly "alpha4406" TList (TPoly "alpha6991")
+TPoly "alpha6985" TInt
+TPoly "alpha7036" TMaybe (TFunc (TPoly "alpha6969", TPoly "alpha6970"))
+TPoly "alpha7050" TPoly "alpha7033"
+TFunc (TPoly "alpha7042", TPoly "alpha7043") TFuncMulti ([TPoly "alpha7051";], TPoly "alpha7051")
+TMaybe (TPoly "alpha7057") TPoly "alpha7045"
+TPoly "alpha7069" TList (TPoly "alpha7054")
+TPoly "alpha7063" TList (TPoly "alpha7072")
+TPoly "alpha7066" TList (TPoly "alpha7075")
+TList (TPoly "alpha7000") TPoly "alpha6970"
+TBool TPoly "alpha6994"
+TList (TPoly "alpha7015") TList (TPoly "alpha6997")
+TList (TPoly "alpha7024") TList (TPoly "alpha7012")
+TFunc (TPoly "alpha7018", TBool) TFuncMulti ([TPoly "alpha7027";], TPoly "alpha7027")
+TList (TPoly "alpha7021") TList (TPoly "alpha7030")
+TPoly "alpha7081" TPoly "alpha6972"
+TBool TPoly "alpha7078"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha7105";TList (TPoly "alpha7105");], TList (TPoly "alpha7105"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha7117") TList (TPoly "alpha7123")
+TInt TInt
+TPoly "alpha7079" TFuncMulti ([TFunc (TPoly "alpha7084", TBool);TList (TPoly "alpha7084");], TList (TPoly "alpha7084"))
 looking up (a -> [a] -> [a]) in applicabilityCache
-TPoly "alpha63" TList (TPoly "alpha64")
+TList (TPoly "alpha7965") TList (TPoly "alpha7612")
+TPoly "alpha7999" TList (TPoly "alpha7968")
+TPoly "alpha8013" TPoly "alpha7993"
+TFunc (TPoly "alpha8003", TPoly "alpha8004") TFuncMulti ([TPoly "alpha8014";], TPoly "alpha8014")
+TPoly "alpha8020" TFunc (TPoly "alpha8005", TPoly "alpha8006")
+TPoly "alpha8035" TPoly "alpha8008"
+TPoly "alpha8026" TList (TPoly "alpha8036")
+TFunc (TPoly "alpha8027", TPoly "alpha8028") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha8030"
+TPoly "alpha8059" TPoly "alpha7996"
+TPoly "alpha8069" TFunc (TPoly "alpha8049", TPoly "alpha8050")
+TBool TBool
+TPoly "alpha8063" TFuncMulti ([TTuple (TPoly "alpha8081", TPoly "alpha8082");], TPoly "alpha8081")
+TPoly "alpha8093" TPoly "alpha8066"
+TPoly "alpha8087" TFuncMulti ([TTuple (TPoly "alpha8096", TPoly "alpha8097");], TPoly "alpha8096")
+TPoly "alpha8090" TFuncMulti ([TTuple (TPoly "alpha8099", TPoly "alpha8100");], TPoly "alpha8099")
+TPoly "alpha8113" TFunc (TPoly "alpha8051", TPoly "alpha8052")
+TPoly "alpha8123" TFunc (TPoly "alpha8103", TPoly "alpha8104")
+TPoly "alpha8117" TFuncMulti ([TPoly "alpha8126";], TPoly "alpha8126")
+TPoly "alpha8120" TFuncMulti ([TPoly "alpha8129";], TPoly "alpha8129")
+TPoly "alpha8106" TFuncMulti ([TTuple (TPoly "alpha8132", TPoly "alpha8133");], TPoly "alpha8132")
+TList (TPoly "alpha8138") TPoly "alpha8108"
+TList (TPoly "alpha8135") TList (TPoly "alpha8141")
+TPoly "alpha8162" TList (TPoly "alpha8166")
+TPoly "alpha8161" TFuncMulti ([TList (TPoly "alpha8163");], TList (TPoly "alpha8163"))
+TList (TPoly "alpha8152") TPoly "alpha8144"
+TList (TPoly "alpha8146") TList (TPoly "alpha8155")
+TList (TPoly "alpha8149") TList (TPoly "alpha8158")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha7959", TBool) TFuncMulti ([TTuple (TPoly "alpha7987", TPoly "alpha7988");], TPoly "alpha7988")
+TPoly "alpha7973" TFunc (TPoly "alpha7959", TBool)
+TPoly "alpha7969" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha7981") TMaybe (TPoly "alpha7970")
+TList (TPoly "alpha7978") TList (TPoly "alpha80")
+TPoly "alpha7970" TPoly "alpha80"
+TList (TPoly "alpha8175") TList (TPoly "alpha7962")
+TList (TPoly "alpha8181") TList (TPoly "alpha8169")
+TPoly "alpha8187" TList (TPoly "alpha8178")
+TPoly "alpha1994" TList (TPoly "alpha8202")
+TPoly "alpha8184" TPoly "alpha1994"
+TInt TPoly "alpha8185"
+TList (TPoly "alpha8211") TList (TPoly "alpha8172")
+TList (TPoly "alpha8217") TList (TPoly "alpha8205")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha8221");], TMaybe (TPoly "alpha8221"))
+TPoly "alpha8220" TInt
+TList (TPoly "alpha8230") TList (TPoly "alpha8208")
+TPoly "alpha8234" TFuncMulti ([TPoly "alpha8241";TList (TPoly "alpha8241");], TList (TPoly "alpha8241"))
+TPoly "alpha8238" TPoly "alpha8233"
+TPoly "alpha8235" TBool
+TList (TPoly "alpha8247") TList (TPoly "alpha8227")
+TList (TPoly "alpha8253") TList (TPoly "alpha8244")
+TList (TPoly "alpha8250") TList (TPoly "alpha8256")
+TPoly "alpha7935" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha7941") TPoly "alpha7932"
+TPoly "alpha7947" TList (TPoly "alpha7938")
+TPoly "alpha7953" TPoly "alpha7944"
+TPoly "alpha7950" TList (TPoly "alpha7956")
+TPoly "alpha7951" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha7785") TPoly "tau"
+TFunc (TPoly "alpha7779", TBool) TFuncMulti ([TPoly "alpha7788";], TPoly "alpha7788")
+TPoly "alpha7901" TList (TPoly "alpha7852")
+TList (TPoly "alpha7904") TList (TPoly "alpha7905")
+TList (TPoly "alpha7915") TPoly "alpha7895"
+TFunc (TPoly "alpha7908", TPoly "alpha7909") TFuncMulti ([TPoly "alpha7917";TList (TPoly "alpha7917");], TList (TPoly "alpha7917"))
+TList (TPoly "alpha7911") TList (TPoly "alpha7920")
+TPoly "alpha7926" TPoly "alpha7898"
+TPoly "alpha7923" TList (TPoly "alpha7929")
+TPoly "alpha7884" TList (TPoly "alpha7791")
+TPoly "alpha7880" TFuncMulti ([TTuple (TPoly "alpha7889", TPoly "alpha7890");], TPoly "alpha7890")
+TPoly "alpha7881" TList (TPoly "alpha7886")
+TList (TPoly "alpha7859") TList (TPoly "alpha7791")
+TFunc (TPoly "alpha7853", TBool) TFuncMulti ([TPoly "alpha7862";], TPoly "alpha7862")
+TList (TPoly "alpha7871") TList (TPoly "alpha7856")
+TList (TPoly "alpha7865") TList (TPoly "alpha7874")
+TList (TPoly "alpha7868") TList (TPoly "alpha7877")
+TPoly "alpha7834" TList (TPoly "alpha7782")
+TPoly "alpha3652" TList (TPoly "alpha7849")
+TPoly "alpha7831" TPoly "alpha3652"
+TBool TPoly "alpha7832"
+TList (TPoly "alpha7795") TList (TPoly "alpha7782")
+TList (TPoly "alpha7804") TList (TPoly "alpha7792")
+TList (TPoly "alpha7810") TList (TPoly "alpha7798")
+TList (TPoly "alpha7807") TList (TPoly "alpha7813")
+TList (TPoly "alpha7822") TList (TPoly "alpha7801")
+TList (TPoly "alpha7816") TList (TPoly "alpha7825")
+TList (TPoly "alpha7819") TList (TPoly "alpha7828")
+TPoly "alpha7624" TPoly "tau"
+TList (TPoly "alpha7628") TPoly "alpha7615"
+TPoly "alpha7635" TPoly "alpha7631"
+TPoly "alpha4406" TList (TPoly "alpha7638")
+TPoly "alpha7632" TInt
+TPoly "alpha7683" TMaybe (TFunc (TPoly "alpha7616", TPoly "alpha7617"))
+TPoly "alpha7697" TPoly "alpha7680"
+TFunc (TPoly "alpha7689", TPoly "alpha7690") TFuncMulti ([TPoly "alpha7698";], TPoly "alpha7698")
+TMaybe (TPoly "alpha7704") TPoly "alpha7692"
+TPoly "alpha7716" TList (TPoly "alpha7701")
+TPoly "alpha7710" TList (TPoly "alpha7719")
+TPoly "alpha7713" TList (TPoly "alpha7722")
+TList (TPoly "alpha7647") TPoly "alpha7617"
+TBool TPoly "alpha7641"
+TList (TPoly "alpha7662") TList (TPoly "alpha7644")
+TList (TPoly "alpha7671") TList (TPoly "alpha7659")
+TFunc (TPoly "alpha7665", TBool) TFuncMulti ([TPoly "alpha7674";], TPoly "alpha7674")
+TList (TPoly "alpha7668") TList (TPoly "alpha7677")
+TPoly "alpha7728" TPoly "alpha7619"
+TBool TPoly "alpha7725"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha7752";TList (TPoly "alpha7752");], TList (TPoly "alpha7752"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha7764") TList (TPoly "alpha7770")
+TInt TInt
+TPoly "alpha7726" TFuncMulti ([TFunc (TPoly "alpha7731", TBool);TList (TPoly "alpha7731");], TList (TPoly "alpha7731"))
 looking up Int in applicabilityCache
-TPoly "alpha67" TList (TPoly "alpha68")
+TList (TPoly "alpha8612") TList (TPoly "alpha8259")
+TPoly "alpha8646" TList (TPoly "alpha8615")
+TPoly "alpha8660" TPoly "alpha8640"
+TFunc (TPoly "alpha8650", TPoly "alpha8651") TFuncMulti ([TPoly "alpha8661";], TPoly "alpha8661")
+TPoly "alpha8667" TFunc (TPoly "alpha8652", TPoly "alpha8653")
+TPoly "alpha8682" TPoly "alpha8655"
+TPoly "alpha8673" TList (TPoly "alpha8683")
+TFunc (TPoly "alpha8674", TPoly "alpha8675") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha8677"
+TPoly "alpha8706" TPoly "alpha8643"
+TPoly "alpha8716" TFunc (TPoly "alpha8696", TPoly "alpha8697")
+TBool TBool
+TPoly "alpha8710" TFuncMulti ([TTuple (TPoly "alpha8728", TPoly "alpha8729");], TPoly "alpha8728")
+TPoly "alpha8740" TPoly "alpha8713"
+TPoly "alpha8734" TFuncMulti ([TTuple (TPoly "alpha8743", TPoly "alpha8744");], TPoly "alpha8743")
+TPoly "alpha8737" TFuncMulti ([TTuple (TPoly "alpha8746", TPoly "alpha8747");], TPoly "alpha8746")
+TPoly "alpha8760" TFunc (TPoly "alpha8698", TPoly "alpha8699")
+TPoly "alpha8770" TFunc (TPoly "alpha8750", TPoly "alpha8751")
+TPoly "alpha8764" TFuncMulti ([TPoly "alpha8773";], TPoly "alpha8773")
+TPoly "alpha8767" TFuncMulti ([TPoly "alpha8776";], TPoly "alpha8776")
+TPoly "alpha8753" TFuncMulti ([TTuple (TPoly "alpha8779", TPoly "alpha8780");], TPoly "alpha8779")
+TList (TPoly "alpha8785") TPoly "alpha8755"
+TList (TPoly "alpha8782") TList (TPoly "alpha8788")
+TPoly "alpha8809" TList (TPoly "alpha8813")
+TPoly "alpha8808" TFuncMulti ([TList (TPoly "alpha8810");], TList (TPoly "alpha8810"))
+TList (TPoly "alpha8799") TPoly "alpha8791"
+TList (TPoly "alpha8793") TList (TPoly "alpha8802")
+TList (TPoly "alpha8796") TList (TPoly "alpha8805")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha8606", TBool) TFuncMulti ([TTuple (TPoly "alpha8634", TPoly "alpha8635");], TPoly "alpha8635")
+TPoly "alpha8620" TFunc (TPoly "alpha8606", TBool)
+TPoly "alpha8616" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha8628") TMaybe (TPoly "alpha8617")
+TList (TPoly "alpha8625") TList (TPoly "alpha80")
+TPoly "alpha8617" TPoly "alpha80"
+TList (TPoly "alpha8822") TList (TPoly "alpha8609")
+TList (TPoly "alpha8828") TList (TPoly "alpha8816")
+TPoly "alpha8834" TList (TPoly "alpha8825")
+TPoly "alpha1994" TList (TPoly "alpha8849")
+TPoly "alpha8831" TPoly "alpha1994"
+TInt TPoly "alpha8832"
+TList (TPoly "alpha8858") TList (TPoly "alpha8819")
+TList (TPoly "alpha8864") TList (TPoly "alpha8852")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha8868");], TMaybe (TPoly "alpha8868"))
+TPoly "alpha8867" TInt
+TList (TPoly "alpha8877") TList (TPoly "alpha8855")
+TPoly "alpha8881" TFuncMulti ([TPoly "alpha8888";TList (TPoly "alpha8888");], TList (TPoly "alpha8888"))
+TPoly "alpha8885" TPoly "alpha8880"
+TPoly "alpha8882" TBool
+TList (TPoly "alpha8894") TList (TPoly "alpha8874")
+TList (TPoly "alpha8900") TList (TPoly "alpha8891")
+TList (TPoly "alpha8897") TList (TPoly "alpha8903")
+TPoly "alpha8582" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha8588") TPoly "alpha8579"
+TPoly "alpha8594" TList (TPoly "alpha8585")
+TPoly "alpha8600" TPoly "alpha8591"
+TPoly "alpha8597" TList (TPoly "alpha8603")
+TPoly "alpha8598" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha8432") TPoly "tau"
+TFunc (TPoly "alpha8426", TBool) TFuncMulti ([TPoly "alpha8435";], TPoly "alpha8435")
+TPoly "alpha8548" TList (TPoly "alpha8499")
+TList (TPoly "alpha8551") TList (TPoly "alpha8552")
+TList (TPoly "alpha8562") TPoly "alpha8542"
+TFunc (TPoly "alpha8555", TPoly "alpha8556") TFuncMulti ([TPoly "alpha8564";TList (TPoly "alpha8564");], TList (TPoly "alpha8564"))
+TList (TPoly "alpha8558") TList (TPoly "alpha8567")
+TPoly "alpha8573" TPoly "alpha8545"
+TPoly "alpha8570" TList (TPoly "alpha8576")
+TPoly "alpha8531" TList (TPoly "alpha8438")
+TPoly "alpha8527" TFuncMulti ([TTuple (TPoly "alpha8536", TPoly "alpha8537");], TPoly "alpha8537")
+TPoly "alpha8528" TList (TPoly "alpha8533")
+TList (TPoly "alpha8506") TList (TPoly "alpha8438")
+TFunc (TPoly "alpha8500", TBool) TFuncMulti ([TPoly "alpha8509";], TPoly "alpha8509")
+TList (TPoly "alpha8518") TList (TPoly "alpha8503")
+TList (TPoly "alpha8512") TList (TPoly "alpha8521")
+TList (TPoly "alpha8515") TList (TPoly "alpha8524")
+TPoly "alpha8481" TList (TPoly "alpha8429")
+TPoly "alpha3652" TList (TPoly "alpha8496")
+TPoly "alpha8478" TPoly "alpha3652"
+TBool TPoly "alpha8479"
+TList (TPoly "alpha8442") TList (TPoly "alpha8429")
+TList (TPoly "alpha8451") TList (TPoly "alpha8439")
+TList (TPoly "alpha8457") TList (TPoly "alpha8445")
+TList (TPoly "alpha8454") TList (TPoly "alpha8460")
+TList (TPoly "alpha8469") TList (TPoly "alpha8448")
+TList (TPoly "alpha8463") TList (TPoly "alpha8472")
+TList (TPoly "alpha8466") TList (TPoly "alpha8475")
+TPoly "alpha8271" TPoly "tau"
+TList (TPoly "alpha8275") TPoly "alpha8262"
+TPoly "alpha8282" TPoly "alpha8278"
+TPoly "alpha4406" TList (TPoly "alpha8285")
+TPoly "alpha8279" TInt
+TPoly "alpha8330" TMaybe (TFunc (TPoly "alpha8263", TPoly "alpha8264"))
+TPoly "alpha8344" TPoly "alpha8327"
+TFunc (TPoly "alpha8336", TPoly "alpha8337") TFuncMulti ([TPoly "alpha8345";], TPoly "alpha8345")
+TMaybe (TPoly "alpha8351") TPoly "alpha8339"
+TPoly "alpha8363" TList (TPoly "alpha8348")
+TPoly "alpha8357" TList (TPoly "alpha8366")
+TPoly "alpha8360" TList (TPoly "alpha8369")
+TList (TPoly "alpha8294") TPoly "alpha8264"
+TBool TPoly "alpha8288"
+TList (TPoly "alpha8309") TList (TPoly "alpha8291")
+TList (TPoly "alpha8318") TList (TPoly "alpha8306")
+TFunc (TPoly "alpha8312", TBool) TFuncMulti ([TPoly "alpha8321";], TPoly "alpha8321")
+TList (TPoly "alpha8315") TList (TPoly "alpha8324")
+TPoly "alpha8375" TPoly "alpha8266"
+TBool TPoly "alpha8372"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha8399";TList (TPoly "alpha8399");], TList (TPoly "alpha8399"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha8411") TList (TPoly "alpha8417")
+TInt TInt
+TPoly "alpha8373" TFuncMulti ([TFunc (TPoly "alpha8378", TBool);TList (TPoly "alpha8378");], TList (TPoly "alpha8378"))
 looking up Int in applicabilityCache
 looking up Bool in applicabilityCache
-TPoly "alpha71" TList (TPoly "alpha72")
+TList (TPoly "alpha9259") TList (TPoly "alpha8906")
+TPoly "alpha9293" TList (TPoly "alpha9262")
+TPoly "alpha9307" TPoly "alpha9287"
+TFunc (TPoly "alpha9297", TPoly "alpha9298") TFuncMulti ([TPoly "alpha9308";], TPoly "alpha9308")
+TPoly "alpha9314" TFunc (TPoly "alpha9299", TPoly "alpha9300")
+TPoly "alpha9329" TPoly "alpha9302"
+TPoly "alpha9320" TList (TPoly "alpha9330")
+TFunc (TPoly "alpha9321", TPoly "alpha9322") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha9324"
+TPoly "alpha9353" TPoly "alpha9290"
+TPoly "alpha9363" TFunc (TPoly "alpha9343", TPoly "alpha9344")
+TBool TBool
+TPoly "alpha9357" TFuncMulti ([TTuple (TPoly "alpha9375", TPoly "alpha9376");], TPoly "alpha9375")
+TPoly "alpha9387" TPoly "alpha9360"
+TPoly "alpha9381" TFuncMulti ([TTuple (TPoly "alpha9390", TPoly "alpha9391");], TPoly "alpha9390")
+TPoly "alpha9384" TFuncMulti ([TTuple (TPoly "alpha9393", TPoly "alpha9394");], TPoly "alpha9393")
+TPoly "alpha9407" TFunc (TPoly "alpha9345", TPoly "alpha9346")
+TPoly "alpha9417" TFunc (TPoly "alpha9397", TPoly "alpha9398")
+TPoly "alpha9411" TFuncMulti ([TPoly "alpha9420";], TPoly "alpha9420")
+TPoly "alpha9414" TFuncMulti ([TPoly "alpha9423";], TPoly "alpha9423")
+TPoly "alpha9400" TFuncMulti ([TTuple (TPoly "alpha9426", TPoly "alpha9427");], TPoly "alpha9426")
+TList (TPoly "alpha9432") TPoly "alpha9402"
+TList (TPoly "alpha9429") TList (TPoly "alpha9435")
+TPoly "alpha9456" TList (TPoly "alpha9460")
+TPoly "alpha9455" TFuncMulti ([TList (TPoly "alpha9457");], TList (TPoly "alpha9457"))
+TList (TPoly "alpha9446") TPoly "alpha9438"
+TList (TPoly "alpha9440") TList (TPoly "alpha9449")
+TList (TPoly "alpha9443") TList (TPoly "alpha9452")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha9253", TBool) TFuncMulti ([TTuple (TPoly "alpha9281", TPoly "alpha9282");], TPoly "alpha9282")
+TPoly "alpha9267" TFunc (TPoly "alpha9253", TBool)
+TPoly "alpha9263" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha9275") TMaybe (TPoly "alpha9264")
+TList (TPoly "alpha9272") TList (TPoly "alpha80")
+TPoly "alpha9264" TPoly "alpha80"
+TList (TPoly "alpha9469") TList (TPoly "alpha9256")
+TList (TPoly "alpha9475") TList (TPoly "alpha9463")
+TPoly "alpha9481" TList (TPoly "alpha9472")
+TPoly "alpha1994" TList (TPoly "alpha9496")
+TPoly "alpha9478" TPoly "alpha1994"
+TInt TPoly "alpha9479"
+TList (TPoly "alpha9505") TList (TPoly "alpha9466")
+TList (TPoly "alpha9511") TList (TPoly "alpha9499")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha9515");], TMaybe (TPoly "alpha9515"))
+TPoly "alpha9514" TInt
+TList (TPoly "alpha9524") TList (TPoly "alpha9502")
+TPoly "alpha9528" TFuncMulti ([TPoly "alpha9535";TList (TPoly "alpha9535");], TList (TPoly "alpha9535"))
+TPoly "alpha9532" TPoly "alpha9527"
+TPoly "alpha9529" TBool
+TList (TPoly "alpha9541") TList (TPoly "alpha9521")
+TList (TPoly "alpha9547") TList (TPoly "alpha9538")
+TList (TPoly "alpha9544") TList (TPoly "alpha9550")
+TPoly "alpha9229" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha9235") TPoly "alpha9226"
+TPoly "alpha9241" TList (TPoly "alpha9232")
+TPoly "alpha9247" TPoly "alpha9238"
+TPoly "alpha9244" TList (TPoly "alpha9250")
+TPoly "alpha9245" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha9079") TPoly "tau"
+TFunc (TPoly "alpha9073", TBool) TFuncMulti ([TPoly "alpha9082";], TPoly "alpha9082")
+TPoly "alpha9195" TList (TPoly "alpha9146")
+TList (TPoly "alpha9198") TList (TPoly "alpha9199")
+TList (TPoly "alpha9209") TPoly "alpha9189"
+TFunc (TPoly "alpha9202", TPoly "alpha9203") TFuncMulti ([TPoly "alpha9211";TList (TPoly "alpha9211");], TList (TPoly "alpha9211"))
+TList (TPoly "alpha9205") TList (TPoly "alpha9214")
+TPoly "alpha9220" TPoly "alpha9192"
+TPoly "alpha9217" TList (TPoly "alpha9223")
+TPoly "alpha9178" TList (TPoly "alpha9085")
+TPoly "alpha9174" TFuncMulti ([TTuple (TPoly "alpha9183", TPoly "alpha9184");], TPoly "alpha9184")
+TPoly "alpha9175" TList (TPoly "alpha9180")
+TList (TPoly "alpha9153") TList (TPoly "alpha9085")
+TFunc (TPoly "alpha9147", TBool) TFuncMulti ([TPoly "alpha9156";], TPoly "alpha9156")
+TList (TPoly "alpha9165") TList (TPoly "alpha9150")
+TList (TPoly "alpha9159") TList (TPoly "alpha9168")
+TList (TPoly "alpha9162") TList (TPoly "alpha9171")
+TPoly "alpha9128" TList (TPoly "alpha9076")
+TPoly "alpha3652" TList (TPoly "alpha9143")
+TPoly "alpha9125" TPoly "alpha3652"
+TBool TPoly "alpha9126"
+TList (TPoly "alpha9089") TList (TPoly "alpha9076")
+TList (TPoly "alpha9098") TList (TPoly "alpha9086")
+TList (TPoly "alpha9104") TList (TPoly "alpha9092")
+TList (TPoly "alpha9101") TList (TPoly "alpha9107")
+TList (TPoly "alpha9116") TList (TPoly "alpha9095")
+TList (TPoly "alpha9110") TList (TPoly "alpha9119")
+TList (TPoly "alpha9113") TList (TPoly "alpha9122")
+TPoly "alpha8918" TPoly "tau"
+TList (TPoly "alpha8922") TPoly "alpha8909"
+TPoly "alpha8929" TPoly "alpha8925"
+TPoly "alpha4406" TList (TPoly "alpha8932")
+TPoly "alpha8926" TInt
+TPoly "alpha8977" TMaybe (TFunc (TPoly "alpha8910", TPoly "alpha8911"))
+TPoly "alpha8991" TPoly "alpha8974"
+TFunc (TPoly "alpha8983", TPoly "alpha8984") TFuncMulti ([TPoly "alpha8992";], TPoly "alpha8992")
+TMaybe (TPoly "alpha8998") TPoly "alpha8986"
+TPoly "alpha9010" TList (TPoly "alpha8995")
+TPoly "alpha9004" TList (TPoly "alpha9013")
+TPoly "alpha9007" TList (TPoly "alpha9016")
+TList (TPoly "alpha8941") TPoly "alpha8911"
+TBool TPoly "alpha8935"
+TList (TPoly "alpha8956") TList (TPoly "alpha8938")
+TList (TPoly "alpha8965") TList (TPoly "alpha8953")
+TFunc (TPoly "alpha8959", TBool) TFuncMulti ([TPoly "alpha8968";], TPoly "alpha8968")
+TList (TPoly "alpha8962") TList (TPoly "alpha8971")
+TPoly "alpha9022" TPoly "alpha8913"
+TBool TPoly "alpha9019"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha9046";TList (TPoly "alpha9046");], TList (TPoly "alpha9046"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha9058") TList (TPoly "alpha9064")
+TInt TInt
+TPoly "alpha9020" TFuncMulti ([TFunc (TPoly "alpha9025", TBool);TList (TPoly "alpha9025");], TList (TPoly "alpha9025"))
 looking up Bool in applicabilityCache
 looking up [a] in applicabilityCache
-TPoly "alpha75" TList (TPoly "alpha76")
+TList (TPoly "alpha9906") TList (TPoly "alpha9553")
+TPoly "alpha9940" TList (TPoly "alpha9909")
+TPoly "alpha9954" TPoly "alpha9934"
+TFunc (TPoly "alpha9944", TPoly "alpha9945") TFuncMulti ([TPoly "alpha9955";], TPoly "alpha9955")
+TPoly "alpha9961" TFunc (TPoly "alpha9946", TPoly "alpha9947")
+TPoly "alpha9976" TPoly "alpha9949"
+TPoly "alpha9967" TList (TPoly "alpha9977")
+TFunc (TPoly "alpha9968", TPoly "alpha9969") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha9971"
+TPoly "alpha10000" TPoly "alpha9937"
+TPoly "alpha10010" TFunc (TPoly "alpha9990", TPoly "alpha9991")
+TBool TBool
+TPoly "alpha10004" TFuncMulti ([TTuple (TPoly "alpha10022", TPoly "alpha10023");], TPoly "alpha10022")
+TPoly "alpha10034" TPoly "alpha10007"
+TPoly "alpha10028" TFuncMulti ([TTuple (TPoly "alpha10037", TPoly "alpha10038");], TPoly "alpha10037")
+TPoly "alpha10031" TFuncMulti ([TTuple (TPoly "alpha10040", TPoly "alpha10041");], TPoly "alpha10040")
+TPoly "alpha10054" TFunc (TPoly "alpha9992", TPoly "alpha9993")
+TPoly "alpha10064" TFunc (TPoly "alpha10044", TPoly "alpha10045")
+TPoly "alpha10058" TFuncMulti ([TPoly "alpha10067";], TPoly "alpha10067")
+TPoly "alpha10061" TFuncMulti ([TPoly "alpha10070";], TPoly "alpha10070")
+TPoly "alpha10047" TFuncMulti ([TTuple (TPoly "alpha10073", TPoly "alpha10074");], TPoly "alpha10073")
+TList (TPoly "alpha10079") TPoly "alpha10049"
+TList (TPoly "alpha10076") TList (TPoly "alpha10082")
+TPoly "alpha10103" TList (TPoly "alpha10107")
+TPoly "alpha10102" TFuncMulti ([TList (TPoly "alpha10104");], TList (TPoly "alpha10104"))
+TList (TPoly "alpha10093") TPoly "alpha10085"
+TList (TPoly "alpha10087") TList (TPoly "alpha10096")
+TList (TPoly "alpha10090") TList (TPoly "alpha10099")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha9900", TBool) TFuncMulti ([TTuple (TPoly "alpha9928", TPoly "alpha9929");], TPoly "alpha9929")
+TPoly "alpha9914" TFunc (TPoly "alpha9900", TBool)
+TPoly "alpha9910" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha9922") TMaybe (TPoly "alpha9911")
+TList (TPoly "alpha9919") TList (TPoly "alpha80")
+TPoly "alpha9911" TPoly "alpha80"
+TList (TPoly "alpha10116") TList (TPoly "alpha9903")
+TList (TPoly "alpha10122") TList (TPoly "alpha10110")
+TPoly "alpha10128" TList (TPoly "alpha10119")
+TPoly "alpha1994" TList (TPoly "alpha10143")
+TPoly "alpha10125" TPoly "alpha1994"
+TInt TPoly "alpha10126"
+TList (TPoly "alpha10152") TList (TPoly "alpha10113")
+TList (TPoly "alpha10158") TList (TPoly "alpha10146")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha10162");], TMaybe (TPoly "alpha10162"))
+TPoly "alpha10161" TInt
+TList (TPoly "alpha10171") TList (TPoly "alpha10149")
+TPoly "alpha10175" TFuncMulti ([TPoly "alpha10182";TList (TPoly "alpha10182");], TList (TPoly "alpha10182"))
+TPoly "alpha10179" TPoly "alpha10174"
+TPoly "alpha10176" TBool
+TList (TPoly "alpha10188") TList (TPoly "alpha10168")
+TList (TPoly "alpha10194") TList (TPoly "alpha10185")
+TList (TPoly "alpha10191") TList (TPoly "alpha10197")
+TPoly "alpha9876" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha9882") TPoly "alpha9873"
+TPoly "alpha9888" TList (TPoly "alpha9879")
+TPoly "alpha9894" TPoly "alpha9885"
+TPoly "alpha9891" TList (TPoly "alpha9897")
+TPoly "alpha9892" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha9726") TPoly "tau"
+TFunc (TPoly "alpha9720", TBool) TFuncMulti ([TPoly "alpha9729";], TPoly "alpha9729")
+TPoly "alpha9842" TList (TPoly "alpha9793")
+TList (TPoly "alpha9845") TList (TPoly "alpha9846")
+TList (TPoly "alpha9856") TPoly "alpha9836"
+TFunc (TPoly "alpha9849", TPoly "alpha9850") TFuncMulti ([TPoly "alpha9858";TList (TPoly "alpha9858");], TList (TPoly "alpha9858"))
+TList (TPoly "alpha9852") TList (TPoly "alpha9861")
+TPoly "alpha9867" TPoly "alpha9839"
+TPoly "alpha9864" TList (TPoly "alpha9870")
+TPoly "alpha9825" TList (TPoly "alpha9732")
+TPoly "alpha9821" TFuncMulti ([TTuple (TPoly "alpha9830", TPoly "alpha9831");], TPoly "alpha9831")
+TPoly "alpha9822" TList (TPoly "alpha9827")
+TList (TPoly "alpha9800") TList (TPoly "alpha9732")
+TFunc (TPoly "alpha9794", TBool) TFuncMulti ([TPoly "alpha9803";], TPoly "alpha9803")
+TList (TPoly "alpha9812") TList (TPoly "alpha9797")
+TList (TPoly "alpha9806") TList (TPoly "alpha9815")
+TList (TPoly "alpha9809") TList (TPoly "alpha9818")
+TPoly "alpha9775" TList (TPoly "alpha9723")
+TPoly "alpha3652" TList (TPoly "alpha9790")
+TPoly "alpha9772" TPoly "alpha3652"
+TBool TPoly "alpha9773"
+TList (TPoly "alpha9736") TList (TPoly "alpha9723")
+TList (TPoly "alpha9745") TList (TPoly "alpha9733")
+TList (TPoly "alpha9751") TList (TPoly "alpha9739")
+TList (TPoly "alpha9748") TList (TPoly "alpha9754")
+TList (TPoly "alpha9763") TList (TPoly "alpha9742")
+TList (TPoly "alpha9757") TList (TPoly "alpha9766")
+TList (TPoly "alpha9760") TList (TPoly "alpha9769")
+TPoly "alpha9565" TPoly "tau"
+TList (TPoly "alpha9569") TPoly "alpha9556"
+TPoly "alpha9576" TPoly "alpha9572"
+TPoly "alpha4406" TList (TPoly "alpha9579")
+TPoly "alpha9573" TInt
+TPoly "alpha9624" TMaybe (TFunc (TPoly "alpha9557", TPoly "alpha9558"))
+TPoly "alpha9638" TPoly "alpha9621"
+TFunc (TPoly "alpha9630", TPoly "alpha9631") TFuncMulti ([TPoly "alpha9639";], TPoly "alpha9639")
+TMaybe (TPoly "alpha9645") TPoly "alpha9633"
+TPoly "alpha9657" TList (TPoly "alpha9642")
+TPoly "alpha9651" TList (TPoly "alpha9660")
+TPoly "alpha9654" TList (TPoly "alpha9663")
+TList (TPoly "alpha9588") TPoly "alpha9558"
+TBool TPoly "alpha9582"
+TList (TPoly "alpha9603") TList (TPoly "alpha9585")
+TList (TPoly "alpha9612") TList (TPoly "alpha9600")
+TFunc (TPoly "alpha9606", TBool) TFuncMulti ([TPoly "alpha9615";], TPoly "alpha9615")
+TList (TPoly "alpha9609") TList (TPoly "alpha9618")
+TPoly "alpha9669" TPoly "alpha9560"
+TBool TPoly "alpha9666"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha9693";TList (TPoly "alpha9693");], TList (TPoly "alpha9693"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha9705") TList (TPoly "alpha9711")
+TInt TInt
+TPoly "alpha9667" TFuncMulti ([TFunc (TPoly "alpha9672", TBool);TList (TPoly "alpha9672");], TList (TPoly "alpha9672"))
 looking up (Int -> Int) in applicabilityCache
-TPoly "alpha79" TList (TPoly "alpha80")
+TList (TPoly "alpha10553") TList (TPoly "alpha10200")
+TPoly "alpha10587" TList (TPoly "alpha10556")
+TPoly "alpha10601" TPoly "alpha10581"
+TFunc (TPoly "alpha10591", TPoly "alpha10592") TFuncMulti ([TPoly "alpha10602";], TPoly "alpha10602")
+TPoly "alpha10608" TFunc (TPoly "alpha10593", TPoly "alpha10594")
+TPoly "alpha10623" TPoly "alpha10596"
+TPoly "alpha10614" TList (TPoly "alpha10624")
+TFunc (TPoly "alpha10615", TPoly "alpha10616") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha10618"
+TPoly "alpha10647" TPoly "alpha10584"
+TPoly "alpha10657" TFunc (TPoly "alpha10637", TPoly "alpha10638")
+TBool TBool
+TPoly "alpha10651" TFuncMulti ([TTuple (TPoly "alpha10669", TPoly "alpha10670");], TPoly "alpha10669")
+TPoly "alpha10681" TPoly "alpha10654"
+TPoly "alpha10675" TFuncMulti ([TTuple (TPoly "alpha10684", TPoly "alpha10685");], TPoly "alpha10684")
+TPoly "alpha10678" TFuncMulti ([TTuple (TPoly "alpha10687", TPoly "alpha10688");], TPoly "alpha10687")
+TPoly "alpha10701" TFunc (TPoly "alpha10639", TPoly "alpha10640")
+TPoly "alpha10711" TFunc (TPoly "alpha10691", TPoly "alpha10692")
+TPoly "alpha10705" TFuncMulti ([TPoly "alpha10714";], TPoly "alpha10714")
+TPoly "alpha10708" TFuncMulti ([TPoly "alpha10717";], TPoly "alpha10717")
+TPoly "alpha10694" TFuncMulti ([TTuple (TPoly "alpha10720", TPoly "alpha10721");], TPoly "alpha10720")
+TList (TPoly "alpha10726") TPoly "alpha10696"
+TList (TPoly "alpha10723") TList (TPoly "alpha10729")
+TPoly "alpha10750" TList (TPoly "alpha10754")
+TPoly "alpha10749" TFuncMulti ([TList (TPoly "alpha10751");], TList (TPoly "alpha10751"))
+TList (TPoly "alpha10740") TPoly "alpha10732"
+TList (TPoly "alpha10734") TList (TPoly "alpha10743")
+TList (TPoly "alpha10737") TList (TPoly "alpha10746")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha10547", TBool) TFuncMulti ([TTuple (TPoly "alpha10575", TPoly "alpha10576");], TPoly "alpha10576")
+TPoly "alpha10561" TFunc (TPoly "alpha10547", TBool)
+TPoly "alpha10557" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha10569") TMaybe (TPoly "alpha10558")
+TList (TPoly "alpha10566") TList (TPoly "alpha80")
+TPoly "alpha10558" TPoly "alpha80"
+TList (TPoly "alpha10763") TList (TPoly "alpha10550")
+TList (TPoly "alpha10769") TList (TPoly "alpha10757")
+TPoly "alpha10775" TList (TPoly "alpha10766")
+TPoly "alpha1994" TList (TPoly "alpha10790")
+TPoly "alpha10772" TPoly "alpha1994"
+TInt TPoly "alpha10773"
+TList (TPoly "alpha10799") TList (TPoly "alpha10760")
+TList (TPoly "alpha10805") TList (TPoly "alpha10793")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha10809");], TMaybe (TPoly "alpha10809"))
+TPoly "alpha10808" TInt
+TList (TPoly "alpha10818") TList (TPoly "alpha10796")
+TPoly "alpha10822" TFuncMulti ([TPoly "alpha10829";TList (TPoly "alpha10829");], TList (TPoly "alpha10829"))
+TPoly "alpha10826" TPoly "alpha10821"
+TPoly "alpha10823" TBool
+TList (TPoly "alpha10835") TList (TPoly "alpha10815")
+TList (TPoly "alpha10841") TList (TPoly "alpha10832")
+TList (TPoly "alpha10838") TList (TPoly "alpha10844")
+TPoly "alpha10523" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha10529") TPoly "alpha10520"
+TPoly "alpha10535" TList (TPoly "alpha10526")
+TPoly "alpha10541" TPoly "alpha10532"
+TPoly "alpha10538" TList (TPoly "alpha10544")
+TPoly "alpha10539" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha10373") TPoly "tau"
+TFunc (TPoly "alpha10367", TBool) TFuncMulti ([TPoly "alpha10376";], TPoly "alpha10376")
+TPoly "alpha10489" TList (TPoly "alpha10440")
+TList (TPoly "alpha10492") TList (TPoly "alpha10493")
+TList (TPoly "alpha10503") TPoly "alpha10483"
+TFunc (TPoly "alpha10496", TPoly "alpha10497") TFuncMulti ([TPoly "alpha10505";TList (TPoly "alpha10505");], TList (TPoly "alpha10505"))
+TList (TPoly "alpha10499") TList (TPoly "alpha10508")
+TPoly "alpha10514" TPoly "alpha10486"
+TPoly "alpha10511" TList (TPoly "alpha10517")
+TPoly "alpha10472" TList (TPoly "alpha10379")
+TPoly "alpha10468" TFuncMulti ([TTuple (TPoly "alpha10477", TPoly "alpha10478");], TPoly "alpha10478")
+TPoly "alpha10469" TList (TPoly "alpha10474")
+TList (TPoly "alpha10447") TList (TPoly "alpha10379")
+TFunc (TPoly "alpha10441", TBool) TFuncMulti ([TPoly "alpha10450";], TPoly "alpha10450")
+TList (TPoly "alpha10459") TList (TPoly "alpha10444")
+TList (TPoly "alpha10453") TList (TPoly "alpha10462")
+TList (TPoly "alpha10456") TList (TPoly "alpha10465")
+TPoly "alpha10422" TList (TPoly "alpha10370")
+TPoly "alpha3652" TList (TPoly "alpha10437")
+TPoly "alpha10419" TPoly "alpha3652"
+TBool TPoly "alpha10420"
+TList (TPoly "alpha10383") TList (TPoly "alpha10370")
+TList (TPoly "alpha10392") TList (TPoly "alpha10380")
+TList (TPoly "alpha10398") TList (TPoly "alpha10386")
+TList (TPoly "alpha10395") TList (TPoly "alpha10401")
+TList (TPoly "alpha10410") TList (TPoly "alpha10389")
+TList (TPoly "alpha10404") TList (TPoly "alpha10413")
+TList (TPoly "alpha10407") TList (TPoly "alpha10416")
+TPoly "alpha10212" TPoly "tau"
+TList (TPoly "alpha10216") TPoly "alpha10203"
+TPoly "alpha10223" TPoly "alpha10219"
+TPoly "alpha4406" TList (TPoly "alpha10226")
+TPoly "alpha10220" TInt
+TPoly "alpha10271" TMaybe (TFunc (TPoly "alpha10204", TPoly "alpha10205"))
+TPoly "alpha10285" TPoly "alpha10268"
+TFunc (TPoly "alpha10277", TPoly "alpha10278") TFuncMulti ([TPoly "alpha10286";], TPoly "alpha10286")
+TMaybe (TPoly "alpha10292") TPoly "alpha10280"
+TPoly "alpha10304" TList (TPoly "alpha10289")
+TPoly "alpha10298" TList (TPoly "alpha10307")
+TPoly "alpha10301" TList (TPoly "alpha10310")
+TList (TPoly "alpha10235") TPoly "alpha10205"
+TBool TPoly "alpha10229"
+TList (TPoly "alpha10250") TList (TPoly "alpha10232")
+TList (TPoly "alpha10259") TList (TPoly "alpha10247")
+TFunc (TPoly "alpha10253", TBool) TFuncMulti ([TPoly "alpha10262";], TPoly "alpha10262")
+TList (TPoly "alpha10256") TList (TPoly "alpha10265")
+TPoly "alpha10316" TPoly "alpha10207"
+TBool TPoly "alpha10313"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha10340";TList (TPoly "alpha10340");], TList (TPoly "alpha10340"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha10352") TList (TPoly "alpha10358")
+TInt TInt
+TPoly "alpha10314" TFuncMulti ([TFunc (TPoly "alpha10319", TBool);TList (TPoly "alpha10319");], TList (TPoly "alpha10319"))
 looking up (Int -> Int) in applicabilityCache
-TPoly "alpha83" TList (TPoly "alpha84")
+TList (TPoly "alpha11200") TList (TPoly "alpha10847")
+TPoly "alpha11234" TList (TPoly "alpha11203")
+TPoly "alpha11248" TPoly "alpha11228"
+TFunc (TPoly "alpha11238", TPoly "alpha11239") TFuncMulti ([TPoly "alpha11249";], TPoly "alpha11249")
+TPoly "alpha11255" TFunc (TPoly "alpha11240", TPoly "alpha11241")
+TPoly "alpha11270" TPoly "alpha11243"
+TPoly "alpha11261" TList (TPoly "alpha11271")
+TFunc (TPoly "alpha11262", TPoly "alpha11263") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha11265"
+TPoly "alpha11294" TPoly "alpha11231"
+TPoly "alpha11304" TFunc (TPoly "alpha11284", TPoly "alpha11285")
+TBool TBool
+TPoly "alpha11298" TFuncMulti ([TTuple (TPoly "alpha11316", TPoly "alpha11317");], TPoly "alpha11316")
+TPoly "alpha11328" TPoly "alpha11301"
+TPoly "alpha11322" TFuncMulti ([TTuple (TPoly "alpha11331", TPoly "alpha11332");], TPoly "alpha11331")
+TPoly "alpha11325" TFuncMulti ([TTuple (TPoly "alpha11334", TPoly "alpha11335");], TPoly "alpha11334")
+TPoly "alpha11348" TFunc (TPoly "alpha11286", TPoly "alpha11287")
+TPoly "alpha11358" TFunc (TPoly "alpha11338", TPoly "alpha11339")
+TPoly "alpha11352" TFuncMulti ([TPoly "alpha11361";], TPoly "alpha11361")
+TPoly "alpha11355" TFuncMulti ([TPoly "alpha11364";], TPoly "alpha11364")
+TPoly "alpha11341" TFuncMulti ([TTuple (TPoly "alpha11367", TPoly "alpha11368");], TPoly "alpha11367")
+TList (TPoly "alpha11373") TPoly "alpha11343"
+TList (TPoly "alpha11370") TList (TPoly "alpha11376")
+TPoly "alpha11397" TList (TPoly "alpha11401")
+TPoly "alpha11396" TFuncMulti ([TList (TPoly "alpha11398");], TList (TPoly "alpha11398"))
+TList (TPoly "alpha11387") TPoly "alpha11379"
+TList (TPoly "alpha11381") TList (TPoly "alpha11390")
+TList (TPoly "alpha11384") TList (TPoly "alpha11393")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha11194", TBool) TFuncMulti ([TTuple (TPoly "alpha11222", TPoly "alpha11223");], TPoly "alpha11223")
+TPoly "alpha11208" TFunc (TPoly "alpha11194", TBool)
+TPoly "alpha11204" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha11216") TMaybe (TPoly "alpha11205")
+TList (TPoly "alpha11213") TList (TPoly "alpha80")
+TPoly "alpha11205" TPoly "alpha80"
+TList (TPoly "alpha11410") TList (TPoly "alpha11197")
+TList (TPoly "alpha11416") TList (TPoly "alpha11404")
+TPoly "alpha11422" TList (TPoly "alpha11413")
+TPoly "alpha1994" TList (TPoly "alpha11437")
+TPoly "alpha11419" TPoly "alpha1994"
+TInt TPoly "alpha11420"
+TList (TPoly "alpha11446") TList (TPoly "alpha11407")
+TList (TPoly "alpha11452") TList (TPoly "alpha11440")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha11456");], TMaybe (TPoly "alpha11456"))
+TPoly "alpha11455" TInt
+TList (TPoly "alpha11465") TList (TPoly "alpha11443")
+TPoly "alpha11469" TFuncMulti ([TPoly "alpha11476";TList (TPoly "alpha11476");], TList (TPoly "alpha11476"))
+TPoly "alpha11473" TPoly "alpha11468"
+TPoly "alpha11470" TBool
+TList (TPoly "alpha11482") TList (TPoly "alpha11462")
+TList (TPoly "alpha11488") TList (TPoly "alpha11479")
+TList (TPoly "alpha11485") TList (TPoly "alpha11491")
+TPoly "alpha11170" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha11176") TPoly "alpha11167"
+TPoly "alpha11182" TList (TPoly "alpha11173")
+TPoly "alpha11188" TPoly "alpha11179"
+TPoly "alpha11185" TList (TPoly "alpha11191")
+TPoly "alpha11186" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha11020") TPoly "tau"
+TFunc (TPoly "alpha11014", TBool) TFuncMulti ([TPoly "alpha11023";], TPoly "alpha11023")
+TPoly "alpha11136" TList (TPoly "alpha11087")
+TList (TPoly "alpha11139") TList (TPoly "alpha11140")
+TList (TPoly "alpha11150") TPoly "alpha11130"
+TFunc (TPoly "alpha11143", TPoly "alpha11144") TFuncMulti ([TPoly "alpha11152";TList (TPoly "alpha11152");], TList (TPoly "alpha11152"))
+TList (TPoly "alpha11146") TList (TPoly "alpha11155")
+TPoly "alpha11161" TPoly "alpha11133"
+TPoly "alpha11158" TList (TPoly "alpha11164")
+TPoly "alpha11119" TList (TPoly "alpha11026")
+TPoly "alpha11115" TFuncMulti ([TTuple (TPoly "alpha11124", TPoly "alpha11125");], TPoly "alpha11125")
+TPoly "alpha11116" TList (TPoly "alpha11121")
+TList (TPoly "alpha11094") TList (TPoly "alpha11026")
+TFunc (TPoly "alpha11088", TBool) TFuncMulti ([TPoly "alpha11097";], TPoly "alpha11097")
+TList (TPoly "alpha11106") TList (TPoly "alpha11091")
+TList (TPoly "alpha11100") TList (TPoly "alpha11109")
+TList (TPoly "alpha11103") TList (TPoly "alpha11112")
+TPoly "alpha11069" TList (TPoly "alpha11017")
+TPoly "alpha3652" TList (TPoly "alpha11084")
+TPoly "alpha11066" TPoly "alpha3652"
+TBool TPoly "alpha11067"
+TList (TPoly "alpha11030") TList (TPoly "alpha11017")
+TList (TPoly "alpha11039") TList (TPoly "alpha11027")
+TList (TPoly "alpha11045") TList (TPoly "alpha11033")
+TList (TPoly "alpha11042") TList (TPoly "alpha11048")
+TList (TPoly "alpha11057") TList (TPoly "alpha11036")
+TList (TPoly "alpha11051") TList (TPoly "alpha11060")
+TList (TPoly "alpha11054") TList (TPoly "alpha11063")
+TPoly "alpha10859" TPoly "tau"
+TList (TPoly "alpha10863") TPoly "alpha10850"
+TPoly "alpha10870" TPoly "alpha10866"
+TPoly "alpha4406" TList (TPoly "alpha10873")
+TPoly "alpha10867" TInt
+TPoly "alpha10918" TMaybe (TFunc (TPoly "alpha10851", TPoly "alpha10852"))
+TPoly "alpha10932" TPoly "alpha10915"
+TFunc (TPoly "alpha10924", TPoly "alpha10925") TFuncMulti ([TPoly "alpha10933";], TPoly "alpha10933")
+TMaybe (TPoly "alpha10939") TPoly "alpha10927"
+TPoly "alpha10951" TList (TPoly "alpha10936")
+TPoly "alpha10945" TList (TPoly "alpha10954")
+TPoly "alpha10948" TList (TPoly "alpha10957")
+TList (TPoly "alpha10882") TPoly "alpha10852"
+TBool TPoly "alpha10876"
+TList (TPoly "alpha10897") TList (TPoly "alpha10879")
+TList (TPoly "alpha10906") TList (TPoly "alpha10894")
+TFunc (TPoly "alpha10900", TBool) TFuncMulti ([TPoly "alpha10909";], TPoly "alpha10909")
+TList (TPoly "alpha10903") TList (TPoly "alpha10912")
+TPoly "alpha10963" TPoly "alpha10854"
+TBool TPoly "alpha10960"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha10987";TList (TPoly "alpha10987");], TList (TPoly "alpha10987"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha10999") TList (TPoly "alpha11005")
+TInt TInt
+TPoly "alpha10961" TFuncMulti ([TFunc (TPoly "alpha10966", TBool);TList (TPoly "alpha10966");], TList (TPoly "alpha10966"))
 looking up (Int -> Int -> Bool) in applicabilityCache
-TPoly "alpha87" TList (TPoly "alpha88")
+TList (TPoly "alpha11847") TList (TPoly "alpha11494")
+TPoly "alpha11881" TList (TPoly "alpha11850")
+TPoly "alpha11895" TPoly "alpha11875"
+TFunc (TPoly "alpha11885", TPoly "alpha11886") TFuncMulti ([TPoly "alpha11896";], TPoly "alpha11896")
+TPoly "alpha11902" TFunc (TPoly "alpha11887", TPoly "alpha11888")
+TPoly "alpha11917" TPoly "alpha11890"
+TPoly "alpha11908" TList (TPoly "alpha11918")
+TFunc (TPoly "alpha11909", TPoly "alpha11910") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha11912"
+TPoly "alpha11941" TPoly "alpha11878"
+TPoly "alpha11951" TFunc (TPoly "alpha11931", TPoly "alpha11932")
+TBool TBool
+TPoly "alpha11945" TFuncMulti ([TTuple (TPoly "alpha11963", TPoly "alpha11964");], TPoly "alpha11963")
+TPoly "alpha11975" TPoly "alpha11948"
+TPoly "alpha11969" TFuncMulti ([TTuple (TPoly "alpha11978", TPoly "alpha11979");], TPoly "alpha11978")
+TPoly "alpha11972" TFuncMulti ([TTuple (TPoly "alpha11981", TPoly "alpha11982");], TPoly "alpha11981")
+TPoly "alpha11995" TFunc (TPoly "alpha11933", TPoly "alpha11934")
+TPoly "alpha12005" TFunc (TPoly "alpha11985", TPoly "alpha11986")
+TPoly "alpha11999" TFuncMulti ([TPoly "alpha12008";], TPoly "alpha12008")
+TPoly "alpha12002" TFuncMulti ([TPoly "alpha12011";], TPoly "alpha12011")
+TPoly "alpha11988" TFuncMulti ([TTuple (TPoly "alpha12014", TPoly "alpha12015");], TPoly "alpha12014")
+TList (TPoly "alpha12020") TPoly "alpha11990"
+TList (TPoly "alpha12017") TList (TPoly "alpha12023")
+TPoly "alpha12044" TList (TPoly "alpha12048")
+TPoly "alpha12043" TFuncMulti ([TList (TPoly "alpha12045");], TList (TPoly "alpha12045"))
+TList (TPoly "alpha12034") TPoly "alpha12026"
+TList (TPoly "alpha12028") TList (TPoly "alpha12037")
+TList (TPoly "alpha12031") TList (TPoly "alpha12040")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha11841", TBool) TFuncMulti ([TTuple (TPoly "alpha11869", TPoly "alpha11870");], TPoly "alpha11870")
+TPoly "alpha11855" TFunc (TPoly "alpha11841", TBool)
+TPoly "alpha11851" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha11863") TMaybe (TPoly "alpha11852")
+TList (TPoly "alpha11860") TList (TPoly "alpha80")
+TPoly "alpha11852" TPoly "alpha80"
+TList (TPoly "alpha12057") TList (TPoly "alpha11844")
+TList (TPoly "alpha12063") TList (TPoly "alpha12051")
+TPoly "alpha12069" TList (TPoly "alpha12060")
+TPoly "alpha1994" TList (TPoly "alpha12084")
+TPoly "alpha12066" TPoly "alpha1994"
+TInt TPoly "alpha12067"
+TList (TPoly "alpha12093") TList (TPoly "alpha12054")
+TList (TPoly "alpha12099") TList (TPoly "alpha12087")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha12103");], TMaybe (TPoly "alpha12103"))
+TPoly "alpha12102" TInt
+TList (TPoly "alpha12112") TList (TPoly "alpha12090")
+TPoly "alpha12116" TFuncMulti ([TPoly "alpha12123";TList (TPoly "alpha12123");], TList (TPoly "alpha12123"))
+TPoly "alpha12120" TPoly "alpha12115"
+TPoly "alpha12117" TBool
+TList (TPoly "alpha12129") TList (TPoly "alpha12109")
+TList (TPoly "alpha12135") TList (TPoly "alpha12126")
+TList (TPoly "alpha12132") TList (TPoly "alpha12138")
+TPoly "alpha11817" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha11823") TPoly "alpha11814"
+TPoly "alpha11829" TList (TPoly "alpha11820")
+TPoly "alpha11835" TPoly "alpha11826"
+TPoly "alpha11832" TList (TPoly "alpha11838")
+TPoly "alpha11833" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha11667") TPoly "tau"
+TFunc (TPoly "alpha11661", TBool) TFuncMulti ([TPoly "alpha11670";], TPoly "alpha11670")
+TPoly "alpha11783" TList (TPoly "alpha11734")
+TList (TPoly "alpha11786") TList (TPoly "alpha11787")
+TList (TPoly "alpha11797") TPoly "alpha11777"
+TFunc (TPoly "alpha11790", TPoly "alpha11791") TFuncMulti ([TPoly "alpha11799";TList (TPoly "alpha11799");], TList (TPoly "alpha11799"))
+TList (TPoly "alpha11793") TList (TPoly "alpha11802")
+TPoly "alpha11808" TPoly "alpha11780"
+TPoly "alpha11805" TList (TPoly "alpha11811")
+TPoly "alpha11766" TList (TPoly "alpha11673")
+TPoly "alpha11762" TFuncMulti ([TTuple (TPoly "alpha11771", TPoly "alpha11772");], TPoly "alpha11772")
+TPoly "alpha11763" TList (TPoly "alpha11768")
+TList (TPoly "alpha11741") TList (TPoly "alpha11673")
+TFunc (TPoly "alpha11735", TBool) TFuncMulti ([TPoly "alpha11744";], TPoly "alpha11744")
+TList (TPoly "alpha11753") TList (TPoly "alpha11738")
+TList (TPoly "alpha11747") TList (TPoly "alpha11756")
+TList (TPoly "alpha11750") TList (TPoly "alpha11759")
+TPoly "alpha11716" TList (TPoly "alpha11664")
+TPoly "alpha3652" TList (TPoly "alpha11731")
+TPoly "alpha11713" TPoly "alpha3652"
+TBool TPoly "alpha11714"
+TList (TPoly "alpha11677") TList (TPoly "alpha11664")
+TList (TPoly "alpha11686") TList (TPoly "alpha11674")
+TList (TPoly "alpha11692") TList (TPoly "alpha11680")
+TList (TPoly "alpha11689") TList (TPoly "alpha11695")
+TList (TPoly "alpha11704") TList (TPoly "alpha11683")
+TList (TPoly "alpha11698") TList (TPoly "alpha11707")
+TList (TPoly "alpha11701") TList (TPoly "alpha11710")
+TPoly "alpha11506" TPoly "tau"
+TList (TPoly "alpha11510") TPoly "alpha11497"
+TPoly "alpha11517" TPoly "alpha11513"
+TPoly "alpha4406" TList (TPoly "alpha11520")
+TPoly "alpha11514" TInt
+TPoly "alpha11565" TMaybe (TFunc (TPoly "alpha11498", TPoly "alpha11499"))
+TPoly "alpha11579" TPoly "alpha11562"
+TFunc (TPoly "alpha11571", TPoly "alpha11572") TFuncMulti ([TPoly "alpha11580";], TPoly "alpha11580")
+TMaybe (TPoly "alpha11586") TPoly "alpha11574"
+TPoly "alpha11598" TList (TPoly "alpha11583")
+TPoly "alpha11592" TList (TPoly "alpha11601")
+TPoly "alpha11595" TList (TPoly "alpha11604")
+TList (TPoly "alpha11529") TPoly "alpha11499"
+TBool TPoly "alpha11523"
+TList (TPoly "alpha11544") TList (TPoly "alpha11526")
+TList (TPoly "alpha11553") TList (TPoly "alpha11541")
+TFunc (TPoly "alpha11547", TBool) TFuncMulti ([TPoly "alpha11556";], TPoly "alpha11556")
+TList (TPoly "alpha11550") TList (TPoly "alpha11559")
+TPoly "alpha11610" TPoly "alpha11501"
+TBool TPoly "alpha11607"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha11634";TList (TPoly "alpha11634");], TList (TPoly "alpha11634"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha11646") TList (TPoly "alpha11652")
+TInt TInt
+TPoly "alpha11608" TFuncMulti ([TFunc (TPoly "alpha11613", TBool);TList (TPoly "alpha11613");], TList (TPoly "alpha11613"))
 looking up (Bool -> Bool -> Bool) in applicabilityCache
 looking up ((a -> b) -> [a] -> [b]) in applicabilityCache
-TPoly "alpha91" TList (TPoly "alpha92")
+TList (TPoly "alpha12494") TList (TPoly "alpha12141")
+TPoly "alpha12528" TList (TPoly "alpha12497")
+TPoly "alpha12542" TPoly "alpha12522"
+TFunc (TPoly "alpha12532", TPoly "alpha12533") TFuncMulti ([TPoly "alpha12543";], TPoly "alpha12543")
+TPoly "alpha12549" TFunc (TPoly "alpha12534", TPoly "alpha12535")
+TPoly "alpha12564" TPoly "alpha12537"
+TPoly "alpha12555" TList (TPoly "alpha12565")
+TFunc (TPoly "alpha12556", TPoly "alpha12557") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha12559"
+TPoly "alpha12588" TPoly "alpha12525"
+TPoly "alpha12598" TFunc (TPoly "alpha12578", TPoly "alpha12579")
+TBool TBool
+TPoly "alpha12592" TFuncMulti ([TTuple (TPoly "alpha12610", TPoly "alpha12611");], TPoly "alpha12610")
+TPoly "alpha12622" TPoly "alpha12595"
+TPoly "alpha12616" TFuncMulti ([TTuple (TPoly "alpha12625", TPoly "alpha12626");], TPoly "alpha12625")
+TPoly "alpha12619" TFuncMulti ([TTuple (TPoly "alpha12628", TPoly "alpha12629");], TPoly "alpha12628")
+TPoly "alpha12642" TFunc (TPoly "alpha12580", TPoly "alpha12581")
+TPoly "alpha12652" TFunc (TPoly "alpha12632", TPoly "alpha12633")
+TPoly "alpha12646" TFuncMulti ([TPoly "alpha12655";], TPoly "alpha12655")
+TPoly "alpha12649" TFuncMulti ([TPoly "alpha12658";], TPoly "alpha12658")
+TPoly "alpha12635" TFuncMulti ([TTuple (TPoly "alpha12661", TPoly "alpha12662");], TPoly "alpha12661")
+TList (TPoly "alpha12667") TPoly "alpha12637"
+TList (TPoly "alpha12664") TList (TPoly "alpha12670")
+TPoly "alpha12691" TList (TPoly "alpha12695")
+TPoly "alpha12690" TFuncMulti ([TList (TPoly "alpha12692");], TList (TPoly "alpha12692"))
+TList (TPoly "alpha12681") TPoly "alpha12673"
+TList (TPoly "alpha12675") TList (TPoly "alpha12684")
+TList (TPoly "alpha12678") TList (TPoly "alpha12687")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha12488", TBool) TFuncMulti ([TTuple (TPoly "alpha12516", TPoly "alpha12517");], TPoly "alpha12517")
+TPoly "alpha12502" TFunc (TPoly "alpha12488", TBool)
+TPoly "alpha12498" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha12510") TMaybe (TPoly "alpha12499")
+TList (TPoly "alpha12507") TList (TPoly "alpha80")
+TPoly "alpha12499" TPoly "alpha80"
+TList (TPoly "alpha12704") TList (TPoly "alpha12491")
+TList (TPoly "alpha12710") TList (TPoly "alpha12698")
+TPoly "alpha12716" TList (TPoly "alpha12707")
+TPoly "alpha1994" TList (TPoly "alpha12731")
+TPoly "alpha12713" TPoly "alpha1994"
+TInt TPoly "alpha12714"
+TList (TPoly "alpha12740") TList (TPoly "alpha12701")
+TList (TPoly "alpha12746") TList (TPoly "alpha12734")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha12750");], TMaybe (TPoly "alpha12750"))
+TPoly "alpha12749" TInt
+TList (TPoly "alpha12759") TList (TPoly "alpha12737")
+TPoly "alpha12763" TFuncMulti ([TPoly "alpha12770";TList (TPoly "alpha12770");], TList (TPoly "alpha12770"))
+TPoly "alpha12767" TPoly "alpha12762"
+TPoly "alpha12764" TBool
+TList (TPoly "alpha12776") TList (TPoly "alpha12756")
+TList (TPoly "alpha12782") TList (TPoly "alpha12773")
+TList (TPoly "alpha12779") TList (TPoly "alpha12785")
+TPoly "alpha12464" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha12470") TPoly "alpha12461"
+TPoly "alpha12476" TList (TPoly "alpha12467")
+TPoly "alpha12482" TPoly "alpha12473"
+TPoly "alpha12479" TList (TPoly "alpha12485")
+TPoly "alpha12480" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha12314") TPoly "tau"
+TFunc (TPoly "alpha12308", TBool) TFuncMulti ([TPoly "alpha12317";], TPoly "alpha12317")
+TPoly "alpha12430" TList (TPoly "alpha12381")
+TList (TPoly "alpha12433") TList (TPoly "alpha12434")
+TList (TPoly "alpha12444") TPoly "alpha12424"
+TFunc (TPoly "alpha12437", TPoly "alpha12438") TFuncMulti ([TPoly "alpha12446";TList (TPoly "alpha12446");], TList (TPoly "alpha12446"))
+TList (TPoly "alpha12440") TList (TPoly "alpha12449")
+TPoly "alpha12455" TPoly "alpha12427"
+TPoly "alpha12452" TList (TPoly "alpha12458")
+TPoly "alpha12413" TList (TPoly "alpha12320")
+TPoly "alpha12409" TFuncMulti ([TTuple (TPoly "alpha12418", TPoly "alpha12419");], TPoly "alpha12419")
+TPoly "alpha12410" TList (TPoly "alpha12415")
+TList (TPoly "alpha12388") TList (TPoly "alpha12320")
+TFunc (TPoly "alpha12382", TBool) TFuncMulti ([TPoly "alpha12391";], TPoly "alpha12391")
+TList (TPoly "alpha12400") TList (TPoly "alpha12385")
+TList (TPoly "alpha12394") TList (TPoly "alpha12403")
+TList (TPoly "alpha12397") TList (TPoly "alpha12406")
+TPoly "alpha12363" TList (TPoly "alpha12311")
+TPoly "alpha3652" TList (TPoly "alpha12378")
+TPoly "alpha12360" TPoly "alpha3652"
+TBool TPoly "alpha12361"
+TList (TPoly "alpha12324") TList (TPoly "alpha12311")
+TList (TPoly "alpha12333") TList (TPoly "alpha12321")
+TList (TPoly "alpha12339") TList (TPoly "alpha12327")
+TList (TPoly "alpha12336") TList (TPoly "alpha12342")
+TList (TPoly "alpha12351") TList (TPoly "alpha12330")
+TList (TPoly "alpha12345") TList (TPoly "alpha12354")
+TList (TPoly "alpha12348") TList (TPoly "alpha12357")
+TPoly "alpha12153" TPoly "tau"
+TList (TPoly "alpha12157") TPoly "alpha12144"
+TPoly "alpha12164" TPoly "alpha12160"
+TPoly "alpha4406" TList (TPoly "alpha12167")
+TPoly "alpha12161" TInt
+TPoly "alpha12212" TMaybe (TFunc (TPoly "alpha12145", TPoly "alpha12146"))
+TPoly "alpha12226" TPoly "alpha12209"
+TFunc (TPoly "alpha12218", TPoly "alpha12219") TFuncMulti ([TPoly "alpha12227";], TPoly "alpha12227")
+TMaybe (TPoly "alpha12233") TPoly "alpha12221"
+TPoly "alpha12245" TList (TPoly "alpha12230")
+TPoly "alpha12239" TList (TPoly "alpha12248")
+TPoly "alpha12242" TList (TPoly "alpha12251")
+TList (TPoly "alpha12176") TPoly "alpha12146"
+TBool TPoly "alpha12170"
+TList (TPoly "alpha12191") TList (TPoly "alpha12173")
+TList (TPoly "alpha12200") TList (TPoly "alpha12188")
+TFunc (TPoly "alpha12194", TBool) TFuncMulti ([TPoly "alpha12203";], TPoly "alpha12203")
+TList (TPoly "alpha12197") TList (TPoly "alpha12206")
+TPoly "alpha12257" TPoly "alpha12148"
+TBool TPoly "alpha12254"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha12281";TList (TPoly "alpha12281");], TList (TPoly "alpha12281"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha12293") TList (TPoly "alpha12299")
+TInt TInt
+TPoly "alpha12255" TFuncMulti ([TFunc (TPoly "alpha12260", TBool);TList (TPoly "alpha12260");], TList (TPoly "alpha12260"))
 looking up ((a -> Bool) -> [a] -> [a]) in applicabilityCache
-TPoly "alpha95" TList (TPoly "alpha96")
+TList (TPoly "alpha13141") TList (TPoly "alpha12788")
+TPoly "alpha13175" TList (TPoly "alpha13144")
+TPoly "alpha13189" TPoly "alpha13169"
+TFunc (TPoly "alpha13179", TPoly "alpha13180") TFuncMulti ([TPoly "alpha13190";], TPoly "alpha13190")
+TPoly "alpha13196" TFunc (TPoly "alpha13181", TPoly "alpha13182")
+TPoly "alpha13211" TPoly "alpha13184"
+TPoly "alpha13202" TList (TPoly "alpha13212")
+TFunc (TPoly "alpha13203", TPoly "alpha13204") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha13206"
+TPoly "alpha13235" TPoly "alpha13172"
+TPoly "alpha13245" TFunc (TPoly "alpha13225", TPoly "alpha13226")
+TBool TBool
+TPoly "alpha13239" TFuncMulti ([TTuple (TPoly "alpha13257", TPoly "alpha13258");], TPoly "alpha13257")
+TPoly "alpha13269" TPoly "alpha13242"
+TPoly "alpha13263" TFuncMulti ([TTuple (TPoly "alpha13272", TPoly "alpha13273");], TPoly "alpha13272")
+TPoly "alpha13266" TFuncMulti ([TTuple (TPoly "alpha13275", TPoly "alpha13276");], TPoly "alpha13275")
+TPoly "alpha13289" TFunc (TPoly "alpha13227", TPoly "alpha13228")
+TPoly "alpha13299" TFunc (TPoly "alpha13279", TPoly "alpha13280")
+TPoly "alpha13293" TFuncMulti ([TPoly "alpha13302";], TPoly "alpha13302")
+TPoly "alpha13296" TFuncMulti ([TPoly "alpha13305";], TPoly "alpha13305")
+TPoly "alpha13282" TFuncMulti ([TTuple (TPoly "alpha13308", TPoly "alpha13309");], TPoly "alpha13308")
+TList (TPoly "alpha13314") TPoly "alpha13284"
+TList (TPoly "alpha13311") TList (TPoly "alpha13317")
+TPoly "alpha13338" TList (TPoly "alpha13342")
+TPoly "alpha13337" TFuncMulti ([TList (TPoly "alpha13339");], TList (TPoly "alpha13339"))
+TList (TPoly "alpha13328") TPoly "alpha13320"
+TList (TPoly "alpha13322") TList (TPoly "alpha13331")
+TList (TPoly "alpha13325") TList (TPoly "alpha13334")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha13135", TBool) TFuncMulti ([TTuple (TPoly "alpha13163", TPoly "alpha13164");], TPoly "alpha13164")
+TPoly "alpha13149" TFunc (TPoly "alpha13135", TBool)
+TPoly "alpha13145" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha13157") TMaybe (TPoly "alpha13146")
+TList (TPoly "alpha13154") TList (TPoly "alpha80")
+TPoly "alpha13146" TPoly "alpha80"
+TList (TPoly "alpha13351") TList (TPoly "alpha13138")
+TList (TPoly "alpha13357") TList (TPoly "alpha13345")
+TPoly "alpha13363" TList (TPoly "alpha13354")
+TPoly "alpha1994" TList (TPoly "alpha13378")
+TPoly "alpha13360" TPoly "alpha1994"
+TInt TPoly "alpha13361"
+TList (TPoly "alpha13387") TList (TPoly "alpha13348")
+TList (TPoly "alpha13393") TList (TPoly "alpha13381")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha13397");], TMaybe (TPoly "alpha13397"))
+TPoly "alpha13396" TInt
+TList (TPoly "alpha13406") TList (TPoly "alpha13384")
+TPoly "alpha13410" TFuncMulti ([TPoly "alpha13417";TList (TPoly "alpha13417");], TList (TPoly "alpha13417"))
+TPoly "alpha13414" TPoly "alpha13409"
+TPoly "alpha13411" TBool
+TList (TPoly "alpha13423") TList (TPoly "alpha13403")
+TList (TPoly "alpha13429") TList (TPoly "alpha13420")
+TList (TPoly "alpha13426") TList (TPoly "alpha13432")
+TPoly "alpha13111" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha13117") TPoly "alpha13108"
+TPoly "alpha13123" TList (TPoly "alpha13114")
+TPoly "alpha13129" TPoly "alpha13120"
+TPoly "alpha13126" TList (TPoly "alpha13132")
+TPoly "alpha13127" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha12961") TPoly "tau"
+TFunc (TPoly "alpha12955", TBool) TFuncMulti ([TPoly "alpha12964";], TPoly "alpha12964")
+TPoly "alpha13077" TList (TPoly "alpha13028")
+TList (TPoly "alpha13080") TList (TPoly "alpha13081")
+TList (TPoly "alpha13091") TPoly "alpha13071"
+TFunc (TPoly "alpha13084", TPoly "alpha13085") TFuncMulti ([TPoly "alpha13093";TList (TPoly "alpha13093");], TList (TPoly "alpha13093"))
+TList (TPoly "alpha13087") TList (TPoly "alpha13096")
+TPoly "alpha13102" TPoly "alpha13074"
+TPoly "alpha13099" TList (TPoly "alpha13105")
+TPoly "alpha13060" TList (TPoly "alpha12967")
+TPoly "alpha13056" TFuncMulti ([TTuple (TPoly "alpha13065", TPoly "alpha13066");], TPoly "alpha13066")
+TPoly "alpha13057" TList (TPoly "alpha13062")
+TList (TPoly "alpha13035") TList (TPoly "alpha12967")
+TFunc (TPoly "alpha13029", TBool) TFuncMulti ([TPoly "alpha13038";], TPoly "alpha13038")
+TList (TPoly "alpha13047") TList (TPoly "alpha13032")
+TList (TPoly "alpha13041") TList (TPoly "alpha13050")
+TList (TPoly "alpha13044") TList (TPoly "alpha13053")
+TPoly "alpha13010" TList (TPoly "alpha12958")
+TPoly "alpha3652" TList (TPoly "alpha13025")
+TPoly "alpha13007" TPoly "alpha3652"
+TBool TPoly "alpha13008"
+TList (TPoly "alpha12971") TList (TPoly "alpha12958")
+TList (TPoly "alpha12980") TList (TPoly "alpha12968")
+TList (TPoly "alpha12986") TList (TPoly "alpha12974")
+TList (TPoly "alpha12983") TList (TPoly "alpha12989")
+TList (TPoly "alpha12998") TList (TPoly "alpha12977")
+TList (TPoly "alpha12992") TList (TPoly "alpha13001")
+TList (TPoly "alpha12995") TList (TPoly "alpha13004")
+TPoly "alpha12800" TPoly "tau"
+TList (TPoly "alpha12804") TPoly "alpha12791"
+TPoly "alpha12811" TPoly "alpha12807"
+TPoly "alpha4406" TList (TPoly "alpha12814")
+TPoly "alpha12808" TInt
+TPoly "alpha12859" TMaybe (TFunc (TPoly "alpha12792", TPoly "alpha12793"))
+TPoly "alpha12873" TPoly "alpha12856"
+TFunc (TPoly "alpha12865", TPoly "alpha12866") TFuncMulti ([TPoly "alpha12874";], TPoly "alpha12874")
+TMaybe (TPoly "alpha12880") TPoly "alpha12868"
+TPoly "alpha12892" TList (TPoly "alpha12877")
+TPoly "alpha12886" TList (TPoly "alpha12895")
+TPoly "alpha12889" TList (TPoly "alpha12898")
+TList (TPoly "alpha12823") TPoly "alpha12793"
+TBool TPoly "alpha12817"
+TList (TPoly "alpha12838") TList (TPoly "alpha12820")
+TList (TPoly "alpha12847") TList (TPoly "alpha12835")
+TFunc (TPoly "alpha12841", TBool) TFuncMulti ([TPoly "alpha12850";], TPoly "alpha12850")
+TList (TPoly "alpha12844") TList (TPoly "alpha12853")
+TPoly "alpha12904" TPoly "alpha12795"
+TBool TPoly "alpha12901"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha12928";TList (TPoly "alpha12928");], TList (TPoly "alpha12928"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha12940") TList (TPoly "alpha12946")
+TInt TInt
+TPoly "alpha12902" TFuncMulti ([TFunc (TPoly "alpha12907", TBool);TList (TPoly "alpha12907");], TList (TPoly "alpha12907"))
 looking up ([a] -> Maybe a) in applicabilityCache
-TPoly "alpha99" TList (TPoly "alpha100")
+TList (TPoly "alpha13788") TList (TPoly "alpha13435")
+TPoly "alpha13822" TList (TPoly "alpha13791")
+TPoly "alpha13836" TPoly "alpha13816"
+TFunc (TPoly "alpha13826", TPoly "alpha13827") TFuncMulti ([TPoly "alpha13837";], TPoly "alpha13837")
+TPoly "alpha13843" TFunc (TPoly "alpha13828", TPoly "alpha13829")
+TPoly "alpha13858" TPoly "alpha13831"
+TPoly "alpha13849" TList (TPoly "alpha13859")
+TFunc (TPoly "alpha13850", TPoly "alpha13851") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha13853"
+TPoly "alpha13882" TPoly "alpha13819"
+TPoly "alpha13892" TFunc (TPoly "alpha13872", TPoly "alpha13873")
+TBool TBool
+TPoly "alpha13886" TFuncMulti ([TTuple (TPoly "alpha13904", TPoly "alpha13905");], TPoly "alpha13904")
+TPoly "alpha13916" TPoly "alpha13889"
+TPoly "alpha13910" TFuncMulti ([TTuple (TPoly "alpha13919", TPoly "alpha13920");], TPoly "alpha13919")
+TPoly "alpha13913" TFuncMulti ([TTuple (TPoly "alpha13922", TPoly "alpha13923");], TPoly "alpha13922")
+TPoly "alpha13936" TFunc (TPoly "alpha13874", TPoly "alpha13875")
+TPoly "alpha13946" TFunc (TPoly "alpha13926", TPoly "alpha13927")
+TPoly "alpha13940" TFuncMulti ([TPoly "alpha13949";], TPoly "alpha13949")
+TPoly "alpha13943" TFuncMulti ([TPoly "alpha13952";], TPoly "alpha13952")
+TPoly "alpha13929" TFuncMulti ([TTuple (TPoly "alpha13955", TPoly "alpha13956");], TPoly "alpha13955")
+TList (TPoly "alpha13961") TPoly "alpha13931"
+TList (TPoly "alpha13958") TList (TPoly "alpha13964")
+TPoly "alpha13985" TList (TPoly "alpha13989")
+TPoly "alpha13984" TFuncMulti ([TList (TPoly "alpha13986");], TList (TPoly "alpha13986"))
+TList (TPoly "alpha13975") TPoly "alpha13967"
+TList (TPoly "alpha13969") TList (TPoly "alpha13978")
+TList (TPoly "alpha13972") TList (TPoly "alpha13981")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha13782", TBool) TFuncMulti ([TTuple (TPoly "alpha13810", TPoly "alpha13811");], TPoly "alpha13811")
+TPoly "alpha13796" TFunc (TPoly "alpha13782", TBool)
+TPoly "alpha13792" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha13804") TMaybe (TPoly "alpha13793")
+TList (TPoly "alpha13801") TList (TPoly "alpha80")
+TPoly "alpha13793" TPoly "alpha80"
+TList (TPoly "alpha13998") TList (TPoly "alpha13785")
+TList (TPoly "alpha14004") TList (TPoly "alpha13992")
+TPoly "alpha14010" TList (TPoly "alpha14001")
+TPoly "alpha1994" TList (TPoly "alpha14025")
+TPoly "alpha14007" TPoly "alpha1994"
+TInt TPoly "alpha14008"
+TList (TPoly "alpha14034") TList (TPoly "alpha13995")
+TList (TPoly "alpha14040") TList (TPoly "alpha14028")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha14044");], TMaybe (TPoly "alpha14044"))
+TPoly "alpha14043" TInt
+TList (TPoly "alpha14053") TList (TPoly "alpha14031")
+TPoly "alpha14057" TFuncMulti ([TPoly "alpha14064";TList (TPoly "alpha14064");], TList (TPoly "alpha14064"))
+TPoly "alpha14061" TPoly "alpha14056"
+TPoly "alpha14058" TBool
+TList (TPoly "alpha14070") TList (TPoly "alpha14050")
+TList (TPoly "alpha14076") TList (TPoly "alpha14067")
+TList (TPoly "alpha14073") TList (TPoly "alpha14079")
+TPoly "alpha13758" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha13764") TPoly "alpha13755"
+TPoly "alpha13770" TList (TPoly "alpha13761")
+TPoly "alpha13776" TPoly "alpha13767"
+TPoly "alpha13773" TList (TPoly "alpha13779")
+TPoly "alpha13774" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha13608") TPoly "tau"
+TFunc (TPoly "alpha13602", TBool) TFuncMulti ([TPoly "alpha13611";], TPoly "alpha13611")
+TPoly "alpha13724" TList (TPoly "alpha13675")
+TList (TPoly "alpha13727") TList (TPoly "alpha13728")
+TList (TPoly "alpha13738") TPoly "alpha13718"
+TFunc (TPoly "alpha13731", TPoly "alpha13732") TFuncMulti ([TPoly "alpha13740";TList (TPoly "alpha13740");], TList (TPoly "alpha13740"))
+TList (TPoly "alpha13734") TList (TPoly "alpha13743")
+TPoly "alpha13749" TPoly "alpha13721"
+TPoly "alpha13746" TList (TPoly "alpha13752")
+TPoly "alpha13707" TList (TPoly "alpha13614")
+TPoly "alpha13703" TFuncMulti ([TTuple (TPoly "alpha13712", TPoly "alpha13713");], TPoly "alpha13713")
+TPoly "alpha13704" TList (TPoly "alpha13709")
+TList (TPoly "alpha13682") TList (TPoly "alpha13614")
+TFunc (TPoly "alpha13676", TBool) TFuncMulti ([TPoly "alpha13685";], TPoly "alpha13685")
+TList (TPoly "alpha13694") TList (TPoly "alpha13679")
+TList (TPoly "alpha13688") TList (TPoly "alpha13697")
+TList (TPoly "alpha13691") TList (TPoly "alpha13700")
+TPoly "alpha13657" TList (TPoly "alpha13605")
+TPoly "alpha3652" TList (TPoly "alpha13672")
+TPoly "alpha13654" TPoly "alpha3652"
+TBool TPoly "alpha13655"
+TList (TPoly "alpha13618") TList (TPoly "alpha13605")
+TList (TPoly "alpha13627") TList (TPoly "alpha13615")
+TList (TPoly "alpha13633") TList (TPoly "alpha13621")
+TList (TPoly "alpha13630") TList (TPoly "alpha13636")
+TList (TPoly "alpha13645") TList (TPoly "alpha13624")
+TList (TPoly "alpha13639") TList (TPoly "alpha13648")
+TList (TPoly "alpha13642") TList (TPoly "alpha13651")
+TPoly "alpha13447" TPoly "tau"
+TList (TPoly "alpha13451") TPoly "alpha13438"
+TPoly "alpha13458" TPoly "alpha13454"
+TPoly "alpha4406" TList (TPoly "alpha13461")
+TPoly "alpha13455" TInt
+TPoly "alpha13506" TMaybe (TFunc (TPoly "alpha13439", TPoly "alpha13440"))
+TPoly "alpha13520" TPoly "alpha13503"
+TFunc (TPoly "alpha13512", TPoly "alpha13513") TFuncMulti ([TPoly "alpha13521";], TPoly "alpha13521")
+TMaybe (TPoly "alpha13527") TPoly "alpha13515"
+TPoly "alpha13539" TList (TPoly "alpha13524")
+TPoly "alpha13533" TList (TPoly "alpha13542")
+TPoly "alpha13536" TList (TPoly "alpha13545")
+TList (TPoly "alpha13470") TPoly "alpha13440"
+TBool TPoly "alpha13464"
+TList (TPoly "alpha13485") TList (TPoly "alpha13467")
+TList (TPoly "alpha13494") TList (TPoly "alpha13482")
+TFunc (TPoly "alpha13488", TBool) TFuncMulti ([TPoly "alpha13497";], TPoly "alpha13497")
+TList (TPoly "alpha13491") TList (TPoly "alpha13500")
+TPoly "alpha13551" TPoly "alpha13442"
+TBool TPoly "alpha13548"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha13575";TList (TPoly "alpha13575");], TList (TPoly "alpha13575"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha13587") TList (TPoly "alpha13593")
+TInt TInt
+TPoly "alpha13549" TFuncMulti ([TFunc (TPoly "alpha13554", TBool);TList (TPoly "alpha13554");], TList (TPoly "alpha13554"))
 looking up ([a] -> [a]) in applicabilityCache
-TPoly "alpha103" TList (TPoly "alpha104")
+TList (TPoly "alpha14435") TList (TPoly "alpha14082")
+TPoly "alpha14469" TList (TPoly "alpha14438")
+TPoly "alpha14483" TPoly "alpha14463"
+TFunc (TPoly "alpha14473", TPoly "alpha14474") TFuncMulti ([TPoly "alpha14484";], TPoly "alpha14484")
+TPoly "alpha14490" TFunc (TPoly "alpha14475", TPoly "alpha14476")
+TPoly "alpha14505" TPoly "alpha14478"
+TPoly "alpha14496" TList (TPoly "alpha14506")
+TFunc (TPoly "alpha14497", TPoly "alpha14498") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha14500"
+TPoly "alpha14529" TPoly "alpha14466"
+TPoly "alpha14539" TFunc (TPoly "alpha14519", TPoly "alpha14520")
+TBool TBool
+TPoly "alpha14533" TFuncMulti ([TTuple (TPoly "alpha14551", TPoly "alpha14552");], TPoly "alpha14551")
+TPoly "alpha14563" TPoly "alpha14536"
+TPoly "alpha14557" TFuncMulti ([TTuple (TPoly "alpha14566", TPoly "alpha14567");], TPoly "alpha14566")
+TPoly "alpha14560" TFuncMulti ([TTuple (TPoly "alpha14569", TPoly "alpha14570");], TPoly "alpha14569")
+TPoly "alpha14583" TFunc (TPoly "alpha14521", TPoly "alpha14522")
+TPoly "alpha14593" TFunc (TPoly "alpha14573", TPoly "alpha14574")
+TPoly "alpha14587" TFuncMulti ([TPoly "alpha14596";], TPoly "alpha14596")
+TPoly "alpha14590" TFuncMulti ([TPoly "alpha14599";], TPoly "alpha14599")
+TPoly "alpha14576" TFuncMulti ([TTuple (TPoly "alpha14602", TPoly "alpha14603");], TPoly "alpha14602")
+TList (TPoly "alpha14608") TPoly "alpha14578"
+TList (TPoly "alpha14605") TList (TPoly "alpha14611")
+TPoly "alpha14632" TList (TPoly "alpha14636")
+TPoly "alpha14631" TFuncMulti ([TList (TPoly "alpha14633");], TList (TPoly "alpha14633"))
+TList (TPoly "alpha14622") TPoly "alpha14614"
+TList (TPoly "alpha14616") TList (TPoly "alpha14625")
+TList (TPoly "alpha14619") TList (TPoly "alpha14628")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha14429", TBool) TFuncMulti ([TTuple (TPoly "alpha14457", TPoly "alpha14458");], TPoly "alpha14458")
+TPoly "alpha14443" TFunc (TPoly "alpha14429", TBool)
+TPoly "alpha14439" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha14451") TMaybe (TPoly "alpha14440")
+TList (TPoly "alpha14448") TList (TPoly "alpha80")
+TPoly "alpha14440" TPoly "alpha80"
+TList (TPoly "alpha14645") TList (TPoly "alpha14432")
+TList (TPoly "alpha14651") TList (TPoly "alpha14639")
+TPoly "alpha14657" TList (TPoly "alpha14648")
+TPoly "alpha1994" TList (TPoly "alpha14672")
+TPoly "alpha14654" TPoly "alpha1994"
+TInt TPoly "alpha14655"
+TList (TPoly "alpha14681") TList (TPoly "alpha14642")
+TList (TPoly "alpha14687") TList (TPoly "alpha14675")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha14691");], TMaybe (TPoly "alpha14691"))
+TPoly "alpha14690" TInt
+TList (TPoly "alpha14700") TList (TPoly "alpha14678")
+TPoly "alpha14704" TFuncMulti ([TPoly "alpha14711";TList (TPoly "alpha14711");], TList (TPoly "alpha14711"))
+TPoly "alpha14708" TPoly "alpha14703"
+TPoly "alpha14705" TBool
+TList (TPoly "alpha14717") TList (TPoly "alpha14697")
+TList (TPoly "alpha14723") TList (TPoly "alpha14714")
+TList (TPoly "alpha14720") TList (TPoly "alpha14726")
+TPoly "alpha14405" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha14411") TPoly "alpha14402"
+TPoly "alpha14417" TList (TPoly "alpha14408")
+TPoly "alpha14423" TPoly "alpha14414"
+TPoly "alpha14420" TList (TPoly "alpha14426")
+TPoly "alpha14421" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha14255") TPoly "tau"
+TFunc (TPoly "alpha14249", TBool) TFuncMulti ([TPoly "alpha14258";], TPoly "alpha14258")
+TPoly "alpha14371" TList (TPoly "alpha14322")
+TList (TPoly "alpha14374") TList (TPoly "alpha14375")
+TList (TPoly "alpha14385") TPoly "alpha14365"
+TFunc (TPoly "alpha14378", TPoly "alpha14379") TFuncMulti ([TPoly "alpha14387";TList (TPoly "alpha14387");], TList (TPoly "alpha14387"))
+TList (TPoly "alpha14381") TList (TPoly "alpha14390")
+TPoly "alpha14396" TPoly "alpha14368"
+TPoly "alpha14393" TList (TPoly "alpha14399")
+TPoly "alpha14354" TList (TPoly "alpha14261")
+TPoly "alpha14350" TFuncMulti ([TTuple (TPoly "alpha14359", TPoly "alpha14360");], TPoly "alpha14360")
+TPoly "alpha14351" TList (TPoly "alpha14356")
+TList (TPoly "alpha14329") TList (TPoly "alpha14261")
+TFunc (TPoly "alpha14323", TBool) TFuncMulti ([TPoly "alpha14332";], TPoly "alpha14332")
+TList (TPoly "alpha14341") TList (TPoly "alpha14326")
+TList (TPoly "alpha14335") TList (TPoly "alpha14344")
+TList (TPoly "alpha14338") TList (TPoly "alpha14347")
+TPoly "alpha14304" TList (TPoly "alpha14252")
+TPoly "alpha3652" TList (TPoly "alpha14319")
+TPoly "alpha14301" TPoly "alpha3652"
+TBool TPoly "alpha14302"
+TList (TPoly "alpha14265") TList (TPoly "alpha14252")
+TList (TPoly "alpha14274") TList (TPoly "alpha14262")
+TList (TPoly "alpha14280") TList (TPoly "alpha14268")
+TList (TPoly "alpha14277") TList (TPoly "alpha14283")
+TList (TPoly "alpha14292") TList (TPoly "alpha14271")
+TList (TPoly "alpha14286") TList (TPoly "alpha14295")
+TList (TPoly "alpha14289") TList (TPoly "alpha14298")
+TPoly "alpha14094" TPoly "tau"
+TList (TPoly "alpha14098") TPoly "alpha14085"
+TPoly "alpha14105" TPoly "alpha14101"
+TPoly "alpha4406" TList (TPoly "alpha14108")
+TPoly "alpha14102" TInt
+TPoly "alpha14153" TMaybe (TFunc (TPoly "alpha14086", TPoly "alpha14087"))
+TPoly "alpha14167" TPoly "alpha14150"
+TFunc (TPoly "alpha14159", TPoly "alpha14160") TFuncMulti ([TPoly "alpha14168";], TPoly "alpha14168")
+TMaybe (TPoly "alpha14174") TPoly "alpha14162"
+TPoly "alpha14186" TList (TPoly "alpha14171")
+TPoly "alpha14180" TList (TPoly "alpha14189")
+TPoly "alpha14183" TList (TPoly "alpha14192")
+TList (TPoly "alpha14117") TPoly "alpha14087"
+TBool TPoly "alpha14111"
+TList (TPoly "alpha14132") TList (TPoly "alpha14114")
+TList (TPoly "alpha14141") TList (TPoly "alpha14129")
+TFunc (TPoly "alpha14135", TBool) TFuncMulti ([TPoly "alpha14144";], TPoly "alpha14144")
+TList (TPoly "alpha14138") TList (TPoly "alpha14147")
+TPoly "alpha14198" TPoly "alpha14089"
+TBool TPoly "alpha14195"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha14222";TList (TPoly "alpha14222");], TList (TPoly "alpha14222"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha14234") TList (TPoly "alpha14240")
+TInt TInt
+TPoly "alpha14196" TFuncMulti ([TFunc (TPoly "alpha14201", TBool);TList (TPoly "alpha14201");], TList (TPoly "alpha14201"))
 looking up (a -> a) in applicabilityCache
-TPoly "alpha107" TList (TPoly "alpha108")
+TList (TPoly "alpha15082") TList (TPoly "alpha14729")
+TPoly "alpha15116" TList (TPoly "alpha15085")
+TPoly "alpha15130" TPoly "alpha15110"
+TFunc (TPoly "alpha15120", TPoly "alpha15121") TFuncMulti ([TPoly "alpha15131";], TPoly "alpha15131")
+TPoly "alpha15137" TFunc (TPoly "alpha15122", TPoly "alpha15123")
+TPoly "alpha15152" TPoly "alpha15125"
+TPoly "alpha15143" TList (TPoly "alpha15153")
+TFunc (TPoly "alpha15144", TPoly "alpha15145") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha15147"
+TPoly "alpha15176" TPoly "alpha15113"
+TPoly "alpha15186" TFunc (TPoly "alpha15166", TPoly "alpha15167")
+TBool TBool
+TPoly "alpha15180" TFuncMulti ([TTuple (TPoly "alpha15198", TPoly "alpha15199");], TPoly "alpha15198")
+TPoly "alpha15210" TPoly "alpha15183"
+TPoly "alpha15204" TFuncMulti ([TTuple (TPoly "alpha15213", TPoly "alpha15214");], TPoly "alpha15213")
+TPoly "alpha15207" TFuncMulti ([TTuple (TPoly "alpha15216", TPoly "alpha15217");], TPoly "alpha15216")
+TPoly "alpha15230" TFunc (TPoly "alpha15168", TPoly "alpha15169")
+TPoly "alpha15240" TFunc (TPoly "alpha15220", TPoly "alpha15221")
+TPoly "alpha15234" TFuncMulti ([TPoly "alpha15243";], TPoly "alpha15243")
+TPoly "alpha15237" TFuncMulti ([TPoly "alpha15246";], TPoly "alpha15246")
+TPoly "alpha15223" TFuncMulti ([TTuple (TPoly "alpha15249", TPoly "alpha15250");], TPoly "alpha15249")
+TList (TPoly "alpha15255") TPoly "alpha15225"
+TList (TPoly "alpha15252") TList (TPoly "alpha15258")
+TPoly "alpha15279" TList (TPoly "alpha15283")
+TPoly "alpha15278" TFuncMulti ([TList (TPoly "alpha15280");], TList (TPoly "alpha15280"))
+TList (TPoly "alpha15269") TPoly "alpha15261"
+TList (TPoly "alpha15263") TList (TPoly "alpha15272")
+TList (TPoly "alpha15266") TList (TPoly "alpha15275")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha15076", TBool) TFuncMulti ([TTuple (TPoly "alpha15104", TPoly "alpha15105");], TPoly "alpha15105")
+TPoly "alpha15090" TFunc (TPoly "alpha15076", TBool)
+TPoly "alpha15086" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha15098") TMaybe (TPoly "alpha15087")
+TList (TPoly "alpha15095") TList (TPoly "alpha80")
+TPoly "alpha15087" TPoly "alpha80"
+TList (TPoly "alpha15292") TList (TPoly "alpha15079")
+TList (TPoly "alpha15298") TList (TPoly "alpha15286")
+TPoly "alpha15304" TList (TPoly "alpha15295")
+TPoly "alpha1994" TList (TPoly "alpha15319")
+TPoly "alpha15301" TPoly "alpha1994"
+TInt TPoly "alpha15302"
+TList (TPoly "alpha15328") TList (TPoly "alpha15289")
+TList (TPoly "alpha15334") TList (TPoly "alpha15322")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha15338");], TMaybe (TPoly "alpha15338"))
+TPoly "alpha15337" TInt
+TList (TPoly "alpha15347") TList (TPoly "alpha15325")
+TPoly "alpha15351" TFuncMulti ([TPoly "alpha15358";TList (TPoly "alpha15358");], TList (TPoly "alpha15358"))
+TPoly "alpha15355" TPoly "alpha15350"
+TPoly "alpha15352" TBool
+TList (TPoly "alpha15364") TList (TPoly "alpha15344")
+TList (TPoly "alpha15370") TList (TPoly "alpha15361")
+TList (TPoly "alpha15367") TList (TPoly "alpha15373")
+TPoly "alpha15052" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha15058") TPoly "alpha15049"
+TPoly "alpha15064" TList (TPoly "alpha15055")
+TPoly "alpha15070" TPoly "alpha15061"
+TPoly "alpha15067" TList (TPoly "alpha15073")
+TPoly "alpha15068" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha14902") TPoly "tau"
+TFunc (TPoly "alpha14896", TBool) TFuncMulti ([TPoly "alpha14905";], TPoly "alpha14905")
+TPoly "alpha15018" TList (TPoly "alpha14969")
+TList (TPoly "alpha15021") TList (TPoly "alpha15022")
+TList (TPoly "alpha15032") TPoly "alpha15012"
+TFunc (TPoly "alpha15025", TPoly "alpha15026") TFuncMulti ([TPoly "alpha15034";TList (TPoly "alpha15034");], TList (TPoly "alpha15034"))
+TList (TPoly "alpha15028") TList (TPoly "alpha15037")
+TPoly "alpha15043" TPoly "alpha15015"
+TPoly "alpha15040" TList (TPoly "alpha15046")
+TPoly "alpha15001" TList (TPoly "alpha14908")
+TPoly "alpha14997" TFuncMulti ([TTuple (TPoly "alpha15006", TPoly "alpha15007");], TPoly "alpha15007")
+TPoly "alpha14998" TList (TPoly "alpha15003")
+TList (TPoly "alpha14976") TList (TPoly "alpha14908")
+TFunc (TPoly "alpha14970", TBool) TFuncMulti ([TPoly "alpha14979";], TPoly "alpha14979")
+TList (TPoly "alpha14988") TList (TPoly "alpha14973")
+TList (TPoly "alpha14982") TList (TPoly "alpha14991")
+TList (TPoly "alpha14985") TList (TPoly "alpha14994")
+TPoly "alpha14951" TList (TPoly "alpha14899")
+TPoly "alpha3652" TList (TPoly "alpha14966")
+TPoly "alpha14948" TPoly "alpha3652"
+TBool TPoly "alpha14949"
+TList (TPoly "alpha14912") TList (TPoly "alpha14899")
+TList (TPoly "alpha14921") TList (TPoly "alpha14909")
+TList (TPoly "alpha14927") TList (TPoly "alpha14915")
+TList (TPoly "alpha14924") TList (TPoly "alpha14930")
+TList (TPoly "alpha14939") TList (TPoly "alpha14918")
+TList (TPoly "alpha14933") TList (TPoly "alpha14942")
+TList (TPoly "alpha14936") TList (TPoly "alpha14945")
+TPoly "alpha14741" TPoly "tau"
+TList (TPoly "alpha14745") TPoly "alpha14732"
+TPoly "alpha14752" TPoly "alpha14748"
+TPoly "alpha4406" TList (TPoly "alpha14755")
+TPoly "alpha14749" TInt
+TPoly "alpha14800" TMaybe (TFunc (TPoly "alpha14733", TPoly "alpha14734"))
+TPoly "alpha14814" TPoly "alpha14797"
+TFunc (TPoly "alpha14806", TPoly "alpha14807") TFuncMulti ([TPoly "alpha14815";], TPoly "alpha14815")
+TMaybe (TPoly "alpha14821") TPoly "alpha14809"
+TPoly "alpha14833" TList (TPoly "alpha14818")
+TPoly "alpha14827" TList (TPoly "alpha14836")
+TPoly "alpha14830" TList (TPoly "alpha14839")
+TList (TPoly "alpha14764") TPoly "alpha14734"
+TBool TPoly "alpha14758"
+TList (TPoly "alpha14779") TList (TPoly "alpha14761")
+TList (TPoly "alpha14788") TList (TPoly "alpha14776")
+TFunc (TPoly "alpha14782", TBool) TFuncMulti ([TPoly "alpha14791";], TPoly "alpha14791")
+TList (TPoly "alpha14785") TList (TPoly "alpha14794")
+TPoly "alpha14845" TPoly "alpha14736"
+TBool TPoly "alpha14842"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha14869";TList (TPoly "alpha14869");], TList (TPoly "alpha14869"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha14881") TList (TPoly "alpha14887")
+TInt TInt
+TPoly "alpha14843" TFuncMulti ([TFunc (TPoly "alpha14848", TBool);TList (TPoly "alpha14848");], TList (TPoly "alpha14848"))
 looking up (a -> a) in applicabilityCache
-TPoly "alpha111" TList (TPoly "alpha112")
+TList (TPoly "alpha15729") TList (TPoly "alpha15376")
+TPoly "alpha15763" TList (TPoly "alpha15732")
+TPoly "alpha15777" TPoly "alpha15757"
+TFunc (TPoly "alpha15767", TPoly "alpha15768") TFuncMulti ([TPoly "alpha15778";], TPoly "alpha15778")
+TPoly "alpha15784" TFunc (TPoly "alpha15769", TPoly "alpha15770")
+TPoly "alpha15799" TPoly "alpha15772"
+TPoly "alpha15790" TList (TPoly "alpha15800")
+TFunc (TPoly "alpha15791", TPoly "alpha15792") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha15794"
+TPoly "alpha15823" TPoly "alpha15760"
+TPoly "alpha15833" TFunc (TPoly "alpha15813", TPoly "alpha15814")
+TBool TBool
+TPoly "alpha15827" TFuncMulti ([TTuple (TPoly "alpha15845", TPoly "alpha15846");], TPoly "alpha15845")
+TPoly "alpha15857" TPoly "alpha15830"
+TPoly "alpha15851" TFuncMulti ([TTuple (TPoly "alpha15860", TPoly "alpha15861");], TPoly "alpha15860")
+TPoly "alpha15854" TFuncMulti ([TTuple (TPoly "alpha15863", TPoly "alpha15864");], TPoly "alpha15863")
+TPoly "alpha15877" TFunc (TPoly "alpha15815", TPoly "alpha15816")
+TPoly "alpha15887" TFunc (TPoly "alpha15867", TPoly "alpha15868")
+TPoly "alpha15881" TFuncMulti ([TPoly "alpha15890";], TPoly "alpha15890")
+TPoly "alpha15884" TFuncMulti ([TPoly "alpha15893";], TPoly "alpha15893")
+TPoly "alpha15870" TFuncMulti ([TTuple (TPoly "alpha15896", TPoly "alpha15897");], TPoly "alpha15896")
+TList (TPoly "alpha15902") TPoly "alpha15872"
+TList (TPoly "alpha15899") TList (TPoly "alpha15905")
+TPoly "alpha15926" TList (TPoly "alpha15930")
+TPoly "alpha15925" TFuncMulti ([TList (TPoly "alpha15927");], TList (TPoly "alpha15927"))
+TList (TPoly "alpha15916") TPoly "alpha15908"
+TList (TPoly "alpha15910") TList (TPoly "alpha15919")
+TList (TPoly "alpha15913") TList (TPoly "alpha15922")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha15723", TBool) TFuncMulti ([TTuple (TPoly "alpha15751", TPoly "alpha15752");], TPoly "alpha15752")
+TPoly "alpha15737" TFunc (TPoly "alpha15723", TBool)
+TPoly "alpha15733" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha15745") TMaybe (TPoly "alpha15734")
+TList (TPoly "alpha15742") TList (TPoly "alpha80")
+TPoly "alpha15734" TPoly "alpha80"
+TList (TPoly "alpha15939") TList (TPoly "alpha15726")
+TList (TPoly "alpha15945") TList (TPoly "alpha15933")
+TPoly "alpha15951" TList (TPoly "alpha15942")
+TPoly "alpha1994" TList (TPoly "alpha15966")
+TPoly "alpha15948" TPoly "alpha1994"
+TInt TPoly "alpha15949"
+TList (TPoly "alpha15975") TList (TPoly "alpha15936")
+TList (TPoly "alpha15981") TList (TPoly "alpha15969")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha15985");], TMaybe (TPoly "alpha15985"))
+TPoly "alpha15984" TInt
+TList (TPoly "alpha15994") TList (TPoly "alpha15972")
+TPoly "alpha15998" TFuncMulti ([TPoly "alpha16005";TList (TPoly "alpha16005");], TList (TPoly "alpha16005"))
+TPoly "alpha16002" TPoly "alpha15997"
+TPoly "alpha15999" TBool
+TList (TPoly "alpha16011") TList (TPoly "alpha15991")
+TList (TPoly "alpha16017") TList (TPoly "alpha16008")
+TList (TPoly "alpha16014") TList (TPoly "alpha16020")
+TPoly "alpha15699" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha15705") TPoly "alpha15696"
+TPoly "alpha15711" TList (TPoly "alpha15702")
+TPoly "alpha15717" TPoly "alpha15708"
+TPoly "alpha15714" TList (TPoly "alpha15720")
+TPoly "alpha15715" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha15549") TPoly "tau"
+TFunc (TPoly "alpha15543", TBool) TFuncMulti ([TPoly "alpha15552";], TPoly "alpha15552")
+TPoly "alpha15665" TList (TPoly "alpha15616")
+TList (TPoly "alpha15668") TList (TPoly "alpha15669")
+TList (TPoly "alpha15679") TPoly "alpha15659"
+TFunc (TPoly "alpha15672", TPoly "alpha15673") TFuncMulti ([TPoly "alpha15681";TList (TPoly "alpha15681");], TList (TPoly "alpha15681"))
+TList (TPoly "alpha15675") TList (TPoly "alpha15684")
+TPoly "alpha15690" TPoly "alpha15662"
+TPoly "alpha15687" TList (TPoly "alpha15693")
+TPoly "alpha15648" TList (TPoly "alpha15555")
+TPoly "alpha15644" TFuncMulti ([TTuple (TPoly "alpha15653", TPoly "alpha15654");], TPoly "alpha15654")
+TPoly "alpha15645" TList (TPoly "alpha15650")
+TList (TPoly "alpha15623") TList (TPoly "alpha15555")
+TFunc (TPoly "alpha15617", TBool) TFuncMulti ([TPoly "alpha15626";], TPoly "alpha15626")
+TList (TPoly "alpha15635") TList (TPoly "alpha15620")
+TList (TPoly "alpha15629") TList (TPoly "alpha15638")
+TList (TPoly "alpha15632") TList (TPoly "alpha15641")
+TPoly "alpha15598" TList (TPoly "alpha15546")
+TPoly "alpha3652" TList (TPoly "alpha15613")
+TPoly "alpha15595" TPoly "alpha3652"
+TBool TPoly "alpha15596"
+TList (TPoly "alpha15559") TList (TPoly "alpha15546")
+TList (TPoly "alpha15568") TList (TPoly "alpha15556")
+TList (TPoly "alpha15574") TList (TPoly "alpha15562")
+TList (TPoly "alpha15571") TList (TPoly "alpha15577")
+TList (TPoly "alpha15586") TList (TPoly "alpha15565")
+TList (TPoly "alpha15580") TList (TPoly "alpha15589")
+TList (TPoly "alpha15583") TList (TPoly "alpha15592")
+TPoly "alpha15388" TPoly "tau"
+TList (TPoly "alpha15392") TPoly "alpha15379"
+TPoly "alpha15399" TPoly "alpha15395"
+TPoly "alpha4406" TList (TPoly "alpha15402")
+TPoly "alpha15396" TInt
+TPoly "alpha15447" TMaybe (TFunc (TPoly "alpha15380", TPoly "alpha15381"))
+TPoly "alpha15461" TPoly "alpha15444"
+TFunc (TPoly "alpha15453", TPoly "alpha15454") TFuncMulti ([TPoly "alpha15462";], TPoly "alpha15462")
+TMaybe (TPoly "alpha15468") TPoly "alpha15456"
+TPoly "alpha15480" TList (TPoly "alpha15465")
+TPoly "alpha15474" TList (TPoly "alpha15483")
+TPoly "alpha15477" TList (TPoly "alpha15486")
+TList (TPoly "alpha15411") TPoly "alpha15381"
+TBool TPoly "alpha15405"
+TList (TPoly "alpha15426") TList (TPoly "alpha15408")
+TList (TPoly "alpha15435") TList (TPoly "alpha15423")
+TFunc (TPoly "alpha15429", TBool) TFuncMulti ([TPoly "alpha15438";], TPoly "alpha15438")
+TList (TPoly "alpha15432") TList (TPoly "alpha15441")
+TPoly "alpha15492" TPoly "alpha15383"
+TBool TPoly "alpha15489"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha15516";TList (TPoly "alpha15516");], TList (TPoly "alpha15516"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha15528") TList (TPoly "alpha15534")
+TInt TInt
+TPoly "alpha15490" TFuncMulti ([TFunc (TPoly "alpha15495", TBool);TList (TPoly "alpha15495");], TList (TPoly "alpha15495"))
 looking up ([a] -> [a] -> [a]) in applicabilityCache
-TPoly "alpha115" TList (TPoly "alpha116")
+TList (TPoly "alpha16376") TList (TPoly "alpha16023")
+TPoly "alpha16410" TList (TPoly "alpha16379")
+TPoly "alpha16424" TPoly "alpha16404"
+TFunc (TPoly "alpha16414", TPoly "alpha16415") TFuncMulti ([TPoly "alpha16425";], TPoly "alpha16425")
+TPoly "alpha16431" TFunc (TPoly "alpha16416", TPoly "alpha16417")
+TPoly "alpha16446" TPoly "alpha16419"
+TPoly "alpha16437" TList (TPoly "alpha16447")
+TFunc (TPoly "alpha16438", TPoly "alpha16439") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha16441"
+TPoly "alpha16470" TPoly "alpha16407"
+TPoly "alpha16480" TFunc (TPoly "alpha16460", TPoly "alpha16461")
+TBool TBool
+TPoly "alpha16474" TFuncMulti ([TTuple (TPoly "alpha16492", TPoly "alpha16493");], TPoly "alpha16492")
+TPoly "alpha16504" TPoly "alpha16477"
+TPoly "alpha16498" TFuncMulti ([TTuple (TPoly "alpha16507", TPoly "alpha16508");], TPoly "alpha16507")
+TPoly "alpha16501" TFuncMulti ([TTuple (TPoly "alpha16510", TPoly "alpha16511");], TPoly "alpha16510")
+TPoly "alpha16524" TFunc (TPoly "alpha16462", TPoly "alpha16463")
+TPoly "alpha16534" TFunc (TPoly "alpha16514", TPoly "alpha16515")
+TPoly "alpha16528" TFuncMulti ([TPoly "alpha16537";], TPoly "alpha16537")
+TPoly "alpha16531" TFuncMulti ([TPoly "alpha16540";], TPoly "alpha16540")
+TPoly "alpha16517" TFuncMulti ([TTuple (TPoly "alpha16543", TPoly "alpha16544");], TPoly "alpha16543")
+TList (TPoly "alpha16549") TPoly "alpha16519"
+TList (TPoly "alpha16546") TList (TPoly "alpha16552")
+TPoly "alpha16573" TList (TPoly "alpha16577")
+TPoly "alpha16572" TFuncMulti ([TList (TPoly "alpha16574");], TList (TPoly "alpha16574"))
+TList (TPoly "alpha16563") TPoly "alpha16555"
+TList (TPoly "alpha16557") TList (TPoly "alpha16566")
+TList (TPoly "alpha16560") TList (TPoly "alpha16569")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha16370", TBool) TFuncMulti ([TTuple (TPoly "alpha16398", TPoly "alpha16399");], TPoly "alpha16399")
+TPoly "alpha16384" TFunc (TPoly "alpha16370", TBool)
+TPoly "alpha16380" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha16392") TMaybe (TPoly "alpha16381")
+TList (TPoly "alpha16389") TList (TPoly "alpha80")
+TPoly "alpha16381" TPoly "alpha80"
+TList (TPoly "alpha16586") TList (TPoly "alpha16373")
+TList (TPoly "alpha16592") TList (TPoly "alpha16580")
+TPoly "alpha16598" TList (TPoly "alpha16589")
+TPoly "alpha1994" TList (TPoly "alpha16613")
+TPoly "alpha16595" TPoly "alpha1994"
+TInt TPoly "alpha16596"
+TList (TPoly "alpha16622") TList (TPoly "alpha16583")
+TList (TPoly "alpha16628") TList (TPoly "alpha16616")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha16632");], TMaybe (TPoly "alpha16632"))
+TPoly "alpha16631" TInt
+TList (TPoly "alpha16641") TList (TPoly "alpha16619")
+TPoly "alpha16645" TFuncMulti ([TPoly "alpha16652";TList (TPoly "alpha16652");], TList (TPoly "alpha16652"))
+TPoly "alpha16649" TPoly "alpha16644"
+TPoly "alpha16646" TBool
+TList (TPoly "alpha16658") TList (TPoly "alpha16638")
+TList (TPoly "alpha16664") TList (TPoly "alpha16655")
+TList (TPoly "alpha16661") TList (TPoly "alpha16667")
+TPoly "alpha16346" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha16352") TPoly "alpha16343"
+TPoly "alpha16358" TList (TPoly "alpha16349")
+TPoly "alpha16364" TPoly "alpha16355"
+TPoly "alpha16361" TList (TPoly "alpha16367")
+TPoly "alpha16362" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha16196") TPoly "tau"
+TFunc (TPoly "alpha16190", TBool) TFuncMulti ([TPoly "alpha16199";], TPoly "alpha16199")
+TPoly "alpha16312" TList (TPoly "alpha16263")
+TList (TPoly "alpha16315") TList (TPoly "alpha16316")
+TList (TPoly "alpha16326") TPoly "alpha16306"
+TFunc (TPoly "alpha16319", TPoly "alpha16320") TFuncMulti ([TPoly "alpha16328";TList (TPoly "alpha16328");], TList (TPoly "alpha16328"))
+TList (TPoly "alpha16322") TList (TPoly "alpha16331")
+TPoly "alpha16337" TPoly "alpha16309"
+TPoly "alpha16334" TList (TPoly "alpha16340")
+TPoly "alpha16295" TList (TPoly "alpha16202")
+TPoly "alpha16291" TFuncMulti ([TTuple (TPoly "alpha16300", TPoly "alpha16301");], TPoly "alpha16301")
+TPoly "alpha16292" TList (TPoly "alpha16297")
+TList (TPoly "alpha16270") TList (TPoly "alpha16202")
+TFunc (TPoly "alpha16264", TBool) TFuncMulti ([TPoly "alpha16273";], TPoly "alpha16273")
+TList (TPoly "alpha16282") TList (TPoly "alpha16267")
+TList (TPoly "alpha16276") TList (TPoly "alpha16285")
+TList (TPoly "alpha16279") TList (TPoly "alpha16288")
+TPoly "alpha16245" TList (TPoly "alpha16193")
+TPoly "alpha3652" TList (TPoly "alpha16260")
+TPoly "alpha16242" TPoly "alpha3652"
+TBool TPoly "alpha16243"
+TList (TPoly "alpha16206") TList (TPoly "alpha16193")
+TList (TPoly "alpha16215") TList (TPoly "alpha16203")
+TList (TPoly "alpha16221") TList (TPoly "alpha16209")
+TList (TPoly "alpha16218") TList (TPoly "alpha16224")
+TList (TPoly "alpha16233") TList (TPoly "alpha16212")
+TList (TPoly "alpha16227") TList (TPoly "alpha16236")
+TList (TPoly "alpha16230") TList (TPoly "alpha16239")
+TPoly "alpha16035" TPoly "tau"
+TList (TPoly "alpha16039") TPoly "alpha16026"
+TPoly "alpha16046" TPoly "alpha16042"
+TPoly "alpha4406" TList (TPoly "alpha16049")
+TPoly "alpha16043" TInt
+TPoly "alpha16094" TMaybe (TFunc (TPoly "alpha16027", TPoly "alpha16028"))
+TPoly "alpha16108" TPoly "alpha16091"
+TFunc (TPoly "alpha16100", TPoly "alpha16101") TFuncMulti ([TPoly "alpha16109";], TPoly "alpha16109")
+TMaybe (TPoly "alpha16115") TPoly "alpha16103"
+TPoly "alpha16127" TList (TPoly "alpha16112")
+TPoly "alpha16121" TList (TPoly "alpha16130")
+TPoly "alpha16124" TList (TPoly "alpha16133")
+TList (TPoly "alpha16058") TPoly "alpha16028"
+TBool TPoly "alpha16052"
+TList (TPoly "alpha16073") TList (TPoly "alpha16055")
+TList (TPoly "alpha16082") TList (TPoly "alpha16070")
+TFunc (TPoly "alpha16076", TBool) TFuncMulti ([TPoly "alpha16085";], TPoly "alpha16085")
+TList (TPoly "alpha16079") TList (TPoly "alpha16088")
+TPoly "alpha16139" TPoly "alpha16030"
+TBool TPoly "alpha16136"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha16163";TList (TPoly "alpha16163");], TList (TPoly "alpha16163"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha16175") TList (TPoly "alpha16181")
+TInt TInt
+TPoly "alpha16137" TFuncMulti ([TFunc (TPoly "alpha16142", TBool);TList (TPoly "alpha16142");], TList (TPoly "alpha16142"))
 looking up (Bool -> a -> a -> a) in applicabilityCache
-TPoly "alpha119" TList (TPoly "alpha120")
+TList (TPoly "alpha17023") TList (TPoly "alpha16670")
+TPoly "alpha17057" TList (TPoly "alpha17026")
+TPoly "alpha17071" TPoly "alpha17051"
+TFunc (TPoly "alpha17061", TPoly "alpha17062") TFuncMulti ([TPoly "alpha17072";], TPoly "alpha17072")
+TPoly "alpha17078" TFunc (TPoly "alpha17063", TPoly "alpha17064")
+TPoly "alpha17093" TPoly "alpha17066"
+TPoly "alpha17084" TList (TPoly "alpha17094")
+TFunc (TPoly "alpha17085", TPoly "alpha17086") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha17088"
+TPoly "alpha17117" TPoly "alpha17054"
+TPoly "alpha17127" TFunc (TPoly "alpha17107", TPoly "alpha17108")
+TBool TBool
+TPoly "alpha17121" TFuncMulti ([TTuple (TPoly "alpha17139", TPoly "alpha17140");], TPoly "alpha17139")
+TPoly "alpha17151" TPoly "alpha17124"
+TPoly "alpha17145" TFuncMulti ([TTuple (TPoly "alpha17154", TPoly "alpha17155");], TPoly "alpha17154")
+TPoly "alpha17148" TFuncMulti ([TTuple (TPoly "alpha17157", TPoly "alpha17158");], TPoly "alpha17157")
+TPoly "alpha17171" TFunc (TPoly "alpha17109", TPoly "alpha17110")
+TPoly "alpha17181" TFunc (TPoly "alpha17161", TPoly "alpha17162")
+TPoly "alpha17175" TFuncMulti ([TPoly "alpha17184";], TPoly "alpha17184")
+TPoly "alpha17178" TFuncMulti ([TPoly "alpha17187";], TPoly "alpha17187")
+TPoly "alpha17164" TFuncMulti ([TTuple (TPoly "alpha17190", TPoly "alpha17191");], TPoly "alpha17190")
+TList (TPoly "alpha17196") TPoly "alpha17166"
+TList (TPoly "alpha17193") TList (TPoly "alpha17199")
+TPoly "alpha17220" TList (TPoly "alpha17224")
+TPoly "alpha17219" TFuncMulti ([TList (TPoly "alpha17221");], TList (TPoly "alpha17221"))
+TList (TPoly "alpha17210") TPoly "alpha17202"
+TList (TPoly "alpha17204") TList (TPoly "alpha17213")
+TList (TPoly "alpha17207") TList (TPoly "alpha17216")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha17017", TBool) TFuncMulti ([TTuple (TPoly "alpha17045", TPoly "alpha17046");], TPoly "alpha17046")
+TPoly "alpha17031" TFunc (TPoly "alpha17017", TBool)
+TPoly "alpha17027" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha17039") TMaybe (TPoly "alpha17028")
+TList (TPoly "alpha17036") TList (TPoly "alpha80")
+TPoly "alpha17028" TPoly "alpha80"
+TList (TPoly "alpha17233") TList (TPoly "alpha17020")
+TList (TPoly "alpha17239") TList (TPoly "alpha17227")
+TPoly "alpha17245" TList (TPoly "alpha17236")
+TPoly "alpha1994" TList (TPoly "alpha17260")
+TPoly "alpha17242" TPoly "alpha1994"
+TInt TPoly "alpha17243"
+TList (TPoly "alpha17269") TList (TPoly "alpha17230")
+TList (TPoly "alpha17275") TList (TPoly "alpha17263")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha17279");], TMaybe (TPoly "alpha17279"))
+TPoly "alpha17278" TInt
+TList (TPoly "alpha17288") TList (TPoly "alpha17266")
+TPoly "alpha17292" TFuncMulti ([TPoly "alpha17299";TList (TPoly "alpha17299");], TList (TPoly "alpha17299"))
+TPoly "alpha17296" TPoly "alpha17291"
+TPoly "alpha17293" TBool
+TList (TPoly "alpha17305") TList (TPoly "alpha17285")
+TList (TPoly "alpha17311") TList (TPoly "alpha17302")
+TList (TPoly "alpha17308") TList (TPoly "alpha17314")
+TPoly "alpha16993" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha16999") TPoly "alpha16990"
+TPoly "alpha17005" TList (TPoly "alpha16996")
+TPoly "alpha17011" TPoly "alpha17002"
+TPoly "alpha17008" TList (TPoly "alpha17014")
+TPoly "alpha17009" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha16843") TPoly "tau"
+TFunc (TPoly "alpha16837", TBool) TFuncMulti ([TPoly "alpha16846";], TPoly "alpha16846")
+TPoly "alpha16959" TList (TPoly "alpha16910")
+TList (TPoly "alpha16962") TList (TPoly "alpha16963")
+TList (TPoly "alpha16973") TPoly "alpha16953"
+TFunc (TPoly "alpha16966", TPoly "alpha16967") TFuncMulti ([TPoly "alpha16975";TList (TPoly "alpha16975");], TList (TPoly "alpha16975"))
+TList (TPoly "alpha16969") TList (TPoly "alpha16978")
+TPoly "alpha16984" TPoly "alpha16956"
+TPoly "alpha16981" TList (TPoly "alpha16987")
+TPoly "alpha16942" TList (TPoly "alpha16849")
+TPoly "alpha16938" TFuncMulti ([TTuple (TPoly "alpha16947", TPoly "alpha16948");], TPoly "alpha16948")
+TPoly "alpha16939" TList (TPoly "alpha16944")
+TList (TPoly "alpha16917") TList (TPoly "alpha16849")
+TFunc (TPoly "alpha16911", TBool) TFuncMulti ([TPoly "alpha16920";], TPoly "alpha16920")
+TList (TPoly "alpha16929") TList (TPoly "alpha16914")
+TList (TPoly "alpha16923") TList (TPoly "alpha16932")
+TList (TPoly "alpha16926") TList (TPoly "alpha16935")
+TPoly "alpha16892" TList (TPoly "alpha16840")
+TPoly "alpha3652" TList (TPoly "alpha16907")
+TPoly "alpha16889" TPoly "alpha3652"
+TBool TPoly "alpha16890"
+TList (TPoly "alpha16853") TList (TPoly "alpha16840")
+TList (TPoly "alpha16862") TList (TPoly "alpha16850")
+TList (TPoly "alpha16868") TList (TPoly "alpha16856")
+TList (TPoly "alpha16865") TList (TPoly "alpha16871")
+TList (TPoly "alpha16880") TList (TPoly "alpha16859")
+TList (TPoly "alpha16874") TList (TPoly "alpha16883")
+TList (TPoly "alpha16877") TList (TPoly "alpha16886")
+TPoly "alpha16682" TPoly "tau"
+TList (TPoly "alpha16686") TPoly "alpha16673"
+TPoly "alpha16693" TPoly "alpha16689"
+TPoly "alpha4406" TList (TPoly "alpha16696")
+TPoly "alpha16690" TInt
+TPoly "alpha16741" TMaybe (TFunc (TPoly "alpha16674", TPoly "alpha16675"))
+TPoly "alpha16755" TPoly "alpha16738"
+TFunc (TPoly "alpha16747", TPoly "alpha16748") TFuncMulti ([TPoly "alpha16756";], TPoly "alpha16756")
+TMaybe (TPoly "alpha16762") TPoly "alpha16750"
+TPoly "alpha16774" TList (TPoly "alpha16759")
+TPoly "alpha16768" TList (TPoly "alpha16777")
+TPoly "alpha16771" TList (TPoly "alpha16780")
+TList (TPoly "alpha16705") TPoly "alpha16675"
+TBool TPoly "alpha16699"
+TList (TPoly "alpha16720") TList (TPoly "alpha16702")
+TList (TPoly "alpha16729") TList (TPoly "alpha16717")
+TFunc (TPoly "alpha16723", TBool) TFuncMulti ([TPoly "alpha16732";], TPoly "alpha16732")
+TList (TPoly "alpha16726") TList (TPoly "alpha16735")
+TPoly "alpha16786" TPoly "alpha16677"
+TBool TPoly "alpha16783"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha16810";TList (TPoly "alpha16810");], TList (TPoly "alpha16810"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha16822") TList (TPoly "alpha16828")
+TInt TInt
+TPoly "alpha16784" TFuncMulti ([TFunc (TPoly "alpha16789", TBool);TList (TPoly "alpha16789");], TList (TPoly "alpha16789"))
+looking up ((a,b) -> a) in applicabilityCache
+TList (TPoly "alpha17670") TList (TPoly "alpha17317")
+TPoly "alpha17704" TList (TPoly "alpha17673")
+TPoly "alpha17718" TPoly "alpha17698"
+TFunc (TPoly "alpha17708", TPoly "alpha17709") TFuncMulti ([TPoly "alpha17719";], TPoly "alpha17719")
+TPoly "alpha17725" TFunc (TPoly "alpha17710", TPoly "alpha17711")
+TPoly "alpha17740" TPoly "alpha17713"
+TPoly "alpha17731" TList (TPoly "alpha17741")
+TFunc (TPoly "alpha17732", TPoly "alpha17733") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha17735"
+TPoly "alpha17764" TPoly "alpha17701"
+TPoly "alpha17774" TFunc (TPoly "alpha17754", TPoly "alpha17755")
+TBool TBool
+TPoly "alpha17768" TFuncMulti ([TTuple (TPoly "alpha17786", TPoly "alpha17787");], TPoly "alpha17786")
+TPoly "alpha17798" TPoly "alpha17771"
+TPoly "alpha17792" TFuncMulti ([TTuple (TPoly "alpha17801", TPoly "alpha17802");], TPoly "alpha17801")
+TPoly "alpha17795" TFuncMulti ([TTuple (TPoly "alpha17804", TPoly "alpha17805");], TPoly "alpha17804")
+TPoly "alpha17818" TFunc (TPoly "alpha17756", TPoly "alpha17757")
+TPoly "alpha17828" TFunc (TPoly "alpha17808", TPoly "alpha17809")
+TPoly "alpha17822" TFuncMulti ([TPoly "alpha17831";], TPoly "alpha17831")
+TPoly "alpha17825" TFuncMulti ([TPoly "alpha17834";], TPoly "alpha17834")
+TPoly "alpha17811" TFuncMulti ([TTuple (TPoly "alpha17837", TPoly "alpha17838");], TPoly "alpha17837")
+TList (TPoly "alpha17843") TPoly "alpha17813"
+TList (TPoly "alpha17840") TList (TPoly "alpha17846")
+TPoly "alpha17867" TList (TPoly "alpha17871")
+TPoly "alpha17866" TFuncMulti ([TList (TPoly "alpha17868");], TList (TPoly "alpha17868"))
+TList (TPoly "alpha17857") TPoly "alpha17849"
+TList (TPoly "alpha17851") TList (TPoly "alpha17860")
+TList (TPoly "alpha17854") TList (TPoly "alpha17863")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha17664", TBool) TFuncMulti ([TTuple (TPoly "alpha17692", TPoly "alpha17693");], TPoly "alpha17693")
+TPoly "alpha17678" TFunc (TPoly "alpha17664", TBool)
+TPoly "alpha17674" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha17686") TMaybe (TPoly "alpha17675")
+TList (TPoly "alpha17683") TList (TPoly "alpha80")
+TPoly "alpha17675" TPoly "alpha80"
+TList (TPoly "alpha17880") TList (TPoly "alpha17667")
+TList (TPoly "alpha17886") TList (TPoly "alpha17874")
+TPoly "alpha17892" TList (TPoly "alpha17883")
+TPoly "alpha1994" TList (TPoly "alpha17907")
+TPoly "alpha17889" TPoly "alpha1994"
+TInt TPoly "alpha17890"
+TList (TPoly "alpha17916") TList (TPoly "alpha17877")
+TList (TPoly "alpha17922") TList (TPoly "alpha17910")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha17926");], TMaybe (TPoly "alpha17926"))
+TPoly "alpha17925" TInt
+TList (TPoly "alpha17935") TList (TPoly "alpha17913")
+TPoly "alpha17939" TFuncMulti ([TPoly "alpha17946";TList (TPoly "alpha17946");], TList (TPoly "alpha17946"))
+TPoly "alpha17943" TPoly "alpha17938"
+TPoly "alpha17940" TBool
+TList (TPoly "alpha17952") TList (TPoly "alpha17932")
+TList (TPoly "alpha17958") TList (TPoly "alpha17949")
+TList (TPoly "alpha17955") TList (TPoly "alpha17961")
+TPoly "alpha17640" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha17646") TPoly "alpha17637"
+TPoly "alpha17652" TList (TPoly "alpha17643")
+TPoly "alpha17658" TPoly "alpha17649"
+TPoly "alpha17655" TList (TPoly "alpha17661")
+TPoly "alpha17656" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha17490") TPoly "tau"
+TFunc (TPoly "alpha17484", TBool) TFuncMulti ([TPoly "alpha17493";], TPoly "alpha17493")
+TPoly "alpha17606" TList (TPoly "alpha17557")
+TList (TPoly "alpha17609") TList (TPoly "alpha17610")
+TList (TPoly "alpha17620") TPoly "alpha17600"
+TFunc (TPoly "alpha17613", TPoly "alpha17614") TFuncMulti ([TPoly "alpha17622";TList (TPoly "alpha17622");], TList (TPoly "alpha17622"))
+TList (TPoly "alpha17616") TList (TPoly "alpha17625")
+TPoly "alpha17631" TPoly "alpha17603"
+TPoly "alpha17628" TList (TPoly "alpha17634")
+TPoly "alpha17589" TList (TPoly "alpha17496")
+TPoly "alpha17585" TFuncMulti ([TTuple (TPoly "alpha17594", TPoly "alpha17595");], TPoly "alpha17595")
+TPoly "alpha17586" TList (TPoly "alpha17591")
+TList (TPoly "alpha17564") TList (TPoly "alpha17496")
+TFunc (TPoly "alpha17558", TBool) TFuncMulti ([TPoly "alpha17567";], TPoly "alpha17567")
+TList (TPoly "alpha17576") TList (TPoly "alpha17561")
+TList (TPoly "alpha17570") TList (TPoly "alpha17579")
+TList (TPoly "alpha17573") TList (TPoly "alpha17582")
+TPoly "alpha17539" TList (TPoly "alpha17487")
+TPoly "alpha3652" TList (TPoly "alpha17554")
+TPoly "alpha17536" TPoly "alpha3652"
+TBool TPoly "alpha17537"
+TList (TPoly "alpha17500") TList (TPoly "alpha17487")
+TList (TPoly "alpha17509") TList (TPoly "alpha17497")
+TList (TPoly "alpha17515") TList (TPoly "alpha17503")
+TList (TPoly "alpha17512") TList (TPoly "alpha17518")
+TList (TPoly "alpha17527") TList (TPoly "alpha17506")
+TList (TPoly "alpha17521") TList (TPoly "alpha17530")
+TList (TPoly "alpha17524") TList (TPoly "alpha17533")
+TPoly "alpha17329" TPoly "tau"
+TList (TPoly "alpha17333") TPoly "alpha17320"
+TPoly "alpha17340" TPoly "alpha17336"
+TPoly "alpha4406" TList (TPoly "alpha17343")
+TPoly "alpha17337" TInt
+TPoly "alpha17388" TMaybe (TFunc (TPoly "alpha17321", TPoly "alpha17322"))
+TPoly "alpha17402" TPoly "alpha17385"
+TFunc (TPoly "alpha17394", TPoly "alpha17395") TFuncMulti ([TPoly "alpha17403";], TPoly "alpha17403")
+TMaybe (TPoly "alpha17409") TPoly "alpha17397"
+TPoly "alpha17421" TList (TPoly "alpha17406")
+TPoly "alpha17415" TList (TPoly "alpha17424")
+TPoly "alpha17418" TList (TPoly "alpha17427")
+TList (TPoly "alpha17352") TPoly "alpha17322"
+TBool TPoly "alpha17346"
+TList (TPoly "alpha17367") TList (TPoly "alpha17349")
+TList (TPoly "alpha17376") TList (TPoly "alpha17364")
+TFunc (TPoly "alpha17370", TBool) TFuncMulti ([TPoly "alpha17379";], TPoly "alpha17379")
+TList (TPoly "alpha17373") TList (TPoly "alpha17382")
+TPoly "alpha17433" TPoly "alpha17324"
+TBool TPoly "alpha17430"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha17457";TList (TPoly "alpha17457");], TList (TPoly "alpha17457"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha17469") TList (TPoly "alpha17475")
+TInt TInt
+TPoly "alpha17431" TFuncMulti ([TFunc (TPoly "alpha17436", TBool);TList (TPoly "alpha17436");], TList (TPoly "alpha17436"))
+looking up ((a,b) -> b) in applicabilityCache
+TList (TPoly "alpha18317") TList (TPoly "alpha17964")
+TPoly "alpha18351" TList (TPoly "alpha18320")
+TPoly "alpha18365" TPoly "alpha18345"
+TFunc (TPoly "alpha18355", TPoly "alpha18356") TFuncMulti ([TPoly "alpha18366";], TPoly "alpha18366")
+TPoly "alpha18372" TFunc (TPoly "alpha18357", TPoly "alpha18358")
+TPoly "alpha18387" TPoly "alpha18360"
+TPoly "alpha18378" TList (TPoly "alpha18388")
+TFunc (TPoly "alpha18379", TPoly "alpha18380") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha18382"
+TPoly "alpha18411" TPoly "alpha18348"
+TPoly "alpha18421" TFunc (TPoly "alpha18401", TPoly "alpha18402")
+TBool TBool
+TPoly "alpha18415" TFuncMulti ([TTuple (TPoly "alpha18433", TPoly "alpha18434");], TPoly "alpha18433")
+TPoly "alpha18445" TPoly "alpha18418"
+TPoly "alpha18439" TFuncMulti ([TTuple (TPoly "alpha18448", TPoly "alpha18449");], TPoly "alpha18448")
+TPoly "alpha18442" TFuncMulti ([TTuple (TPoly "alpha18451", TPoly "alpha18452");], TPoly "alpha18451")
+TPoly "alpha18465" TFunc (TPoly "alpha18403", TPoly "alpha18404")
+TPoly "alpha18475" TFunc (TPoly "alpha18455", TPoly "alpha18456")
+TPoly "alpha18469" TFuncMulti ([TPoly "alpha18478";], TPoly "alpha18478")
+TPoly "alpha18472" TFuncMulti ([TPoly "alpha18481";], TPoly "alpha18481")
+TPoly "alpha18458" TFuncMulti ([TTuple (TPoly "alpha18484", TPoly "alpha18485");], TPoly "alpha18484")
+TList (TPoly "alpha18490") TPoly "alpha18460"
+TList (TPoly "alpha18487") TList (TPoly "alpha18493")
+TPoly "alpha18514" TList (TPoly "alpha18518")
+TPoly "alpha18513" TFuncMulti ([TList (TPoly "alpha18515");], TList (TPoly "alpha18515"))
+TList (TPoly "alpha18504") TPoly "alpha18496"
+TList (TPoly "alpha18498") TList (TPoly "alpha18507")
+TList (TPoly "alpha18501") TList (TPoly "alpha18510")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha18311", TBool) TFuncMulti ([TTuple (TPoly "alpha18339", TPoly "alpha18340");], TPoly "alpha18340")
+TPoly "alpha18325" TFunc (TPoly "alpha18311", TBool)
+TPoly "alpha18321" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha18333") TMaybe (TPoly "alpha18322")
+TList (TPoly "alpha18330") TList (TPoly "alpha80")
+TPoly "alpha18322" TPoly "alpha80"
+TList (TPoly "alpha18527") TList (TPoly "alpha18314")
+TList (TPoly "alpha18533") TList (TPoly "alpha18521")
+TPoly "alpha18539" TList (TPoly "alpha18530")
+TPoly "alpha1994" TList (TPoly "alpha18554")
+TPoly "alpha18536" TPoly "alpha1994"
+TInt TPoly "alpha18537"
+TList (TPoly "alpha18563") TList (TPoly "alpha18524")
+TList (TPoly "alpha18569") TList (TPoly "alpha18557")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha18573");], TMaybe (TPoly "alpha18573"))
+TPoly "alpha18572" TInt
+TList (TPoly "alpha18582") TList (TPoly "alpha18560")
+TPoly "alpha18586" TFuncMulti ([TPoly "alpha18593";TList (TPoly "alpha18593");], TList (TPoly "alpha18593"))
+TPoly "alpha18590" TPoly "alpha18585"
+TPoly "alpha18587" TBool
+TList (TPoly "alpha18599") TList (TPoly "alpha18579")
+TList (TPoly "alpha18605") TList (TPoly "alpha18596")
+TList (TPoly "alpha18602") TList (TPoly "alpha18608")
+TPoly "alpha18287" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha18293") TPoly "alpha18284"
+TPoly "alpha18299" TList (TPoly "alpha18290")
+TPoly "alpha18305" TPoly "alpha18296"
+TPoly "alpha18302" TList (TPoly "alpha18308")
+TPoly "alpha18303" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha18137") TPoly "tau"
+TFunc (TPoly "alpha18131", TBool) TFuncMulti ([TPoly "alpha18140";], TPoly "alpha18140")
+TPoly "alpha18253" TList (TPoly "alpha18204")
+TList (TPoly "alpha18256") TList (TPoly "alpha18257")
+TList (TPoly "alpha18267") TPoly "alpha18247"
+TFunc (TPoly "alpha18260", TPoly "alpha18261") TFuncMulti ([TPoly "alpha18269";TList (TPoly "alpha18269");], TList (TPoly "alpha18269"))
+TList (TPoly "alpha18263") TList (TPoly "alpha18272")
+TPoly "alpha18278" TPoly "alpha18250"
+TPoly "alpha18275" TList (TPoly "alpha18281")
+TPoly "alpha18236" TList (TPoly "alpha18143")
+TPoly "alpha18232" TFuncMulti ([TTuple (TPoly "alpha18241", TPoly "alpha18242");], TPoly "alpha18242")
+TPoly "alpha18233" TList (TPoly "alpha18238")
+TList (TPoly "alpha18211") TList (TPoly "alpha18143")
+TFunc (TPoly "alpha18205", TBool) TFuncMulti ([TPoly "alpha18214";], TPoly "alpha18214")
+TList (TPoly "alpha18223") TList (TPoly "alpha18208")
+TList (TPoly "alpha18217") TList (TPoly "alpha18226")
+TList (TPoly "alpha18220") TList (TPoly "alpha18229")
+TPoly "alpha18186" TList (TPoly "alpha18134")
+TPoly "alpha3652" TList (TPoly "alpha18201")
+TPoly "alpha18183" TPoly "alpha3652"
+TBool TPoly "alpha18184"
+TList (TPoly "alpha18147") TList (TPoly "alpha18134")
+TList (TPoly "alpha18156") TList (TPoly "alpha18144")
+TList (TPoly "alpha18162") TList (TPoly "alpha18150")
+TList (TPoly "alpha18159") TList (TPoly "alpha18165")
+TList (TPoly "alpha18174") TList (TPoly "alpha18153")
+TList (TPoly "alpha18168") TList (TPoly "alpha18177")
+TList (TPoly "alpha18171") TList (TPoly "alpha18180")
+TPoly "alpha17976" TPoly "tau"
+TList (TPoly "alpha17980") TPoly "alpha17967"
+TPoly "alpha17987" TPoly "alpha17983"
+TPoly "alpha4406" TList (TPoly "alpha17990")
+TPoly "alpha17984" TInt
+TPoly "alpha18035" TMaybe (TFunc (TPoly "alpha17968", TPoly "alpha17969"))
+TPoly "alpha18049" TPoly "alpha18032"
+TFunc (TPoly "alpha18041", TPoly "alpha18042") TFuncMulti ([TPoly "alpha18050";], TPoly "alpha18050")
+TMaybe (TPoly "alpha18056") TPoly "alpha18044"
+TPoly "alpha18068" TList (TPoly "alpha18053")
+TPoly "alpha18062" TList (TPoly "alpha18071")
+TPoly "alpha18065" TList (TPoly "alpha18074")
+TList (TPoly "alpha17999") TPoly "alpha17969"
+TBool TPoly "alpha17993"
+TList (TPoly "alpha18014") TList (TPoly "alpha17996")
+TList (TPoly "alpha18023") TList (TPoly "alpha18011")
+TFunc (TPoly "alpha18017", TBool) TFuncMulti ([TPoly "alpha18026";], TPoly "alpha18026")
+TList (TPoly "alpha18020") TList (TPoly "alpha18029")
+TPoly "alpha18080" TPoly "alpha17971"
+TBool TPoly "alpha18077"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha18104";TList (TPoly "alpha18104");], TList (TPoly "alpha18104"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha18116") TList (TPoly "alpha18122")
+TInt TInt
+TPoly "alpha18078" TFuncMulti ([TFunc (TPoly "alpha18083", TBool);TList (TPoly "alpha18083");], TList (TPoly "alpha18083"))
+looking up ((b -> c) -> (a -> b) -> a -> c) in applicabilityCache
+TList (TPoly "alpha18964") TList (TPoly "alpha18611")
+TPoly "alpha18998" TList (TPoly "alpha18967")
+TPoly "alpha19012" TPoly "alpha18992"
+TFunc (TPoly "alpha19002", TPoly "alpha19003") TFuncMulti ([TPoly "alpha19013";], TPoly "alpha19013")
+TPoly "alpha19019" TFunc (TPoly "alpha19004", TPoly "alpha19005")
+TPoly "alpha19034" TPoly "alpha19007"
+TPoly "alpha19025" TList (TPoly "alpha19035")
+TFunc (TPoly "alpha19026", TPoly "alpha19027") TFuncMulti ([TBool;TBool;], TBool)
+TBool TPoly "alpha19029"
+TPoly "alpha19058" TPoly "alpha18995"
+TPoly "alpha19068" TFunc (TPoly "alpha19048", TPoly "alpha19049")
+TBool TBool
+TPoly "alpha19062" TFuncMulti ([TTuple (TPoly "alpha19080", TPoly "alpha19081");], TPoly "alpha19080")
+TPoly "alpha19092" TPoly "alpha19065"
+TPoly "alpha19086" TFuncMulti ([TTuple (TPoly "alpha19095", TPoly "alpha19096");], TPoly "alpha19095")
+TPoly "alpha19089" TFuncMulti ([TTuple (TPoly "alpha19098", TPoly "alpha19099");], TPoly "alpha19098")
+TPoly "alpha19112" TFunc (TPoly "alpha19050", TPoly "alpha19051")
+TPoly "alpha19122" TFunc (TPoly "alpha19102", TPoly "alpha19103")
+TPoly "alpha19116" TFuncMulti ([TPoly "alpha19125";], TPoly "alpha19125")
+TPoly "alpha19119" TFuncMulti ([TPoly "alpha19128";], TPoly "alpha19128")
+TPoly "alpha19105" TFuncMulti ([TTuple (TPoly "alpha19131", TPoly "alpha19132");], TPoly "alpha19131")
+TList (TPoly "alpha19137") TPoly "alpha19107"
+TList (TPoly "alpha19134") TList (TPoly "alpha19140")
+TPoly "alpha19161" TList (TPoly "alpha19165")
+TPoly "alpha19160" TFuncMulti ([TList (TPoly "alpha19162");], TList (TPoly "alpha19162"))
+TList (TPoly "alpha19151") TPoly "alpha19143"
+TList (TPoly "alpha19145") TList (TPoly "alpha19154")
+TList (TPoly "alpha19148") TList (TPoly "alpha19157")
+TPoly "alpha1295" TInt
+TFunc (TPoly "alpha18958", TBool) TFuncMulti ([TTuple (TPoly "alpha18986", TPoly "alpha18987");], TPoly "alpha18987")
+TPoly "alpha18972" TFunc (TPoly "alpha18958", TBool)
+TPoly "alpha18968" TFuncMulti ([TBool;TBool;], TBool)
+TMaybe (TPoly "alpha18980") TMaybe (TPoly "alpha18969")
+TList (TPoly "alpha18977") TList (TPoly "alpha80")
+TPoly "alpha18969" TPoly "alpha80"
+TList (TPoly "alpha19174") TList (TPoly "alpha18961")
+TList (TPoly "alpha19180") TList (TPoly "alpha19168")
+TPoly "alpha19186" TList (TPoly "alpha19177")
+TPoly "alpha1994" TList (TPoly "alpha19201")
+TPoly "alpha19183" TPoly "alpha1994"
+TInt TPoly "alpha19184"
+TList (TPoly "alpha19210") TList (TPoly "alpha19171")
+TList (TPoly "alpha19216") TList (TPoly "alpha19204")
+TPoly "alpha2234" TFuncMulti ([TList (TPoly "alpha19220");], TMaybe (TPoly "alpha19220"))
+TPoly "alpha19219" TInt
+TList (TPoly "alpha19229") TList (TPoly "alpha19207")
+TPoly "alpha19233" TFuncMulti ([TPoly "alpha19240";TList (TPoly "alpha19240");], TList (TPoly "alpha19240"))
+TPoly "alpha19237" TPoly "alpha19232"
+TPoly "alpha19234" TBool
+TList (TPoly "alpha19246") TList (TPoly "alpha19226")
+TList (TPoly "alpha19252") TList (TPoly "alpha19243")
+TList (TPoly "alpha19249") TList (TPoly "alpha19255")
+TPoly "alpha18934" TMaybe (TPoly "tau")
+TMaybe (TPoly "alpha18940") TPoly "alpha18931"
+TPoly "alpha18946" TList (TPoly "alpha18937")
+TPoly "alpha18952" TPoly "alpha18943"
+TPoly "alpha18949" TList (TPoly "alpha18955")
+TPoly "alpha18950" TFuncMulti ([TInt;TInt;], TInt)
+TList (TPoly "alpha18784") TPoly "tau"
+TFunc (TPoly "alpha18778", TBool) TFuncMulti ([TPoly "alpha18787";], TPoly "alpha18787")
+TPoly "alpha18900" TList (TPoly "alpha18851")
+TList (TPoly "alpha18903") TList (TPoly "alpha18904")
+TList (TPoly "alpha18914") TPoly "alpha18894"
+TFunc (TPoly "alpha18907", TPoly "alpha18908") TFuncMulti ([TPoly "alpha18916";TList (TPoly "alpha18916");], TList (TPoly "alpha18916"))
+TList (TPoly "alpha18910") TList (TPoly "alpha18919")
+TPoly "alpha18925" TPoly "alpha18897"
+TPoly "alpha18922" TList (TPoly "alpha18928")
+TPoly "alpha18883" TList (TPoly "alpha18790")
+TPoly "alpha18879" TFuncMulti ([TTuple (TPoly "alpha18888", TPoly "alpha18889");], TPoly "alpha18889")
+TPoly "alpha18880" TList (TPoly "alpha18885")
+TList (TPoly "alpha18858") TList (TPoly "alpha18790")
+TFunc (TPoly "alpha18852", TBool) TFuncMulti ([TPoly "alpha18861";], TPoly "alpha18861")
+TList (TPoly "alpha18870") TList (TPoly "alpha18855")
+TList (TPoly "alpha18864") TList (TPoly "alpha18873")
+TList (TPoly "alpha18867") TList (TPoly "alpha18876")
+TPoly "alpha18833" TList (TPoly "alpha18781")
+TPoly "alpha3652" TList (TPoly "alpha18848")
+TPoly "alpha18830" TPoly "alpha3652"
+TBool TPoly "alpha18831"
+TList (TPoly "alpha18794") TList (TPoly "alpha18781")
+TList (TPoly "alpha18803") TList (TPoly "alpha18791")
+TList (TPoly "alpha18809") TList (TPoly "alpha18797")
+TList (TPoly "alpha18806") TList (TPoly "alpha18812")
+TList (TPoly "alpha18821") TList (TPoly "alpha18800")
+TList (TPoly "alpha18815") TList (TPoly "alpha18824")
+TList (TPoly "alpha18818") TList (TPoly "alpha18827")
+TPoly "alpha18623" TPoly "tau"
+TList (TPoly "alpha18627") TPoly "alpha18614"
+TPoly "alpha18634" TPoly "alpha18630"
+TPoly "alpha4406" TList (TPoly "alpha18637")
+TPoly "alpha18631" TInt
+TPoly "alpha18682" TMaybe (TFunc (TPoly "alpha18615", TPoly "alpha18616"))
+TPoly "alpha18696" TPoly "alpha18679"
+TFunc (TPoly "alpha18688", TPoly "alpha18689") TFuncMulti ([TPoly "alpha18697";], TPoly "alpha18697")
+TMaybe (TPoly "alpha18703") TPoly "alpha18691"
+TPoly "alpha18715" TList (TPoly "alpha18700")
+TPoly "alpha18709" TList (TPoly "alpha18718")
+TPoly "alpha18712" TList (TPoly "alpha18721")
+TList (TPoly "alpha18646") TPoly "alpha18616"
+TBool TPoly "alpha18640"
+TList (TPoly "alpha18661") TList (TPoly "alpha18643")
+TList (TPoly "alpha18670") TList (TPoly "alpha18658")
+TFunc (TPoly "alpha18664", TBool) TFuncMulti ([TPoly "alpha18673";], TPoly "alpha18673")
+TList (TPoly "alpha18667") TList (TPoly "alpha18676")
+TPoly "alpha18727" TPoly "alpha18618"
+TBool TPoly "alpha18724"
+TBool TBool
+TPoly "alpha5413" TFuncMulti ([TPoly "alpha18751";TList (TPoly "alpha18751");], TList (TPoly "alpha18751"))
+TBool TBool
+TInt TInt
+TList (TPoly "alpha18763") TList (TPoly "alpha18769")
+TInt TInt
+TPoly "alpha18725" TFuncMulti ([TFunc (TPoly "alpha18730", TBool);TList (TPoly "alpha18730");], TList (TPoly "alpha18730"))
 
-EvilApp chosen
+EvilIndir chosen

@@ -397,8 +397,6 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
             (* print_endline (ty_to_string expected_type);
             print_endline (log_expr e); *)
 
-            let gamma = take ((List.length gamma)-3) gamma in (* exclude the 3 lambdas, as they might not guarantee ill-typedness *)
-
             let applicableRules : (rule * (expr * ty)) list ref = ref [] in
             
             let applicabilityCache : (ty * bool) list ref = ref [] in
@@ -601,14 +599,6 @@ let main =
     let totalStartTime = Sys.time() in
     let out_channel_haskell = open_out "illtyped.hs" in
     let out_channel_ocaml = open_out "illtyped.ml" in
-    (* generating three lambdas for mutual recursion *)
-    (* let lambdas = ref [] in
-    for i = 1 to 3 do
-        let n = List.length gamma in
-        let expected_type = snd (List.nth gamma (n-i)) in
-        let pi = ref (Hashtbl.create 64) in
-        lambdas := (generate 5 expected_type [] None pi) :: !lambdas;
-    done; *)
     (* well-typed generation *)
     let expected_type = List.hd (shuffle (TFunc (TList TInt, TList TInt) :: basic_types)) in
     let steps = 8 in
