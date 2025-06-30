@@ -30,12 +30,12 @@ let rec ty_to_string_ocaml (t : ty) : string =
 
 let haskell_to_ocaml (s : string) : string =
     begin match s with
-    | "(:)" -> "List.cons"
+    | "(:)" -> "cons"
     | "len" -> "List.length"
     | "True" -> "true"
     | "False" -> "false"
     | "negate" -> "(~-)"
-    | "id" -> "Fun.id"
+    | "id" -> "(fun id -> id)"
     | "map" -> "List.map"
     | "filter" -> "List.filter"
     | "(.)" -> "compose"
@@ -182,5 +182,7 @@ let safeTail list =
 let compose f g x = f (g x)
 
 let ifthenelse c a b = if c then a else b
+
+let cons x xs = x :: xs
 
 let welltypedProgram"

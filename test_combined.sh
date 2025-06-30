@@ -4,12 +4,13 @@ currentProgram=0
 # ocamlopt -O2 helpers.ml types.ml tracemem.ml prettyprinter.ml generation.ml -o generator
 while true; do
     timeout 2 ./generator
-    if ghc -o illtyped_haskell illtyped.hs | grep -q "\[2 of 2\]"; then # [2 of 2] is the string denoting successful compilation in GHC
+    $HOME/.ghcup/bin/ghc-[VERSION] -o illtyped_haskell illtyped.hs
+    if [ $? -eq 0 ]; then
         cp expr_log.txt bugs/expr_log_bug_haskell$currentProgram.txt
         cp illtyped.hs bugs/illtyped_bug_haskell$currentProgram.hs
         # break;
     fi
-    ocamlc -o illtyped_ocaml illtyped.ml
+    _opam/bin/ocamlc -o illtyped_ocaml illtyped.ml
     if [ $? -eq 0 ]; then # status code 0 denotes successful compilation
         if [ -s illtyped.ml ]; then # only copy the log and program files if the program is not empty
             cp expr_log.txt bugs/expr_log_bug_ocaml$currentProgram.txt
