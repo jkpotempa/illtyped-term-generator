@@ -571,10 +571,7 @@ let rec statTrack (e : expr) : unit =
     | ELamMulti (delta, body) ->
         exprSize := !exprSize + 1;
         let len = List.length delta in
-        for i = 0 to len - 1 do
-            let arg = fst (List.nth delta i) in
-            if usesArgument arg body then () else unusedArgumentCount := !unusedArgumentCount + 1;
-        done;
+        if List.exists (fun (arg, _) -> not (usesArgument arg body)) delta then unusedArgumentCount := !unusedArgumentCount + 1;
         totalArgumentsCount := !totalArgumentsCount + len;
         totalLamExts := !totalLamExts + 1;
         exprSize := !exprSize + 1;
@@ -626,8 +623,8 @@ let main =
 
     (* tracking statistics *)
     statTrack evil;
-    let ratio = (Float.of_int ((!totalArgumentsCount - !unusedArgumentCount)) /. Float.of_int (!totalArgumentsCount)) in
-    let argUsageStr = ("Argument usage in lambdas: " ^ (string_of_int (!totalArgumentsCount - !unusedArgumentCount)) ^ "/" ^ (string_of_int !totalArgumentsCount) ^ " = " ^ (string_of_float ratio)) in
+    let ratio = (Float.of_int ((!totalLams + !totalLamExts - !unusedArgumentCount)) /. Float.of_int (!totalLams + !totalLamExts)) in
+    let argUsageStr = ("Argument usage in lambdas: " ^ (string_of_int (!totalLams + !totalLamExts - !unusedArgumentCount)) ^ "/" ^ (string_of_int (!totalLams + !totalLamExts)) ^ " = " ^ (string_of_float ratio)) in
     let exprSizeStr = ("Expression size: " ^ (string_of_int !exprSize)) in
     let generationTimeStr = ("Generation time: " ^ (string_of_float generationTime)) in
     let eriTimeStr = ("ERI time: " ^ (string_of_float eriTime)) in

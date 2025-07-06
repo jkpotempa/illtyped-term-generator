@@ -5,3 +5,6 @@ archive/
 *.cmx
 illtyped_haskell
 illtyped_ocaml
+bugs/
+rewrite.ml
+rewrite
