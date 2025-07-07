@@ -1,1 +1,1 @@
-argumentUsageRatio,exprSize,generationTime,ERITime,totalTime,expectedType,totalVars,totalLams,totalLamExts,totalApps,totalTuples,totalMaybes,totalLets,totalPMs
+argumentUsageRatio,exprSize,generationTime,ERITime,totalTime,expectedType,totalVars,totalLams,totalLamExts,totalApps,totalTuples,totalMaybes,totalLets,totalPMs,totalEvilRuleLocations,validEvilRuleLocations,lamExtEvilRuleLocations
