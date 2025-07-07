@@ -346,37 +346,37 @@ let evil_rule_applied = fun () -> evil_rule_counter := !evil_rule_counter + 1
 
 (* when used on its own, there's a non-zero chance no evil rule gets applied. 
 use introduce_evil_rule_safe instead to generate surely ill-typed expressions *)
-let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl ref) (root : expr) (use_type_annotation : bool) : expr =
+let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl ref) (root : expr) (use_constraint_recollection : bool) : expr =
     if !evil_rule_counter >= 1 then e else
     begin match e with
-        | ELam (e1, e2) -> ELam (e1, introduce_evil_rule e2 (Lam :: tr) pi root use_type_annotation)
-        | ELamMulti (args, e2) -> ELamMulti (args, introduce_evil_rule e2 (LamExt::tr) pi root use_type_annotation)
-        | EApp (e1, e2) -> failwith "should not be here. EApp is no longer used in well-typed generation"; (*EApp ((introduce_evil_rule) e1 (App::tr) pi root use_type_annotation, introduce_evil_rule e2 (App::tr) pi root use_type_annotation)*)
+        | ELam (e1, e2) -> ELam (e1, introduce_evil_rule e2 (Lam :: tr) pi root use_constraint_recollection)
+        | ELamMulti (args, e2) -> ELamMulti (args, introduce_evil_rule e2 (LamExt::tr) pi root use_constraint_recollection)
+        | EApp (e1, e2) -> failwith "should not be here. EApp is no longer used in well-typed generation"; (*EApp ((introduce_evil_rule) e1 (App::tr) pi root use_constraint_recollection, introduce_evil_rule e2 (App::tr) pi root use_constraint_recollection)*)
         | EAppMulti (e1, args) -> 
             begin match e1 with
             | ELamMulti ([arg, arg_type], body) -> 
                 if not (usesArgument arg body) then (* evil rule is not applicable *) e
-                else EAppMulti (e1, List.map (fun arg -> introduce_evil_rule arg (Indir::tr) pi root use_type_annotation) args)
+                else EAppMulti (e1, List.map (fun arg -> introduce_evil_rule arg (Indir::tr) pi root use_constraint_recollection) args)
             | ELamMulti _ ->
                 (* more than one argument, so they are used in the body of the lambda *) 
-                EAppMulti (e1, List.map (fun arg -> introduce_evil_rule arg (Indir::tr) pi root use_type_annotation) args)
+                EAppMulti (e1, List.map (fun arg -> introduce_evil_rule arg (Indir::tr) pi root use_constraint_recollection) args)
             | EVar (s, _) -> 
-                EAppMulti (e1, List.map (fun arg -> introduce_evil_rule arg (Indir::tr) pi root use_type_annotation) args) 
+                EAppMulti (e1, List.map (fun arg -> introduce_evil_rule arg (Indir::tr) pi root use_constraint_recollection) args) 
             | _ -> failwith "tried applying something other than a lambda or variable"
             end
-        | ELet (freshvar, e1, e2) -> ELet (freshvar, e1, introduce_evil_rule e2 (Let::tr) pi root use_type_annotation)
+        | ELet (freshvar, e1, e2) -> ELet (freshvar, e1, introduce_evil_rule e2 (Let::tr) pi root use_constraint_recollection)
         | EPatternMatch (list, base, step, x, xs) -> 
-            let listNew = introduce_evil_rule list (PatternMatch::tr) pi root use_type_annotation in
-            let baseNew = introduce_evil_rule base (PatternMatch::tr) pi root use_type_annotation in
-            let stepNew = introduce_evil_rule step (PatternMatch::tr) pi root use_type_annotation in
+            let listNew = introduce_evil_rule list (PatternMatch::tr) pi root use_constraint_recollection in
+            let baseNew = introduce_evil_rule base (PatternMatch::tr) pi root use_constraint_recollection in
+            let stepNew = introduce_evil_rule step (PatternMatch::tr) pi root use_constraint_recollection in
             EPatternMatch (listNew, baseNew, stepNew, x, xs)
         | ETuple (e1, e2) -> 
-            let e1New = introduce_evil_rule e1 (Tuple :: tr) pi root use_type_annotation in
-            let e2New = introduce_evil_rule e2 (Tuple :: tr) pi root use_type_annotation in
+            let e1New = introduce_evil_rule e1 (Tuple :: tr) pi root use_constraint_recollection in
+            let e2New = introduce_evil_rule e2 (Tuple :: tr) pi root use_constraint_recollection in
             ETuple (e1New, e2New)
         | EMaybe (e1, e2) -> 
-            let e1New = introduce_evil_rule e1 (Maybe :: tr) pi root use_type_annotation in
-            let e2New = introduce_evil_rule e2 (Maybe :: tr) pi root use_type_annotation in
+            let e1New = introduce_evil_rule e1 (Maybe :: tr) pi root use_constraint_recollection in
+            let e2New = introduce_evil_rule e2 (Maybe :: tr) pi root use_constraint_recollection in
             EMaybe (e1New, e2New)
         | EVar (s, ct) ->
             (* tracing system turned off, as once too many traces are stored, many programs are rejected straight away *)
@@ -423,14 +423,17 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
                     end
             in
 
-            if use_type_annotation then (* OPTION 1. SINCE WE TYPE ANNOTATE THE PROGRAM ANYWAY, NO NEED TO USE CONSTRAINT RECOLLECTION *)
-            failwith "tried using the old method with type annotations"
+            if not use_constraint_recollection then 
+            (* OPTION 1. WITHOUT USING CONSTRAINT RECOLLECTION => MAY PRODUCE FALSE POSITIVES *)
+
+            (print_endline "careful! not using constraint recollection. may produce false positives.";
+
             (* checking if EvilVar is applicable *)
             (* adding all of the constants from the context where the type doesn't match the expected_type seems to make EvilVar overrepresented in applicableRules. *)
-            (* (let matchingVarExprs = List.filter (fun ((_, constant_type) : expr * ty) -> 
+            let matchingVarExprs = List.filter (fun ((_, constant_type) : expr * ty) -> 
                 match unify (Some ([expected_type, constant_type] (*@ !pi*))) (Hashtbl.create 64) with
-                | None -> (*print_endline "false";*) true;
-                | Some ([], substitutions) -> (*print_endline "true";*) false;
+                | None -> true;
+                | Some ([], substitutions) -> false;
                 | Some _ -> failwith "unification failed. there should be no constraints left"
             ) (ct @ gamma) in 
             applicableRules := !applicableRules @ (List.map (fun c -> Var, c) matchingVarExprs);
@@ -454,17 +457,27 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
 
             (* EvilApp is always applicable *)
             (* For now for simplicity, only non-functions are considered. design choice *)
-            applicableRules := !applicableRules @ (List.map (fun t -> App, (EVar ("ignored", ct), t)) basic_types); *)
+            applicableRules := !applicableRules @ (List.map (fun t -> App, (EVar ("ignored", ct), t)) basic_types);
             
             (* checking if EvilIndir is applicable *)
-            (* let matchingIndirExprs = List.filter (fun ((_, constant_type) : expr * ty) -> 
+            let matchingIndirExprs = List.filter (fun ((EVar (s, _), constant_type) : expr * ty) ->
                 begin match constant_type with
-                    | TFuncMulti (_, tau) -> tau = expected_type (* tau would not even have to be equal to the expected_type in theory...? *)
-                    | _ -> false
-                end
-                ) ct in
-            applicableRules := !applicableRules @ (List.map (fun (e, TFuncMulti (args, _)) -> Indir, (e, TFuncMulti (change_argument_type args pi, expected_type))) matchingIndirExprs); 
-            ) *)
+                | TFuncMulti (args, tau) -> 
+                    begin match unify (Some ([tau, expected_type] @ (hashtable_to_list !pi))) (Hashtbl.create 64), change_argument_type args pi with
+                    | Some ([], _), Some _ -> true (* apply EvilIndir only if tau and the expected_type unify AND changing an argument is possible *)
+                    | _, _ -> false
+                    end
+                | _ -> false
+                end;
+                ) (gamma) in
+            applicableRules := !applicableRules @ (List.map (fun (e, TFuncMulti (args, _)) -> 
+                Indir, (e, TFuncMulti (
+                    begin match change_argument_type args pi with
+                    | None -> failwith "Even though expr was said to be matching, changing argument type failed"
+                    | Some ts -> ts
+                    end, 
+                expected_type))) matchingIndirExprs);
+            )
 
             else 
             (* OPTION 2: USING THE NEW ALGORITHM TO ELIMINATE TYPE ANNOTATIONS *)
@@ -535,12 +548,12 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
         end
         (* end *)
     end
-and introduce_evil_rule_safe (e : expr) (pi : ty_hashtbl ref) (use_type_annotation : bool) : expr =
+and introduce_evil_rule_safe (e : expr) (pi : ty_hashtbl ref) (use_constraint_recollection : bool) : expr =
     evil_rule_counter := 0;
-    let result : expr ref = ref (introduce_evil_rule e [] pi e use_type_annotation) in
+    let result : expr ref = ref (introduce_evil_rule e [] pi e use_constraint_recollection) in
     let tries : int ref = ref 0 in
     while !evil_rule_counter = 0 && !tries <= 100 do
-        result := introduce_evil_rule e [] pi e use_type_annotation;
+        result := introduce_evil_rule e [] pi e use_constraint_recollection;
         tries := !tries + 1;
     done;
     if !tries >= 100 then failwith "Evil rule introduction failed. " else
@@ -557,6 +570,9 @@ let totalTuples = ref 0
 let totalMaybes = ref 0
 let totalLets = ref 0
 let totalPMs = ref 0
+let totalEvilRuleLocations = ref 0
+let validEvilRuleLocations = ref 0
+let lamExtEvilRuleLocations = ref 0
 
 let rec statTrack (e : expr) : unit =
     begin match e with
@@ -590,7 +606,68 @@ let rec statTrack (e : expr) : unit =
     | EPatternMatch (e1, e2, e3, _, _) -> statTrack e1; statTrack e2; statTrack e3; totalPMs := !totalPMs + 1
     end
 
+let rec statTrackTotalEvilRuleLocations (e : expr) : unit =
+    begin match e with
+    | EVar _ -> totalEvilRuleLocations := !totalEvilRuleLocations + 1;
+    | ELam (_, e1) | ELamMulti (_, e1) | ELet (_, _, e1) -> statTrackTotalEvilRuleLocations e1;
+    | EApp _ -> failwith "tried tracking stats on evil rule locations in an expression where ERI happened already"
+    | EAppMulti (_, args) -> List.iter statTrackTotalEvilRuleLocations args
+    | EPatternMatch (e1, e2, e3, _, _) -> statTrackTotalEvilRuleLocations e1; statTrackTotalEvilRuleLocations e2; statTrackTotalEvilRuleLocations e3 
+    | ETuple (e1, e2) | EMaybe (e1, e2) -> statTrackTotalEvilRuleLocations e1; statTrackTotalEvilRuleLocations e2
+    end
+
+let rec statTrackValidEvilRuleLocations (e : expr) (root : expr) : unit =
+    begin match e with
+    | EVar _ -> 
+        let applicabilityCache : (ty * bool) list ref = ref [] in
+
+        let lookup_applicability_cache (t : ty) : bool =
+            try
+                snd (List.find (fun (cached_type, _) -> cached_type = t) !applicabilityCache)
+            with Not_found -> (* cache miss, recollect constraints *)
+                let cs = recollect_constraints (ref root) (ref e) (TPoly "tau") t in
+                begin match unify (Some cs) (Hashtbl.create 64) with
+                | None -> applicabilityCache := !applicabilityCache @ [t, true]; true
+                | Some ([], _) -> applicabilityCache := !applicabilityCache @ [t, false]; false
+                | Some _ -> failwith "unification failed. there should be no constraints left"
+                end
+        in
+
+        let matchingVarExprs = List.filter (fun ((_, constant_type) : expr * ty) -> lookup_applicability_cache constant_type) (gamma) in
+
+        if List.length matchingVarExprs <> 0 then validEvilRuleLocations := !validEvilRuleLocations + 1;
+    | ELam (_, e1) | ELamMulti (_, e1) | ELet (_, _, e1) -> statTrackValidEvilRuleLocations e1 root;
+    | EApp _ -> failwith "tried tracking stats on evil rule locations in an expression where ERI happened already"
+    | EAppMulti (_, args) -> List.iter (fun arg -> statTrackValidEvilRuleLocations arg root) args
+    | EPatternMatch (e1, e2, e3, _, _) -> statTrackValidEvilRuleLocations e1 root; statTrackValidEvilRuleLocations e2 root; statTrackValidEvilRuleLocations e3 root
+    | ETuple (e1, e2) | EMaybe (e1, e2) -> statTrackValidEvilRuleLocations e1 root; statTrackValidEvilRuleLocations e2 root
+    end
+
+let rec statTrackLamExtEvilRuleLocations (e : expr) (inLamExtSubtree : bool) : unit =
+    begin match e with
+    | EVar _ -> if inLamExtSubtree then lamExtEvilRuleLocations := !lamExtEvilRuleLocations + 1;
+    | ELam (_, e1) | ELet (_, _, e1) -> statTrackLamExtEvilRuleLocations e1 inLamExtSubtree;
+    | ELamMulti (_, e1) -> statTrackLamExtEvilRuleLocations e1 true;
+    | EApp _ -> failwith "tried tracking stats on evil rule locations in an expression where ERI happened already"
+    | EAppMulti (_, args) -> List.iter (fun arg -> statTrackLamExtEvilRuleLocations arg inLamExtSubtree) args
+    | EPatternMatch (e1, e2, e3, _, _) -> statTrackLamExtEvilRuleLocations e1 inLamExtSubtree; statTrackLamExtEvilRuleLocations e2 inLamExtSubtree; statTrackLamExtEvilRuleLocations e3 inLamExtSubtree
+    | ETuple (e1, e2) | EMaybe (e1, e2) -> statTrackLamExtEvilRuleLocations e1 inLamExtSubtree; statTrackLamExtEvilRuleLocations e2 inLamExtSubtree
+    end
+
+let statTrackEvilRuleLocations (e : expr) : unit =
+    statTrackTotalEvilRuleLocations e;
+    statTrackValidEvilRuleLocations e e;
+    statTrackLamExtEvilRuleLocations e false
+
 let main = 
+    (* variables settable by flags. DEFAULT: use constraint recollection AND track statistics *)
+    let use_constraint_recollection = ref true in
+    let track_statistics = ref true in
+    let usage_msg = "./generator [-no-stat] [-no-constraint-recollection]" in
+    let speclist = [("-no-stat", Arg.Clear track_statistics, "Do not track statistics")
+                   ;("-no-constraint-recollection", Arg.Clear use_constraint_recollection, "Do not use constraint recollection")] in
+    Arg.parse speclist (fun _ -> ()) usage_msg;
+
     (* setup *)
     (* Printexc.record_backtrace true; *)
     let totalStartTime = Sys.time() in
@@ -605,24 +682,24 @@ let main =
     let e = (generate steps expected_type [] None pi) in
     let generationTime = Sys.time() -. generationStartTime in
     (* evil rule introduction *)
-    let use_type_annotation = false in
     let eriStartTime = Sys.time() in
-    let evil = introduce_evil_rule_safe e pi use_type_annotation in
+    let evil = introduce_evil_rule_safe e pi !use_constraint_recollection in
     let eriTime = Sys.time() -. eriStartTime in
     (* printing final program files *)
     (* Haskell *)
     let out_program = ref ((program_prefix_haskell) ^ (" = ") ^ (prettyprint_haskell e) ^ ("\n\nilltypedProgram ")) in
-    if use_type_annotation then out_program := !out_program ^ ":: " ^ (ty_to_string expected_type) else (); 
+    (* if not !use_constraint_recollection then out_program := !out_program ^ ":: " ^ (ty_to_string expected_type) else ();  *)
     out_program := !out_program ^ (" = ") ^ (prettyprint_haskell evil);
     Printf.fprintf out_channel_haskell "%s" !out_program;
     (* Ocaml *)
     let out_program = ref ((program_prefix_ocaml) ^ (" = ") ^ (prettyprint_ocaml e) ^ ("\n\nlet illtypedProgram ")) in
-    if use_type_annotation then out_program := !out_program ^ ": " ^ (ty_to_string_ocaml expected_type) else (); 
+    (* if not !use_constraint_recollection then out_program := !out_program ^ ": " ^ (ty_to_string_ocaml expected_type) else ();  *)
     out_program := !out_program ^ (" = ") ^ (prettyprint_ocaml evil);
     Printf.fprintf out_channel_ocaml "%s" !out_program;
 
     (* tracking statistics *)
     statTrack evil;
+    if !track_statistics then statTrackEvilRuleLocations e;
     let ratio = (Float.of_int ((!totalLams + !totalLamExts - !unusedArgumentCount)) /. Float.of_int (!totalLams + !totalLamExts)) in
     let argUsageStr = ("Argument usage in lambdas: " ^ (string_of_int (!totalLams + !totalLamExts - !unusedArgumentCount)) ^ "/" ^ (string_of_int (!totalLams + !totalLamExts)) ^ " = " ^ (string_of_float ratio)) in
     let exprSizeStr = ("Expression size: " ^ (string_of_int !exprSize)) in
@@ -638,6 +715,9 @@ let main =
     let totalMaybeStr = string_of_int !totalMaybes in
     let totalLetStr = string_of_int !totalLets in
     let totalPMStr = string_of_int !totalPMs in
+    let totalEvilRuleLocationsStr = string_of_int !totalEvilRuleLocations in
+    let validEvilRuleLocationsStr = string_of_int !validEvilRuleLocations in
+    let lamExtEvilRuleLocationsStr = string_of_int !lamExtEvilRuleLocations in
     print_endline argUsageStr; print_endline exprSizeStr; print_endline generationTimeStr; print_endline eriTimeStr; print_endline totalTimeStr;
     (* logging *)
     let out_log = open_out "expr_log.txt" in
@@ -645,9 +725,11 @@ let main =
     Printf.fprintf out_log "%s" ((log_expr e) ^ "\n" ^ (log_expr evil) ^ "\nPI: " ^ log_pi ^ "\nEXPECTED TYPE: " 
         ^ (log_ty expected_type) ^ "\n" ^ argUsageStr ^ "\n" ^ exprSizeStr ^ "\n" ^ generationTimeStr ^ "\n" 
         ^ eriTimeStr ^ "\n" ^ totalTimeStr ^ "\n" ^ totalVarStr ^ "\n" ^ totalLamStr ^ "\n" ^ totalLamExtStr 
-        ^ "\n" ^ totalAppStr ^ "\n" ^ totalTupleStr ^ "\n" ^ totalMaybeStr ^ "\n" ^ totalLetStr ^ "\n" ^ totalPMStr ^ "\n\n" ^ !log);
+        ^ "\n" ^ totalAppStr ^ "\n" ^ totalTupleStr ^ "\n" ^ totalMaybeStr ^ "\n" ^ totalLetStr ^ "\n" ^ totalPMStr ^ "\n" 
+        ^ totalEvilRuleLocationsStr ^ "\n" ^ validEvilRuleLocationsStr ^ "\n" ^ lamExtEvilRuleLocationsStr ^ "\n\n" ^ !log);
     close_out out_log;
     (* writing stats to file *)
+    if !track_statistics then begin
     let found = ref false in
     for i = 1 to 250 do
         if not !found then
@@ -670,6 +752,7 @@ let main =
                 ^ "," ^ totalLamExtStr ^ "," ^ totalAppStr ^ "," ^ totalTupleStr ^ "," ^ totalMaybeStr ^ "," 
                 ^ totalLetStr ^ "," ^ totalPMStr); 
             close_out out_ratios;
-            close_out out_channel_haskell;
-            close_out out_channel_ocaml;
     done;
+    end else ();
+    close_out out_channel_haskell;
+    close_out out_channel_ocaml;
