@@ -660,7 +660,7 @@ let statTrackEvilRuleLocations (e : expr) : unit =
     statTrackLamExtEvilRuleLocations e false
 
 let main = 
-    (* variables settable by flags. DEFAULT: use constraint recollection AND track statistics *)
+    (* variables which can be disabled by flags *)
     let use_constraint_recollection = ref true in
     let track_statistics = ref true in
     let usage_msg = "./generator [-no-stat] [-no-constraint-recollection]" in
