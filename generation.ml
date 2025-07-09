@@ -750,7 +750,8 @@ let main =
                 ^ "," ^ (string_of_float generationTime) ^ "," ^ (string_of_float eriTime) ^ "," 
                 ^ (string_of_float totalTime) ^ "," ^ (log_ty expected_type) ^ "," ^ totalVarStr ^ "," ^ totalLamStr 
                 ^ "," ^ totalLamExtStr ^ "," ^ totalAppStr ^ "," ^ totalTupleStr ^ "," ^ totalMaybeStr ^ "," 
-                ^ totalLetStr ^ "," ^ totalPMStr); 
+                ^ totalLetStr ^ "," ^ totalPMStr ^ "," ^ totalEvilRuleLocationsStr ^ "," ^ validEvilRuleLocationsStr 
+                ^ "," ^ lamExtEvilRuleLocationsStr); 
             close_out out_ratios;
     done;
     end else ();
