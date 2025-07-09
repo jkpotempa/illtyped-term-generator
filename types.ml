@@ -9,7 +9,7 @@ type ty = TInt
         | TFuncExt of (ctxt ref * ty)
         | TMaybe of ty
         | TTuple of ty * ty
-and expr =    EVar of (string * ctxt) (* storing context in Var rules is necessary, as it is needed for evil rule introduction *)
+and expr =    EVar of (string * ctxt * int) (* storing context in Var rules is necessary, as it is needed for evil rule introduction *)
             | ELam of (expr * expr) 
             | ELamMulti of (ctxt * expr)
             | EApp of (expr * expr) 
@@ -71,7 +71,7 @@ and log_ctxt (cs : ctxt) =
     !res ^ "]"
 and log_expr (e : expr) = 
     begin match e with 
-    | EVar (s, cs) -> "EVar (\"" ^ s ^ "\", " ^ (log_ctxt cs) ^ ")"
+    | EVar (s, cs, id) -> "EVar (\"" ^ s ^ "\", " ^ (log_ctxt cs) ^ ", " ^ (string_of_int id) ^ ")"
     | ELam (e1, e2) -> "ELam (" ^ (log_expr e1) ^ ", " ^ (log_expr e2) ^ ")"
     | ELamMulti (cs, body) -> "ELamMulti (" ^ (log_ctxt cs) ^ ", " ^ (log_expr body) ^ ")"
     | EApp (e1, e2) -> "EApp (" ^ (log_expr e1) ^ ", " ^ (log_expr e2) ^ ")" 
@@ -302,39 +302,39 @@ let rec is_polymorphic (t : ty) : bool =
 
 let basic_types = [TInt; TBool; TList TInt; TList TBool] (* arbitrary design choice *)
 
-let gamma : ctxt =  [(EVar ("(+)", []), TFuncMulti ([TInt; TInt], TInt))
-                    ;(EVar ("(-)", []), TFuncMulti ([TInt; TInt], TInt))
-                    ;(EVar ("(||)", []), TFuncMulti ([TBool; TBool], TBool))
-                    ;(EVar ("(&&)", []), TFuncMulti ([TBool; TBool], TBool))
-                    ;(EVar ("len", []), TFuncMulti ([TList (TPoly "a")], TInt))
-                    ;(EVar ("(:)", []), TFuncMulti ([TPoly "a"; TList (TPoly "a")], TList (TPoly "a")))
-                    ;(EVar ("0", []), TInt)
-                    ;(EVar ("1", []), TInt)
-                    ;(EVar ("True", []), TBool)
-                    ;(EVar ("False", []), TBool)
-                    ;(EVar ("[]", []), TList (TPoly "a"))
-                    ;(EVar ("negate", []), TFuncMulti ([TInt], TInt))
-                    ;(EVar ("negate", []), TFunc (TInt, TInt))
-                    ;(EVar ("(Main.<)", []), TFuncMulti ([TInt; TInt], TBool))
-                    ;(EVar ("(Main.==)", []), TFuncMulti ([TBool; TBool], TBool))
-                    ;(EVar ("map", []), TFuncMulti ([TFunc (TPoly "a", TPoly "b"); TList (TPoly "a")], TList (TPoly "b")))
-                    ;(EVar ("filter", []), TFuncMulti ([TFunc (TPoly "a", TBool); TList (TPoly "a")], TList (TPoly "a")))
-                    ;(EVar ("safeHead", []), TFuncMulti ([TList (TPoly "a")], TMaybe (TPoly "a")))
-                    ;(EVar ("safeTail", []), TFuncMulti ([TList (TPoly "a")], TList (TPoly "a")))
-                    ;(EVar ("id", []), TFuncMulti ([TPoly "a"], TPoly "a"))
-                    ;(EVar ("id", []), TFunc (TPoly "a", TPoly "a"))
-                    ;(EVar ("(++)", []), TFuncMulti ([TList (TPoly "a"); TList (TPoly "a")], TList (TPoly "a")))
-                    ;(EVar ("ifthenelse", []), TFuncMulti ([TBool; TPoly "a"; TPoly "a"], TPoly "a"))
-                    ;(EVar ("fst", []), TFuncMulti ([TTuple (TPoly "a", TPoly "b")], TPoly "a"))
-                    ;(EVar ("snd", []), TFuncMulti ([TTuple (TPoly "a", TPoly "b")], TPoly "b"))
-                    ;(EVar ("(.)", []), TFuncMulti ([TFunc (TPoly "b", TPoly "c"); TFunc (TPoly "a", TPoly "b"); TPoly "a"], TPoly "c"))                    
+let gamma : ctxt =  [(EVar ("(+)", [], -1), TFuncMulti ([TInt; TInt], TInt))
+                    ;(EVar ("(-)", [], -1), TFuncMulti ([TInt; TInt], TInt))
+                    ;(EVar ("(||)", [], -1), TFuncMulti ([TBool; TBool], TBool))
+                    ;(EVar ("(&&)", [], -1), TFuncMulti ([TBool; TBool], TBool))
+                    ;(EVar ("len", [], -1), TFuncMulti ([TList (TPoly "a")], TInt))
+                    ;(EVar ("(:)", [], -1), TFuncMulti ([TPoly "a"; TList (TPoly "a")], TList (TPoly "a")))
+                    ;(EVar ("0", [], -1), TInt)
+                    ;(EVar ("1", [], -1), TInt)
+                    ;(EVar ("True", [], -1), TBool)
+                    ;(EVar ("False", [], -1), TBool)
+                    ;(EVar ("[]", [], -1), TList (TPoly "a"))
+                    ;(EVar ("negate", [], -1), TFuncMulti ([TInt], TInt))
+                    ;(EVar ("negate", [], -1), TFunc (TInt, TInt))
+                    ;(EVar ("(Main.<)", [], -1), TFuncMulti ([TInt; TInt], TBool))
+                    ;(EVar ("(Main.==)", [], -1), TFuncMulti ([TBool; TBool], TBool))
+                    ;(EVar ("map", [], -1), TFuncMulti ([TFunc (TPoly "a", TPoly "b"); TList (TPoly "a")], TList (TPoly "b")))
+                    ;(EVar ("filter", [], -1), TFuncMulti ([TFunc (TPoly "a", TBool); TList (TPoly "a")], TList (TPoly "a")))
+                    ;(EVar ("safeHead", [], -1), TFuncMulti ([TList (TPoly "a")], TMaybe (TPoly "a")))
+                    ;(EVar ("safeTail", [], -1), TFuncMulti ([TList (TPoly "a")], TList (TPoly "a")))
+                    ;(EVar ("id", [], -1), TFuncMulti ([TPoly "a"], TPoly "a"))
+                    ;(EVar ("id", [], -1), TFunc (TPoly "a", TPoly "a"))
+                    ;(EVar ("(++)", [], -1), TFuncMulti ([TList (TPoly "a"); TList (TPoly "a")], TList (TPoly "a")))
+                    ;(EVar ("ifthenelse", [], -1), TFuncMulti ([TBool; TPoly "a"; TPoly "a"], TPoly "a"))
+                    ;(EVar ("fst", [], -1), TFuncMulti ([TTuple (TPoly "a", TPoly "b")], TPoly "a"))
+                    ;(EVar ("snd", [], -1), TFuncMulti ([TTuple (TPoly "a", TPoly "b")], TPoly "b"))
+                    ;(EVar ("(.)", [], -1), TFuncMulti ([TFunc (TPoly "b", TPoly "c"); TFunc (TPoly "a", TPoly "b"); TPoly "a"], TPoly "c"))
                     ]
 
 let rec lookup (e : expr) (ct : ctxt) : ty =
     let ct = ct @ gamma in
     begin match e with
-        | EVar (s, _) -> try 
-            snd (List.find (fun (elem, _) -> elem = EVar (s, [])) ct) (* CAREFUL: finds only the first element. watch out for potential TFunc / TFuncMulti conflicts*)
+        | EVar (s, _, _) -> try 
+            snd (List.find (fun (elem, _) -> elem = EVar (s, [], -1)) ct) (* CAREFUL: finds only the first element. watch out for potential TFunc / TFuncMulti conflicts*)
             with Not_found -> failwith ("NOT FOUND. tried looking for " ^ (log_expr e) ^ " in " ^ (log_ctxt ct))
         | _ -> failwith "tried to look up non variable inside context"
     end
@@ -343,11 +343,11 @@ let rec lookup (e : expr) (ct : ctxt) : ty =
 let rec usesArgument (e1 : expr) (e2 : expr) : bool =
     let argName = ref "" in
     begin match e1 with
-        | EVar (s, _) -> argName := s;
+        | EVar (s, _, _) -> argName := s;
         | _ -> failwith "argument of a lambda is not an EVar"
     end;
     begin match e2 with
-        | EVar (s, _) -> !argName = s
+        | EVar (s, _, _) -> !argName = s
         | ELam (_, e3) | ELamMulti (_, e3) -> usesArgument e1 e3
         | EApp (e3, e4) | ELet (_, e3, e4) | ETuple (e3, e4) | EMaybe (e3, e4) -> (usesArgument e1 e3) || (usesArgument e1 e4) 
         | EAppMulti (e3, args) -> (usesArgument e1 e3) || List.fold_right (fun e b -> (usesArgument e1 e) || b) args false
@@ -356,7 +356,7 @@ let rec usesArgument (e1 : expr) (e2 : expr) : bool =
 
 let rec evil_rule_in_subtree (e : expr) : bool =
     begin match e with
-    | EVar (s, _) -> String.starts_with ~prefix:"EVIL" s
+    | EVar (s, _, _) -> String.starts_with ~prefix:"EVIL" s
     | ELam (e1, e2) | ELet (_, e1, e2) | ETuple (e1, e2) | EMaybe (e1, e2) -> evil_rule_in_subtree e1 || evil_rule_in_subtree e2
     | ELamMulti (delta, ret) -> List.fold_right (fun (e, _) b -> evil_rule_in_subtree e || b) delta false || evil_rule_in_subtree ret
     | EApp _ -> true (* EApp is only used in evil rules, regular App rule has been replaced with AppExt *)

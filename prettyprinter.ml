@@ -49,11 +49,11 @@ let haskell_to_ocaml (s : string) : string =
 
 let rec prettyprint_haskell (e : expr) : string = 
     begin match e with
-    | EVar (s, _) -> if String.starts_with ~prefix:"EVIL" s then String.sub s 4 ((String.length s)-4) else s 
+    | EVar (s, _, _) -> if String.starts_with ~prefix:"EVIL" s then String.sub s 4 ((String.length s)-4) else s 
     | ELam (e1, e2) -> 
         let context = ref [] in
         begin match e1 with
-            | EVar (_, ct) -> context := ct;
+            | EVar (_, ct, _) -> context := ct;
             | _ -> failwith "argument of a lambda is not an EVar"
         end;
         let argumentType = lookup e1 !context in
@@ -71,7 +71,7 @@ let rec prettyprint_haskell (e : expr) : string =
         let res = ref "" in
         let sugarIfThenElse = ref false in
         begin match e1 with
-        | EVar (s, _) ->
+        | EVar (s, _, _) ->
             if String.ends_with ~suffix:"ifthenelse" s then (
                 sugarIfThenElse := true;
                 let condition = List.nth args 0 in
@@ -99,11 +99,11 @@ let rec prettyprint_haskell (e : expr) : string =
 
 let rec prettyprint_ocaml (e : expr) : string = 
     begin match e with
-    | EVar (s, _) -> if String.starts_with ~prefix:"EVIL" s then haskell_to_ocaml (String.sub s 4 ((String.length s)-4)) else haskell_to_ocaml s 
+    | EVar (s, _, _) -> if String.starts_with ~prefix:"EVIL" s then haskell_to_ocaml (String.sub s 4 ((String.length s)-4)) else haskell_to_ocaml s 
     | ELam (e1, e2) ->
         let context = ref [] in
         begin match e1 with
-            | EVar (_, ct) -> context := ct;
+            | EVar (_, ct, _) -> context := ct;
             | _ -> failwith "argument of a lambda is not an EVar"
         end;
         let argumentType = lookup e1 !context in
@@ -121,7 +121,7 @@ let rec prettyprint_ocaml (e : expr) : string =
         let res = ref "" in
         let sugarIfThenElse = ref false in
         begin match e1 with
-        | EVar (s, _) ->
+        | EVar (s, _, _) ->
             if String.ends_with ~suffix:"ifthenelse" s then (
                 sugarIfThenElse := true;
                 let condition = List.nth args 0 in

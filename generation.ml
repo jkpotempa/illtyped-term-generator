@@ -6,10 +6,12 @@ let counter = ref 0
 let counterlet = ref 0
 let counterpm = ref 0
 let counteralpha = ref 0
+let counterid = ref 0
 let genvar = fun () -> counter := !counter + 1; "x" ^ (string_of_int !counter)
 let genlet = fun () -> counterlet := !counterlet + 1; "y" ^ (string_of_int !counterlet)
 let genpm = fun () -> counterpm := !counterpm + 1; "z" ^ (string_of_int !counterpm)
 let genalpha = fun () -> counteralpha := !counteralpha + 1; "alpha" ^ (string_of_int !counteralpha)
+let genId = fun () -> counterid := !counterid + 1; !counterid
 
 let log = ref ""
 
@@ -106,7 +108,7 @@ let rec generate (steps : int) (expected_type : ty) (ct : ctxt) (delta_opt : ctx
     (* checking if Lam is applicable *)
     begin match expected_type with
         (* weight the lambda rule with 6, such that the probability it gets chosen is increased. design choice *)
-        | TFunc (sigma, tau) | TFuncMulti ([sigma], tau) -> applicableRules := !applicableRules @ (replicate 6 (Lam, (EVar ("ignored", []), expected_type)))
+        | TFunc (sigma, tau) | TFuncMulti ([sigma], tau) -> applicableRules := !applicableRules @ (replicate 6 (Lam, (EVar ("ignored", [], -1), expected_type)))
         | _ -> ()
     end;
 
@@ -120,24 +122,24 @@ let rec generate (steps : int) (expected_type : ty) (ct : ctxt) (delta_opt : ctx
         end
     done;
     (* weight Indir with 2. design choice *)
-    applicableRules := !applicableRules @ (List.map (fun ((EVar (e, [])), t) -> Indir, (EVar (e, ct), t)) !matchingIndirExprs);
-    applicableRules := !applicableRules @ (List.map (fun ((EVar (e, [])), t) -> Indir, (EVar (e, ct), t)) !matchingIndirExprs);
+    applicableRules := !applicableRules @ (List.map (fun ((EVar (e, [], -1)), t) -> Indir, (EVar (e, ct, -1), t)) !matchingIndirExprs);
+    applicableRules := !applicableRules @ (List.map (fun ((EVar (e, [], -1)), t) -> Indir, (EVar (e, ct, -1), t)) !matchingIndirExprs);
 
     (* Let is always applicable *)
-    applicableRules := !applicableRules @ [Let, (EVar ("ignored", []), TPoly (genalpha ()))];
+    applicableRules := !applicableRules @ [Let, (EVar ("ignored", [], -1), TPoly (genalpha ()))];
 
     (* PatternMatch is always applicable *)
-    applicableRules := !applicableRules @ [PatternMatch, (EVar ("ignored", []), TInt)];
+    applicableRules := !applicableRules @ [PatternMatch, (EVar ("ignored", [], -1), TInt)];
 
     (* Maybe is always applicable, however nested TMaybes lead to performance decrease *)
     begin match expected_type with
         | TMaybe _ -> ()
-        | _ -> applicableRules := !applicableRules @ [(Maybe, (EVar ("ignored", []), expected_type))];
+        | _ -> applicableRules := !applicableRules @ [(Maybe, (EVar ("ignored", [], -1), expected_type))];
     end;
 
     (* checking if AppExt is applicable. dynamic generation of needed types instead of using basic types *)
     begin match delta_opt with
-        | None -> applicableRules := !applicableRules @ [ ((*replicate 6*) (AppExt, (EVar ("ignored", []), expected_type))) ];
+        | None -> applicableRules := !applicableRules @ [ ((*replicate 6*) (AppExt, (EVar ("ignored", [], -1), expected_type))) ];
         | Some _ -> ()
     end;
 
@@ -145,19 +147,19 @@ let rec generate (steps : int) (expected_type : ty) (ct : ctxt) (delta_opt : ctx
     begin match delta_opt, expected_type with
         | None, _ -> ()
         | Some _, TFuncExt _ -> ()
-        | Some _, _ -> applicableRules := !applicableRules @ (replicate 6 (ParamExt, (EVar ("ignored", []), expected_type)))
+        | Some _, _ -> applicableRules := !applicableRules @ (replicate 6 (ParamExt, (EVar ("ignored", [], -1), expected_type)))
     end;
     
     (* check if LamExt is applicable *)
     (* in fact, if we want to generate an extendable function, this should be the only rule we should be able to apply *)
     begin match expected_type with
-        | TFuncExt (delta, ret) -> applicableRules := (*!applicableRules @*) [LamExt, (EVar ("ignored", []), expected_type)]
+        | TFuncExt (delta, ret) -> applicableRules := (*!applicableRules @*) [LamExt, (EVar ("ignored", [], -1), expected_type)]
         | _ -> ()
     end;
 
     (* check if Tuple is applicable *)
     begin match expected_type with
-    | TTuple _ -> applicableRules := [Tuple, (EVar ("ignored", []), expected_type)]
+    | TTuple _ -> applicableRules := [Tuple, (EVar ("ignored", [], -1), expected_type)]
     | _ -> ()
     end;
 
@@ -177,8 +179,8 @@ let rec generate (steps : int) (expected_type : ty) (ct : ctxt) (delta_opt : ctx
         begin try
             let curr = List.nth !applicableRules i in
             begin match (curr) with
-                | (Var, (EVar (e, _), constant_type)) -> 
-                    result := Some (EVar (e, ct)); 
+                | (Var, (EVar (e, _, -1), constant_type)) -> 
+                    result := Some (EVar (e, ct, genId())); 
                     found := true;
 
                     let updated_type = substitute_fresh_alphas constant_type in
@@ -189,11 +191,11 @@ let rec generate (steps : int) (expected_type : ty) (ct : ctxt) (delta_opt : ctx
                     end
                 | (Lam, (_, (TFunc (sigma, tau)))) -> 
                     let newBinding = genvar () in 
-                    result := Some (ELam (EVar (newBinding, [EVar (newBinding, []), sigma]), generate (steps - 1) tau ( [(EVar (newBinding, []), sigma)] @ ct) delta_opt pi)); 
+                    result := Some (ELam (EVar (newBinding, [EVar (newBinding, [], -1), sigma], -1), generate (steps - 1) tau ( [(EVar (newBinding, [], -1), sigma)] @ ct) delta_opt pi)); 
                     found := true;
                 | (Lam, (_, (TFuncMulti ([sigma], tau)))) -> 
                     let newBinding = genvar () in 
-                    result := Some (ELam (EVar (newBinding, [EVar (newBinding, []), sigma]), generate (steps - 1) tau ( [(EVar (newBinding, []), sigma)] @ ct) delta_opt pi)); 
+                    result := Some (ELam (EVar (newBinding, [EVar (newBinding, [], -1), sigma], -1), generate (steps - 1) tau ( [(EVar (newBinding, [], -1), sigma)] @ ct) delta_opt pi)); 
                     found := true;
                 | (Indir, (e, (TFuncMulti (args, tau)))) -> 
                     begin match unify (Some ([tau, expected_type] @ (hashtable_to_list !pi))) (Hashtbl.create 64) with
@@ -222,7 +224,7 @@ let rec generate (steps : int) (expected_type : ty) (ct : ctxt) (delta_opt : ctx
                         let body = generate (steps - 1) tau ct (Some delta) pi in
                         if (List.length !delta) = 0 then begin ();
                             let fresh_arg = genvar () in
-                            delta := !delta @ [EVar (fresh_arg, [EVar (fresh_arg, []), TInt]), TInt];
+                            delta := !delta @ [EVar (fresh_arg, [EVar (fresh_arg, [], -1), TInt], -1), TInt];
                         end else ();
                         result := Some (ELamMulti (!delta, body));
                         found := true;
@@ -233,13 +235,13 @@ let rec generate (steps : int) (expected_type : ty) (ct : ctxt) (delta_opt : ctx
                     | None -> failwith "should not be here. ParamExt is only applicable if there is a delta available"
                     | Some delta ->
                         let fresh_arg = genvar () in
-                        delta := !delta @ [EVar (fresh_arg, [EVar (fresh_arg, []), expected_type]), expected_type];
-                        result := Some (EVar (fresh_arg, ct @ [EVar (fresh_arg, []), expected_type]));
+                        delta := !delta @ [EVar (fresh_arg, [EVar (fresh_arg, [], -1), expected_type], -1), expected_type];
+                        result := Some (EVar (fresh_arg, ct @ [EVar (fresh_arg, [], -1), expected_type], -1));
                         found := true;
                     end;
                 | Let, (_, sigma) -> 
                     let newBinding = genlet () in
-                    result := Some (ELet (EVar (newBinding, [EVar (newBinding, []), sigma]), generate (steps - 1) sigma ct delta_opt pi, generate (steps - 1) expected_type (([(EVar (newBinding, []), sigma)]) @ ct) delta_opt pi)); 
+                    result := Some (ELet (EVar (newBinding, [EVar (newBinding, [], -1), sigma], -1), generate (steps - 1) sigma ct delta_opt pi, generate (steps - 1) expected_type (([(EVar (newBinding, [], -1), sigma)]) @ ct) delta_opt pi)); 
                     found := true;
                 | PatternMatch, _ -> 
                     let newBinding1 = genpm () in
@@ -247,8 +249,8 @@ let rec generate (steps : int) (expected_type : ty) (ct : ctxt) (delta_opt : ctx
                     let listType = genalpha () in
                     let list_expr = generate (steps - 1) (TList (TPoly listType)) ct delta_opt pi in
                     let base_expr = generate (steps - 1) expected_type ct delta_opt pi in
-                    let step_expr = generate (steps - 1) expected_type (ct @ [EVar (newBinding1, []), TPoly listType; EVar (newBinding2, []), TList (TPoly listType)]) delta_opt pi in
-                    result := Some (EPatternMatch (list_expr, base_expr, step_expr, EVar (newBinding1, [EVar (newBinding1, []), TPoly listType]), EVar (newBinding2, [EVar (newBinding2, []), TList (TPoly listType)]))); 
+                    let step_expr = generate (steps - 1) expected_type (ct @ [EVar (newBinding1, [], -1), TPoly listType; EVar (newBinding2, [], -1), TList (TPoly listType)]) delta_opt pi in
+                    result := Some (EPatternMatch (list_expr, base_expr, step_expr, EVar (newBinding1, [EVar (newBinding1, [], -1), TPoly listType], -1), EVar (newBinding2, [EVar (newBinding2, [], -1), TList (TPoly listType)], -1))); 
                     found := true;
                 | Maybe, _ -> 
                     result := Some (EMaybe (generate (steps - 1) (TMaybe expected_type) ct delta_opt pi, generate (steps - 1) expected_type ct delta_opt pi)); 
@@ -271,11 +273,11 @@ let rec generate (steps : int) (expected_type : ty) (ct : ctxt) (delta_opt : ctx
         end
     else (* precondition: found = false, so all applicable rules failed => we recursively fail as well *) raise Out_of_steps 
 
-let rec recollect_constraints (e : expr ref) (evil_rule_spot : expr ref) (expected_type : ty) (evil_type : ty) : constraints =
-    (* print_endline ("recollect_constraints " ^ (log_expr !e) ^ " " ^ (log_expr !evil_rule_spot) ^ " " ^ (log_ty expected_type) ^ " " ^ (log_ty evil_type) ^ " called"); *)
+let rec recollect_constraints (e : expr ref) (evilRuleLocationId : int) (expected_type : ty) (evil_type : ty) : constraints =
+    (* print_endline ("recollect_constraints " ^ (log_expr !e) ^ " " ^ (log_expr !evilRuleLocationId) ^ " " ^ (log_ty expected_type) ^ " " ^ (log_ty evil_type) ^ " called"); *)
     begin match !e with
-    | EVar (s, ct) -> 
-        if e == evil_rule_spot 
+    | EVar (s, ct, currentId) -> 
+        if currentId = evilRuleLocationId 
         then
             [expected_type, evil_type]
         else
@@ -284,64 +286,63 @@ let rec recollect_constraints (e : expr ref) (evil_rule_spot : expr ref) (expect
                 if is_polymorphic actual_type then [expected_type, substitute_fresh_alphas actual_type] else [expected_type, actual_type])
     | ELam (_, body) -> 
         begin match expected_type with
-        | TFunc (_, ret) -> recollect_constraints (ref body) evil_rule_spot ret evil_type
-        | _ -> recollect_constraints (ref body) evil_rule_spot (TPoly (genalpha ())) evil_type
+        | TFunc (_, ret) -> recollect_constraints (ref body) evilRuleLocationId ret evil_type
+        | _ -> recollect_constraints (ref body) evilRuleLocationId (TPoly (genalpha ())) evil_type
         end
     | ELamMulti (_, body) -> 
         begin match expected_type with
-        | TFuncMulti (_, ret) -> recollect_constraints (ref body) evil_rule_spot ret evil_type
+        | TFuncMulti (_, ret) -> recollect_constraints (ref body) evilRuleLocationId ret evil_type
         | _ -> failwith "expected_type of ELamMulti was not a TFuncMulti"
         end
     | EApp _ -> failwith "shouldn't be here. EApp is not used anymore by the generator"
     | EAppMulti (func, args) ->
         let res = ref [] in 
         let sigmas = ref [] in
-        let functype = begin match func with
+        begin match func with
         | ELamMulti (delta, _) ->
             for i = 0 to (List.length delta)-1 do
                 sigmas := !sigmas @ [TPoly (genalpha ())];
             done;
-            TFuncMulti (!sigmas, expected_type)
-        | EVar (s, ct) -> (* lookup, add needed constraints *) 
+        | EVar (s, ct, _) -> (* lookup, add needed constraints *) 
             let functype = lookup func ct in
             begin match functype with
             | TFuncMulti (args, ret) -> sigmas := List.map substitute_fresh_alphas args; res := [substitute_fresh_alphas ret, expected_type];
             | _ -> failwith "only a TFuncMulti can be used in an EAppMulti application"
             end;
-            functype
         | _ -> failwith "unexpected EAppMulti LHS"
-        end in
+        end;
         assert (List.length !sigmas = List.length args);
         for i = 0 to (List.length !sigmas)-1 do
-            res := !res @ (recollect_constraints (ref (List.nth args i)) evil_rule_spot (List.nth !sigmas i) evil_type);
+            res := !res @ (recollect_constraints (ref (List.nth args i)) evilRuleLocationId (List.nth !sigmas i) evil_type);
         done;
         !res
     | ELet (freshvar, e1, e2) -> 
         let lettype = begin match freshvar with
-        | EVar (x, ct) -> lookup freshvar ct
+        | EVar (x, ct, _) -> lookup freshvar ct
         | _ -> failwith "Fresh variable in ELet should always be an EVar"
         end in
-        (recollect_constraints (ref e1) evil_rule_spot lettype evil_type) @ 
-        (recollect_constraints (ref e2) evil_rule_spot expected_type evil_type)
+        (recollect_constraints (ref e1) evilRuleLocationId lettype evil_type) @ 
+        (recollect_constraints (ref e2) evilRuleLocationId expected_type evil_type)
     | EPatternMatch (list, base, step, x, xs) -> 
         let listtype = TList (TPoly (genalpha ())) in
-        (recollect_constraints (ref list) evil_rule_spot listtype evil_type) @
-        (recollect_constraints (ref base) evil_rule_spot expected_type evil_type) @
-        (recollect_constraints (ref step) evil_rule_spot expected_type evil_type)
+        (recollect_constraints (ref list) evilRuleLocationId listtype evil_type) @
+        (recollect_constraints (ref base) evilRuleLocationId expected_type evil_type) @
+        (recollect_constraints (ref step) evilRuleLocationId expected_type evil_type)
     | ETuple (e1, e2) ->
         let t1, t2 = begin match expected_type with
         | TTuple (s1, s2) -> s1, s2
         | _ -> TPoly (genalpha ()), TPoly (genalpha ())
         end in
-        (recollect_constraints (ref e1) evil_rule_spot t1 evil_type) @
-        (recollect_constraints (ref e2) evil_rule_spot t2 evil_type)
+        (recollect_constraints (ref e1) evilRuleLocationId t1 evil_type) @
+        (recollect_constraints (ref e2) evilRuleLocationId t2 evil_type)
     | EMaybe (m, n) -> 
-        (recollect_constraints (ref m) evil_rule_spot (TMaybe expected_type) evil_type) @
-        (recollect_constraints (ref n) evil_rule_spot expected_type evil_type)
+        (recollect_constraints (ref m) evilRuleLocationId (TMaybe expected_type) evil_type) @
+        (recollect_constraints (ref n) evilRuleLocationId expected_type evil_type)
     end
 
 let evil_rule_counter = ref 0
 let evil_rule_applied = fun () -> evil_rule_counter := !evil_rule_counter + 1
+let chosen_evil_rule = ref ""
 (* let traces = ref (Tracemem.read_traces ()) *)
 
 (* when used on its own, there's a non-zero chance no evil rule gets applied. 
@@ -360,7 +361,7 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
             | ELamMulti _ ->
                 (* more than one argument, so they are used in the body of the lambda *) 
                 EAppMulti (e1, List.map (fun arg -> introduce_evil_rule arg (Indir::tr) pi root use_constraint_recollection) args)
-            | EVar (s, _) -> 
+            | EVar (s, _, _) -> 
                 EAppMulti (e1, List.map (fun arg -> introduce_evil_rule arg (Indir::tr) pi root use_constraint_recollection) args) 
             | _ -> failwith "tried applying something other than a lambda or variable"
             end
@@ -378,13 +379,14 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
             let e1New = introduce_evil_rule e1 (Maybe :: tr) pi root use_constraint_recollection in
             let e2New = introduce_evil_rule e2 (Maybe :: tr) pi root use_constraint_recollection in
             EMaybe (e1New, e2New)
-        | EVar (s, ct) ->
+        | EVar (s, ct, id) ->
             (* tracing system turned off, as once too many traces are stored, many programs are rejected straight away *)
             (* if contains (Var :: tr) !traces then (print_endline "trace collision!"; EVar (s, ct)) else begin  *)
             (* probablistic approach - switch out Var rule for an evil subtree with probability 30%. design choice *)
+            assert (id <> -1);
             Random.self_init ();
             let prob = Random.int 1000 in
-            if (prob < 700 || !evil_rule_counter = 1) then EVar (s, ct) else begin
+            if (prob < 700 || !evil_rule_counter = 1) then EVar (s, ct, id) else begin
             (* traces := !traces @ [Var :: tr]; *)
             (* Tracemem.write_traces !traces; *)
 
@@ -407,7 +409,7 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
                 try
                     snd (List.find (fun (cached_type, _) -> cached_type = t) !applicabilityCache)
                 with Not_found -> (* cache miss, recollect constraints *)
-                    let cs = recollect_constraints (ref root) (ref e) (TPoly "tau") t in
+                    let cs = recollect_constraints (ref root) id (TPoly "tau") t in
 
                     if List.length cs = 0 then log := !log ^ "cs empty!\n" else ();
                     for i=0 to (List.length cs) -1 do
@@ -451,16 +453,16 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
                     | Some ([], substitutions) -> false;
                     | Some _ -> failwith "unification failed. there should be no constraints left"
                 ) basic_types in
-                applicableRules := !applicableRules @ (List.map (fun tau_prime -> Lam, (EVar ("ignored", []), TFunc (sigma, tau_prime))) matchingLamTypes);
+                applicableRules := !applicableRules @ (List.map (fun tau_prime -> Lam, (EVar ("ignored", [], -1), TFunc (sigma, tau_prime))) matchingLamTypes);
             | _ -> ()
             end;
 
             (* EvilApp is always applicable *)
             (* For now for simplicity, only non-functions are considered. design choice *)
-            applicableRules := !applicableRules @ (List.map (fun t -> App, (EVar ("ignored", ct), t)) basic_types);
+            applicableRules := !applicableRules @ (List.map (fun t -> App, (EVar ("ignored", ct, -1), t)) basic_types);
             
             (* checking if EvilIndir is applicable *)
-            let matchingIndirExprs = List.filter (fun ((EVar (s, _), constant_type) : expr * ty) ->
+            let matchingIndirExprs = List.filter (fun ((EVar (s, _, _), constant_type) : expr * ty) ->
                 begin match constant_type with
                 | TFuncMulti (args, tau) -> 
                     begin match unify (Some ([tau, expected_type] @ (hashtable_to_list !pi))) (Hashtbl.create 64), change_argument_type args pi with
@@ -491,15 +493,15 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
             begin match expected_type with
             | TFunc (sigma, tau) ->
                 let matchingLamTypes = List.filter (fun tau_prime -> lookup_applicability_cache tau_prime) basic_types in
-                applicableRules := !applicableRules @ (List.map (fun tau_prime -> Lam, (EVar ("ignored", []), TFunc (sigma, tau_prime))) matchingLamTypes);
+                applicableRules := !applicableRules @ (List.map (fun tau_prime -> Lam, (EVar ("ignored", [], -1), TFunc (sigma, tau_prime))) matchingLamTypes);
             | _ -> ()
             end;
 
             (* EvilApp is always applicable *)
-            applicableRules := !applicableRules @ (List.map (fun t -> App, (EVar ("ignored", ct), t)) basic_types); 
+            applicableRules := !applicableRules @ (List.map (fun t -> App, (EVar ("ignored", ct, -1), t)) basic_types); 
             
             (* check if EvilIndir is applicable *)
-            let matchingIndirExprs = List.filter (fun ((EVar (s, _), constant_type) : expr * ty) ->
+            let matchingIndirExprs = List.filter (fun ((EVar (s, _, _), constant_type) : expr * ty) ->
                 begin match constant_type with
                 | TFuncMulti (args, tau) -> 
                     begin match unify (Some ([tau, expected_type] @ (hashtable_to_list !pi))) (Hashtbl.create 64), change_argument_type args pi with
@@ -525,25 +527,26 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
             (* for i=0 to (List.length !applicableRules)-1 do
                 print_endline ((rule_to_string (fst (List.nth !applicableRules i))) ^ " " ^ (ty_to_string (snd (snd (List.nth !applicableRules i)))))
             done; *)
+            chosen_evil_rule := "Evil" ^ (rule_to_string (fst (List.hd !applicableRules)));
             (* generate the needed subtrees with the types according to the evil rules, build an expression from it and return it *)
             begin match (List.hd !applicableRules) with
-                | (Var, (EVar (e, _), _)) -> 
+                | (Var, (EVar (e, _, id), _)) -> 
                     print_endline "EvilVar chosen";
                     log := !log ^ "\nEvilVar chosen";
-                    EVar ("EVIL" ^ e, ct)
+                    EVar ("EVIL" ^ e, ct, id)
                 | (Lam, (_, (TFunc (sigma, tau_prime)))) ->
                     print_endline "EvilLam chosen"; 
                     log := !log ^ "\nEvilLam chosen";
                     let newBinding = genvar () in 
-                    (ELam (EVar ("EVIL" ^ newBinding, []), generate (steps - 1) tau_prime (([EVar (newBinding, []), sigma])) None (ref (Hashtbl.create 64))))
+                    (ELam (EVar ("EVIL" ^ newBinding, [], -1), generate (steps - 1) tau_prime (([EVar (newBinding, [], -1), sigma])) None (ref (Hashtbl.create 64))))
                 | (App, (_, sigma)) -> 
                     print_endline "EvilApp chosen";
                     log := !log ^ "\nEvilApp chosen";
                     (EApp ((generate (steps - 1) sigma [] None (ref (Hashtbl.create 64))), (generate (steps - 1) sigma [] None (ref (Hashtbl.create 64)))))
-                | (Indir, (EVar (s, _), (TFuncMulti (args, tau)))) -> 
+                | (Indir, (EVar (s, _, id), (TFuncMulti (args, tau)))) -> 
                     print_endline "EvilIndir chosen";
                     log := !log ^ "\nEvilIndir chosen";
-                    (EAppMulti (EVar ("EVIL" ^ s, ct), List.map (fun a -> generate (steps - 1) a [] None (ref (Hashtbl.create 64))) args))
+                    (EAppMulti (EVar ("EVIL" ^ s, ct, id), List.map (fun a -> generate (steps - 1) a [] None (ref (Hashtbl.create 64))) args))
             end
         end
         (* end *)
@@ -618,14 +621,14 @@ let rec statTrackTotalEvilRuleLocations (e : expr) : unit =
 
 let rec statTrackValidEvilRuleLocations (e : expr) (root : expr) : unit =
     begin match e with
-    | EVar _ -> 
+    | EVar (_, _, id) -> 
         let applicabilityCache : (ty * bool) list ref = ref [] in
 
         let lookup_applicability_cache (t : ty) : bool =
             try
                 snd (List.find (fun (cached_type, _) -> cached_type = t) !applicabilityCache)
             with Not_found -> (* cache miss, recollect constraints *)
-                let cs = recollect_constraints (ref root) (ref e) (TPoly "tau") t in
+                let cs = recollect_constraints (ref root) id (TPoly "tau") t in
                 begin match unify (Some cs) (Hashtbl.create 64) with
                 | None -> applicabilityCache := !applicabilityCache @ [t, true]; true
                 | Some ([], _) -> applicabilityCache := !applicabilityCache @ [t, false]; false
@@ -643,21 +646,42 @@ let rec statTrackValidEvilRuleLocations (e : expr) (root : expr) : unit =
     | ETuple (e1, e2) | EMaybe (e1, e2) -> statTrackValidEvilRuleLocations e1 root; statTrackValidEvilRuleLocations e2 root
     end
 
-let rec statTrackLamExtEvilRuleLocations (e : expr) (inLamExtSubtree : bool) : unit =
+let rec statTrackLamExtEvilRuleLocations (e : expr) (root : expr) (inLamExtSubtree : bool) : unit =
     begin match e with
-    | EVar _ -> if inLamExtSubtree then lamExtEvilRuleLocations := !lamExtEvilRuleLocations + 1;
-    | ELam (_, e1) | ELet (_, _, e1) -> statTrackLamExtEvilRuleLocations e1 inLamExtSubtree;
-    | ELamMulti (_, e1) -> statTrackLamExtEvilRuleLocations e1 true;
+    | EVar (_, _, id) -> if inLamExtSubtree then
+        let applicabilityCache : (ty * bool) list ref = ref [] in
+
+        let lookup_applicability_cache (t : ty) : bool =
+            try
+                snd (List.find (fun (cached_type, _) -> cached_type = t) !applicabilityCache)
+            with Not_found -> (* cache miss, recollect constraints *)
+                let cs = recollect_constraints (ref root) id (TPoly "tau") t in
+                begin match unify (Some cs) (Hashtbl.create 64) with
+                | None -> applicabilityCache := !applicabilityCache @ [t, true]; true
+                | Some ([], _) -> applicabilityCache := !applicabilityCache @ [t, false]; false
+                | Some _ -> failwith "unification failed. there should be no constraints left"
+                end
+        in
+
+        let matchingVarExprs = List.filter (fun ((_, constant_type) : expr * ty) -> lookup_applicability_cache constant_type) (gamma) in
+
+        if List.length matchingVarExprs <> 0 then lamExtEvilRuleLocations := !lamExtEvilRuleLocations + 1;
+    | ELam (_, e1) | ELet (_, _, e1) -> statTrackLamExtEvilRuleLocations e1 root inLamExtSubtree;
+    | ELamMulti (_, e1) -> statTrackLamExtEvilRuleLocations e1 root true;
     | EApp _ -> failwith "tried tracking stats on evil rule locations in an expression where ERI happened already"
-    | EAppMulti (_, args) -> List.iter (fun arg -> statTrackLamExtEvilRuleLocations arg inLamExtSubtree) args
-    | EPatternMatch (e1, e2, e3, _, _) -> statTrackLamExtEvilRuleLocations e1 inLamExtSubtree; statTrackLamExtEvilRuleLocations e2 inLamExtSubtree; statTrackLamExtEvilRuleLocations e3 inLamExtSubtree
-    | ETuple (e1, e2) | EMaybe (e1, e2) -> statTrackLamExtEvilRuleLocations e1 inLamExtSubtree; statTrackLamExtEvilRuleLocations e2 inLamExtSubtree
+    | EAppMulti (e1, args) ->
+        begin match e1 with
+        | ELamMulti _ -> List.iter (fun arg -> statTrackLamExtEvilRuleLocations arg root true) args
+        | _ -> List.iter (fun arg -> statTrackLamExtEvilRuleLocations arg root inLamExtSubtree) args
+        end
+    | EPatternMatch (e1, e2, e3, _, _) -> statTrackLamExtEvilRuleLocations e1 root inLamExtSubtree; statTrackLamExtEvilRuleLocations e2 root inLamExtSubtree; statTrackLamExtEvilRuleLocations e3 root inLamExtSubtree
+    | ETuple (e1, e2) | EMaybe (e1, e2) -> statTrackLamExtEvilRuleLocations e1 root inLamExtSubtree; statTrackLamExtEvilRuleLocations e2 root inLamExtSubtree
     end
 
 let statTrackEvilRuleLocations (e : expr) : unit =
     statTrackTotalEvilRuleLocations e;
     statTrackValidEvilRuleLocations e e;
-    statTrackLamExtEvilRuleLocations e false
+    statTrackLamExtEvilRuleLocations e e false
 
 let main = 
     (* variables which can be disabled by flags *)
@@ -751,7 +775,7 @@ let main =
                 ^ (string_of_float totalTime) ^ "," ^ (log_ty expected_type) ^ "," ^ totalVarStr ^ "," ^ totalLamStr 
                 ^ "," ^ totalLamExtStr ^ "," ^ totalAppStr ^ "," ^ totalTupleStr ^ "," ^ totalMaybeStr ^ "," 
                 ^ totalLetStr ^ "," ^ totalPMStr ^ "," ^ totalEvilRuleLocationsStr ^ "," ^ validEvilRuleLocationsStr 
-                ^ "," ^ lamExtEvilRuleLocationsStr); 
+                ^ "," ^ lamExtEvilRuleLocationsStr ^ "," ^ !chosen_evil_rule); 
             close_out out_ratios;
     done;
     end else ();
