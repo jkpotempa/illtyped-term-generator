@@ -282,7 +282,7 @@ let rec recollect_constraints (e : expr ref) (evilRuleLocationId : int) (expecte
             [expected_type, evil_type]
         else
             (let actual_type = lookup !e ct in
-            if expected_type = actual_type || String.starts_with ~prefix:"x" s (* we can't say anything about the types of arguments *) then [] else
+            if expected_type = actual_type || String.starts_with ~prefix:"x" s || String.starts_with ~prefix:"EVILx" s (* we can't say anything about the types of arguments *) then [] else
                 if is_polymorphic actual_type then [expected_type, substitute_fresh_alphas actual_type] else [expected_type, actual_type])
     | ELam (_, body) -> 
         begin match expected_type with

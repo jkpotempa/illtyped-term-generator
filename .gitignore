@@ -8,3 +8,6 @@ illtyped_ocaml
 bugs/
 rewrite.ml
 rewrite
+illtyped.hs
+illtyped.ml
+expr_log.txt
