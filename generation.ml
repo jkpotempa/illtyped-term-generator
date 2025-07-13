@@ -523,7 +523,7 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
             (* checking if EvilLam is applicable *)
             begin match expected_type with
             | TFunc (sigma, tau) | TFuncMulti ([sigma], tau) ->
-                let matchingLamTypes = List.filter (fun tau_prime -> lookup_applicability_cache (TFunc (sigma,tau_prime))) basic_types in
+                let matchingLamTypes = List.filter (fun tau_prime -> lookup_applicability_cache (TFunc (sigma, TPoly (genalpha ())))) basic_types in
                 let applicableLamRules = List.map (fun tau_prime -> Lam, (EVar ("ignored", [], -1), TFunc (sigma, tau_prime))) matchingLamTypes in
                 if applicableLamRules = [] then () else applicableRules := applicableLamRules;
             | _ -> ()
@@ -532,7 +532,7 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
 
             (* choosing the evil rule to be applied *)
             applicableRules := shuffle !applicableRules;
-            let steps = 8 in
+            let steps = 4 in
             (* DEBUG *)
             (* for i=0 to (List.length !applicableRules)-1 do
                 print_endline ((rule_to_string (fst (List.nth !applicableRules i))) ^ " " ^ (ty_to_string (snd (snd (List.nth !applicableRules i)))))
