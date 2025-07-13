@@ -384,16 +384,24 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
             (* if contains (Var :: tr) !traces then (print_endline "trace collision!"; EVar (s, ct)) else begin  *)
             (* probablistic approach - switch out Var rule for an evil subtree with probability 30%. design choice *)
             assert (id <> -1);
+            
+            let expected_type = lookup_ty (lookup e ct) !pi [] in
+            
             Random.self_init ();
-            let prob = Random.int 1000 in
-            if (prob < 700 || !evil_rule_counter = 1) then EVar (s, ct, id) else begin
+            let prob = ref (Random.int 1000) in
+            
+            begin match expected_type with
+            | TFunc _ | TFuncMulti ([_], _) -> prob := 999
+            | _ -> ()
+            end;
+
+            if (!prob < 700 || !evil_rule_counter = 1) then EVar (s, ct, id) else begin
             (* traces := !traces @ [Var :: tr]; *)
             (* Tracemem.write_traces !traces; *)
 
             evil_rule_applied();
             (* print_endline (string_of_int !evil_rule_counter); *)
 
-            let expected_type = lookup_ty (lookup e ct) !pi [] in
 
             (* DEBUG *)
             (* print_endline (ty_to_string expected_type);
@@ -440,23 +448,6 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
             ) (ct @ gamma) in 
             applicableRules := !applicableRules @ (List.map (fun c -> Var, c) matchingVarExprs);
 
-            (* checking if EvilLam2 is applicable *)
-            (* begin match expected_type with
-                | TFunc (sigma, tau) -> applicableRules := !applicableRules @ List.map (fun (tau_prime:ty) -> (Lam, (EVar ("ignored", []), TFunc (sigma, tau_prime)))) (List.filter (fun (tau_prime:ty) -> tau_prime <> expected_type) basic_types)
-                | _ -> ()
-            end; *)
-            begin match expected_type with
-            | TFunc (sigma, tau) ->
-                let matchingLamTypes = List.filter (fun tau_prime -> 
-                    match unify (Some ([expected_type, tau_prime] (*@ !pi*))) (Hashtbl.create 64) with
-                    | None -> true;
-                    | Some ([], substitutions) -> false;
-                    | Some _ -> failwith "unification failed. there should be no constraints left"
-                ) basic_types in
-                applicableRules := !applicableRules @ (List.map (fun tau_prime -> Lam, (EVar ("ignored", [], -1), TFunc (sigma, tau_prime))) matchingLamTypes);
-            | _ -> ()
-            end;
-
             (* EvilApp is always applicable *)
             (* For now for simplicity, only non-functions are considered. design choice *)
             applicableRules := !applicableRules @ (List.map (fun t -> App, (EVar ("ignored", ct, -1), t)) basic_types);
@@ -479,6 +470,24 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
                     | Some ts -> ts
                     end, 
                 expected_type))) matchingIndirExprs);
+
+            (* checking if EvilLam2 is applicable *)
+            (* begin match expected_type with
+                | TFunc (sigma, tau) -> applicableRules := !applicableRules @ List.map (fun (tau_prime:ty) -> (Lam, (EVar ("ignored", []), TFunc (sigma, tau_prime)))) (List.filter (fun (tau_prime:ty) -> tau_prime <> expected_type) basic_types)
+                | _ -> ()
+            end; *)
+            begin match expected_type with
+            | TFunc (sigma, tau) | TFuncMulti ([sigma], tau) ->
+                let matchingLamTypes = List.filter (fun tau_prime -> 
+                    match unify (Some ([expected_type, tau_prime] (*@ !pi*))) (Hashtbl.create 64) with
+                    | None -> true;
+                    | Some ([], substitutions) -> false;
+                    | Some _ -> failwith "unification failed. there should be no constraints left"
+                ) basic_types in
+                let applicableLamRules = List.map (fun tau_prime -> Lam, (EVar ("ignored", [], -1), TFunc (sigma, tau_prime))) matchingLamTypes in
+                if applicableLamRules = [] then () else applicableRules := applicableLamRules;
+            | _ -> ()
+            end;
             )
 
             else 
@@ -488,14 +497,6 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
             (* checking if EvilVar is applicable *)
             let matchingVarExprs = List.filter (fun ((_, constant_type) : expr * ty) -> lookup_applicability_cache constant_type) (gamma) in
             applicableRules := !applicableRules @ (List.map (fun c -> Var, c) matchingVarExprs);
-
-            (* checking if EvilLam is applicable *)
-            begin match expected_type with
-            | TFunc (sigma, tau) ->
-                let matchingLamTypes = List.filter (fun tau_prime -> lookup_applicability_cache tau_prime) basic_types in
-                applicableRules := !applicableRules @ (List.map (fun tau_prime -> Lam, (EVar ("ignored", [], -1), TFunc (sigma, tau_prime))) matchingLamTypes);
-            | _ -> ()
-            end;
 
             (* EvilApp is always applicable *)
             applicableRules := !applicableRules @ (List.map (fun t -> App, (EVar ("ignored", ct, -1), t)) basic_types); 
@@ -518,6 +519,15 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
                     | Some ts -> ts
                     end, 
                 expected_type))) matchingIndirExprs);
+
+            (* checking if EvilLam is applicable *)
+            begin match expected_type with
+            | TFunc (sigma, tau) | TFuncMulti ([sigma], tau) ->
+                let matchingLamTypes = List.filter (fun tau_prime -> lookup_applicability_cache (TFunc (sigma,tau_prime))) basic_types in
+                let applicableLamRules = List.map (fun tau_prime -> Lam, (EVar ("ignored", [], -1), TFunc (sigma, tau_prime))) matchingLamTypes in
+                if applicableLamRules = [] then () else applicableRules := applicableLamRules;
+            | _ -> ()
+            end;
             ); 
 
             (* choosing the evil rule to be applied *)
@@ -538,7 +548,7 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
                     print_endline "EvilLam chosen"; 
                     log := !log ^ "\nEvilLam chosen";
                     let newBinding = genvar () in 
-                    (ELam (EVar ("EVIL" ^ newBinding, [], -1), generate (steps - 1) tau_prime (([EVar (newBinding, [], -1), sigma])) None (ref (Hashtbl.create 64))))
+                    (ELam (EVar ("EVIL" ^ newBinding, [EVar ("EVIL" ^ newBinding, [], -1), sigma], -1), generate (steps - 1) tau_prime (([EVar ("EVIL" ^ newBinding, [], -1), sigma])) None (ref (Hashtbl.create 64))))
                 | (App, (_, sigma)) -> 
                     print_endline "EvilApp chosen";
                     log := !log ^ "\nEvilApp chosen";
@@ -693,7 +703,7 @@ let main =
     Arg.parse speclist (fun _ -> ()) usage_msg;
 
     (* setup *)
-    (* Printexc.record_backtrace true; *)
+    Printexc.record_backtrace true;
     let totalStartTime = Sys.time() in
     let out_channel_haskell = open_out "illtyped.hs" in
     let out_channel_ocaml = open_out "illtyped.ml" in
