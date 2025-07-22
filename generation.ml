@@ -306,7 +306,7 @@ let rec recollect_constraints (e : expr ref) (evilRuleLocationId : int) (expecte
         | EVar (s, ct, _) -> (* lookup, add needed constraints *) 
             let functype = lookup func ct in
             begin match functype with
-            | TFuncMulti (args, ret) -> sigmas := List.map substitute_fresh_alphas args; res := [substitute_fresh_alphas ret, expected_type];
+            | TFuncMulti (args, ret) -> sigmas := List.map substitute_fresh_alphas args; counteralpha := !counteralpha - 3; res := [substitute_fresh_alphas ret, expected_type];
             | _ -> failwith "only a TFuncMulti can be used in an EAppMulti application"
             end;
         | _ -> failwith "unexpected EAppMulti LHS"

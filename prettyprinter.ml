@@ -39,8 +39,8 @@ let haskell_to_ocaml (s : string) : string =
     | "map" -> "List.map"
     | "filter" -> "List.filter"
     | "(.)" -> "compose"
-    | "(Main.<)" -> "(<)"
-    | "(Main.==)" -> "(=)"
+    | "(Main.<)" -> "lt"
+    | "(Main.==)" -> "eq"
     | "(++)" -> "(@)"
     | s -> s
     end
@@ -184,5 +184,9 @@ let compose f g x = f (g x)
 let ifthenelse c a b = if c then a else b
 
 let cons x xs = x :: xs
+
+let lt : int -> int -> bool = (<)
+
+let eq : bool -> bool -> bool = (=)
 
 let welltypedProgram"
