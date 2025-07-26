@@ -390,10 +390,10 @@ let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl re
             Random.self_init ();
             let prob = ref (Random.int 1000) in
             
-            begin match expected_type with
+            (* begin match expected_type with
             | TFunc _ | TFuncMulti ([_], _) -> prob := 999
             | _ -> ()
-            end;
+            end; *)
 
             if (!prob < 700 || !evil_rule_counter = 1) then EVar (s, ct, id) else begin
             (* traces := !traces @ [Var :: tr]; *)
