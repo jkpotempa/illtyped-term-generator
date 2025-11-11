@@ -55,6 +55,11 @@ let change_argument_type (types : Types.ty list) (pi : ty_hashtbl ref) : Types.t
     if !foundOuter then Some !finalList else None
 
 (* generates a WELL-TYPED expression *)
+(* in the initial, top-level call, the arguments should be:
+    ct: []
+    delta_opt: None
+    pi: empty Hashtbl
+*)
 let rec generate (steps : int) (expected_type : ty) (ct : ctxt) (delta_opt : ctxt ref option) (pi : ty_hashtbl ref) : expr =
     
     if (steps <= 0) then raise Out_of_steps else
@@ -347,6 +352,8 @@ let chosen_evil_rule = ref ""
 
 (* when used on its own, there's a non-zero chance no evil rule gets applied. 
 use introduce_evil_rule_safe instead to generate surely ill-typed expressions *)
+(* pi, root and use_constraint_recollection stay invariant throughout any recursive calls. *)
+(* use of tr is currently inactive. *)
 let rec introduce_evil_rule (e : expr) (tr : Tracemem.trace) (pi : ty_hashtbl ref) (root : expr) (use_constraint_recollection : bool) : expr =
     if !evil_rule_counter >= 1 then e else
     begin match e with
